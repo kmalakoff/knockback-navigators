@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>KnockbackNavigators.js Interactive Tests</title>
+  <link rel="stylesheet" href="vendor/normalize.css">
+  <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.css">
+  <link rel="stylesheet" href="../knockback-navigators.css">
+</head>
+<body>
+  <a class='btn' href='../index.html#page_navigator_panes' style='position: absolute; z-index: 200'>More Examples</a>
+
+  <div class='embed' id='app'>
+
+    <!-- VIEWS -->
+    <div class='pane' id='main'>
+      <div class='hero-unit'>
+        <a href='#page1' class='btn btn-warning btn-small'>Page1</a>
+        <h1>Main</h1>
+      </div>
+    </div>
+
+    <div class='pane' id='page1'>
+      <div class='hero-unit'>
+        <a href='#' class='btn btn-small'><i class='icon-step-backward'></i><span> Back</span></a>
+        <a href='#page2' class='btn btn-warning btn-small'>Page2</a>
+        <h1>Page1</h1>
+      </div>
+    </div>
+
+    <div class='pane' id='page2'>
+      <div class='hero-unit'>
+        <a href='#page1' class='btn btn-small'><i class='icon-step-backward'></i><span> Back</span></a>
+        <h1>Page2</h1>
+      </div>
+    </div>
+  </div>
+
+  <script src="vendor/zepto-1.0rc1.js"></script>
+  <script src="vendor/backbone/underscore-1.3.3.js"></script>
+  <script src="vendor/backbone/backbone-0.9.2.js"></script>
+  <script src="../knockback-page-navigator-panes.js"></script>
+  <script src="../lib/knockback-sample-transitions.js"></script>
+
+  <script type='text/javascript'>
+    ////////////////////////////////////
+    // Page Routing and Navigating
+    // Don't allow pages to be detached since they are owned by the DOM (default is to assume dynamic pages and to therefore detach)
+    ////////////////////////////////////
+    var page_navigator = new kb.PageNavigatorPanes($('#app')[0], {no_detach: true});
+    var router = new Backbone.Router()
+    router.route('', null, page_navigator.dispatcher(function(){
+      page_navigator.loadPage({el: $('#main')[0], transition: 'FadeIn'});
+    }));
+    router.route('page1', null, page_navigator.dispatcher(function(){
+      page_navigator.loadPage({el: $('#page1')[0], transition: 'NavigationSlide'});
+    }));
+    router.route('page2', null, page_navigator.dispatcher(function(){
+      page_navigator.loadPage({el: $('#page2')[0], transition: 'CoverVertical'});
+    }));
+    Backbone.history.start({hashChange: true});
+
+  </script>
+  <!-- ****************** -->
+  <!-- Source -->
+  <!-- ****************** -->
+  <script src="vendor/backbone/underscore-1.3.3.js"></script>
+  <script type='text/javascript'>
+    $('body').append($('<div style="position: absolute; top: 220px"><h1>Example Source</h1><pre>' +_.escape(document.body.innerHTML.substring(0, document.body.innerHTML.indexOf('<!-- ****************** -->')))+'</pre></div>')[0]);
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,25 @@
+/* PAGE NAVIGATORS */
+.pane-navigator {
+  position: absolute;
+  padding: 0; margin: 0; left: 0; right: 0; top: 0; bottom: 0; /* pane-navigators take up their parent */
+  overflow: hidden;
+}
+.pane-navigator.page {
+  overflow: visible; /* will resize the browser window */
+}
+.pane-navigator.page.embed {
+  overflow: hidden; /* will stay in its pane instead of resizing the page */
+}
+
+/* PANES */
+.pane {
+  position: absolute; /* allow transitions relative to parent */
+  padding: 0; margin: 0; width: 100%; /* panes take up their pane-navigator */
+  display: none; /* panes are not visible by default */
+}
+.pane.active {
+  display: block; /* visible if active or in a scrolling pane-navigator */
+}
+.pane.on-top {
+  z-index: 100; /* default overlay z-index */
+}
