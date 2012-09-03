@@ -3,6 +3,7 @@ module.exports =
     join: 'knockback-page-navigator-panes.js'
     compress: true
     files: [
+      'src/license-header.coffee'
       'src/component-imports.coffee'
       'src/knockback-page-navigator-panes/knockback-page-navigator-panes.coffee'
       'src/knockback-page-navigator-panes/knockout-bindings.coffee'
@@ -20,6 +21,7 @@ module.exports =
     join: 'knockback-page-navigator-simple.js'
     compress: true
     files: [
+      'src/license-header.coffee'
       'src/component-imports.coffee'
       'src/knockback-page-navigator-simple/knockback-page-navigator-simple.coffee'
       'src/knockback-page-navigator-simple/knockout-bindings.coffee'
@@ -31,6 +33,7 @@ module.exports =
     join: 'knockback-pane-navigator.js'
     compress: true
     files: [
+      'src/license-header.coffee'
       'src/component-imports.coffee'
       'src/knockback-pane-navigator/knockback-pane-navigator.coffee'
       'src/knockback-pane-navigator/knockback-pane-navigator-helpers.coffee'
@@ -44,6 +47,7 @@ module.exports =
     output: 'lib'
     compress: true
     files: [
+      'src/license-header.coffee'
       'src/knockback-sample-transitions/knockback-transition-helpers.coffee'
       'src/knockback-sample-transitions/knockback-transition-cover-vertical.coffee'
       'src/knockback-sample-transitions/knockback-transition-fade-in.coffee'
