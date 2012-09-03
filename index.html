@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>KnockbackNavigators.js Interactive Tests</title>
+  <link rel="stylesheet" href="examples/vendor/normalize.css">
+  <link rel="stylesheet" href="examples/vendor/bootstrap/css/bootstrap.css">
+  <link rel="stylesheet" href="knockback-navigators.css">
+
+  <style type="text/css">
+    .pane-navigator.page  {top: 80px;} /* offset the page to start after the fixed-position header */
+    .pane.page            {background-color: white} /* make pages opaque for transitions */
+  </style>
+</head>
+<body>
+
+  <div class="navbar navbar-fixed-top navbar-inverse"><div class="navbar-inner"><div class="container">
+
+    <ul class="nav">
+      <li><a class='brand' href="http://kmalakoff.github.com/knockback-navigators/">KnockbackNavigators.js</a></li>
+      <li><a href='doc/index.html'>API</a></li>
+      <li><a onclick="kb.loadUrl('', {name: 'NavigationSlide', inverse: true})">Examples</a></li>
+    </ul>
+  </div></div></div>
+
+  <div class='embed' id='app'>
+    <div id='main' class='pane page'>
+      <div class='container hero-unit'>
+        <h4>KnockbackNavigators.js provides page navigators, a pane navigator, and transition animations to help you make dynamic, single-page applications. They are platform-agnostic so you can even use them without using Knockback.js or Knockout.js!</h4>
+        <p>Please take a look at the following example pages to see just how easy and little HTML and JavaScript is required to do some amazing things.</p>
+        <ul>
+          <li><a href='#pane_navigator'>kb.PaneNavigator</a></li>
+          <li><a href='#page_navigator_simple'>kb.PageNavigatorSimple</a></li>
+          <li><a href='#page_navigator_panes'>kb.PageNavigatorPanes</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div id='pane_navigator' class='pane'>
+      <div class='container hero-unit'>
+        <legend>kb.PaneNavigator Examples</legend>
+        <p>kb.PaneNavigator provides an embedded pane navigator that has a history stack of panes and that can optionally use transition animations when navigating between them.</p>
+        <p>If you are using Knockback.js or No Knockout.js, you are able to observe changes on the active page by calling activePane() or previousPane() during ko.observable subscription generation cycles.</p>
+
+        <h4>No Knockback.js / No Knockout.js</h4>
+        <ul>
+          <li><a href='examples/pn-nt_zpt.html'>Zepto + Navigators (No Transitions)</a><span>: shows one of the most simple configurations possible for switching panes using buttons</span></li>
+          <li><a href='examples/pn-nt+_xui.html'>XUI + Navigators (No Transitions)</a><span>: shows one of the most simple configurations possible for switching panes using buttons</span></li>
+          <li><a href='examples/pn-t_zpt.html'>Zepto + Navigators (Transitions)</a><span>: shows switching panes using buttons with transitions</span></li>
+        </ul>
+
+        <h4>Knockout.js</h4>
+        <ul>
+          <li><a href='examples/pn-t-e_zpt_ko.html'>Zepto + KnockoutJS + Navigators (Transitions)</a><span>: shows switching panes using buttons with transitions using the PaneNavigator KnockoutJS binding</span></li>
+        </ul>
+
+      </div>
+    </div>
+
+    <div id='page_navigator_simple' class='pane'>
+      <div class='container hero-unit'>
+        <legend>kb.PageNavigatorSimple Examples</legend>
+        <p>kb.PageNavigatorSimple provides a page navigator that has one active page at a time.</p>
+        <p>If you are using Knockback.js or No Knockout.js, you are able to observe changes on the active page by calling activePage() or activeUrl() during ko.observable subscription generation cycles.</p>
+
+        <h4>No Knockback.js / No Knockout.js</h4>
+        <ul>
+          <li><a href='examples/pns_zpt_pth.html'>Zepto / PathJS</a><span>: shows one of the most simple configurations possible using PathJS for routing</span></li>
+          <li><a href='examples/pns_zpt_bb.html'>Zepto / BackboneJS</a><span>: shows one of the most simple configurations possible using BackboneJS for routing</span></li>
+        </ul>
+
+        <h4>Knockout.js</h4>
+        <ul>
+          <li><a href='examples/pns_zpt_pth_ko.html'>Zepto / PathJS / KnockoutJS</a><span>: shows how to use KnockoutJS to bind a page ViewModel</span></li>
+        </ul>
+
+        <h4>Knockback.js</h4>
+        <ul>
+          <li><a href='examples/pns_jq_kb.html'>Zepto / KnockbackJS</a><span>: shows how to use KnockbackJS to define Models for each page and generate ViewModels for the pages and the relationships between the pages</span></li>
+          <li><a href='examples/pns-e_jq_kb.html'>Zepto / KnockbackJS</a><span>: shows how to use KnockbackJS to define Models for each page and generate ViewModels for the pages and the relationships between the pages. Rather than creating the page navigator before binding the page, the page navigator and router are created during the page binding.</span></li>
+        </ul>
+
+      </div>
+    </div>
+
+    <div id='page_navigator_panes' class='pane'>
+      <div class='container hero-unit'>
+        <legend>kb.PageNavigatorPanes Examples</legend>
+        <p>kb.PageNavigatorPanes provides a page navigator that has a history stack of panes and that can optionally use transition animations when navigating between them. History can also be useful for keeping pages in memory (you can also provide a 'no_cache' option with re-loading 'callback' to disable caching).</p>
+        <p>If you are using Knockback.js or No Knockout.js, you are able to observe changes on the active page by calling activePage(), activeUrl(), previousPage(), or previousUrl() during ko.observable subscription generation cycles.</p>
+
+        <h4>No Knockback.js / No Knockout.js</h4>
+        <ul>
+          <li><a href='examples/pnp-nt_zpt_pth.html'>Zepto / PathJS / Navigators (No Transitions)</a>: shows simple page navigation without history and animations on a static HTML page.</li>
+          <li><a href='examples/pnp-nt_xui_pth.html'>XUI / PathJS / Navigators (No Transitions)</a>: shows simple page navigation without history and animations on a static HTML page.</li>
+          <li><a href='examples/pnp-t-nh_zpt_pth.html'>Zepto / PathJS / Navigators (Transitions + No History)</a>: shows simple page navigation without history with animations on a static HTML page.</li>
+          <li><a href='examples/pnp-dt_zpt_pth.html'>Zepto / PathJS / Navigators (Default Transition + History)</a>: shows simple page navigation with history and a single animation for all transitions on a static HTML page.</li>
+          <li><a href='examples/pnp-t_zpt_pth.html'>Zepto / PathJS / Navigators (Transitions + History)</a>: shows simple page navigation with history and a different animation for each transitions on a static HTML page (routing using PathJS).</li>
+          <li><a href='examples/pnp-t_zpt_bb.html'>Zepto / BackboneJS / Navigators (Transitions + History)</a>: shows simple page navigation with history and a different animation for each transitions on a static HTML page (routing using BackboneJS).</li>
+        </ul>
+
+        <h4>Knockout.js</h4>
+        <ul>
+          <li><a href='examples/pnp-t_zpt_pth_ko.html'>Zepto / PathJS / KnockoutJS / Navigators (Transitions + History)</a>: shows how KnockoutJS view models can be used to create relationships between pages on a dynamic HTML page</li>
+        </ul>
+
+        <h4>Knockback.js</h4>
+        <ul>
+          <li><a href='examples/pnp-t_zpt_kb.html'>Zepto / KnockbackJS / Navigators (Transitions + History)</a>: shows how KnockbackJS can use models with relationships to separate page data structure from view models on a dynamic HTML page</li>
+          <li><a href='examples/pnp-t_jq_kb.html'>jQueryTmpl (Dynamic Pages) / KnockbackJS / Navigators (Transitions + History)</a>: shows how KnockbackJS can use models with relationships to separate page data structure from view models on a dynamic HTML page using query-tmpl</li>
+          <li><a href='examples/pnp-t-e_jq_kb.html'>jQueryTmpl (Dynamic Pages) / KnockbackJS / Navigators (Transitions + History + Embedded)</a>: shows how KnockbackJS can use models with relationships to separate page data structure from view models on a dynamic HTML page using query-tmpl and an embedded page navigator (binding managed by HTML rather than JavaScript)</li>
+        </ul>
+
+      </div>
+    </div>
+
+  </div>
+
+  <script src="examples/vendor/zepto-1.0rc1.js"></script>
+  <script src="examples/vendor/path-0.8.4.js"></script>
+  <script src="knockback-page-navigator-panes.js"></script>
+  <script src="lib/knockback-sample-transitions.js"></script>
+
+  <script type='text/javascript'>
+    ////////////////////////////////////
+    // Page Routing and Navigating
+    // Don't allow pages to be detached since they are owned by the DOM (default is to assume dynamic pages and to therefore detach)
+    ////////////////////////////////////
+    var page_navigator = new kb.PageNavigatorPanes($('#app')[0], {no_detach: true});
+    Path.map('').to(page_navigator.dispatcher(function(){
+      page_navigator.loadPage({el: $('#main')[0], transition: 'FadeIn'});
+    }));
+    Path.map('#page_navigator_simple').to(page_navigator.dispatcher(function(){
+      page_navigator.loadPage({el: $('#page_navigator_simple')[0], transition: 'NavigationSlide'});
+    }));
+    Path.map('#page_navigator_panes').to(page_navigator.dispatcher(function(){
+      page_navigator.loadPage({el: $('#page_navigator_panes')[0], transition: 'NavigationSlide'});
+    }));
+    Path.map('#pane_navigator').to(page_navigator.dispatcher(function(){
+      page_navigator.loadPage({el: $('#pane_navigator')[0], transition: 'NavigationSlide'});
+    }));
+    Path.listen();
+    Path.dispatch(window.location.hash);
+
+  </script>
+
+</body>
+</html>

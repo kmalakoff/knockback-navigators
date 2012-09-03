@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>KnockbackNavigators.js Interactive Tests</title>
+  <link rel="stylesheet" href="vendor/normalize.css">
+  <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.css">
+  <link rel="stylesheet" href="../knockback-navigators.css">
+
+  <style type="text/css">
+    .cell                 {height: 120px; width: 120px; background-color: white} /* cell styling */
+  </style>
+
+</head>
+<body>
+  <a class='btn' href='../index.html#pane_navigator' style='position: absolute; z-index: 200'>More Examples</a>
+
+  <div class='container hero-unit'>
+    <button class='previous-pane btn btn-small' onclick="kb.previousPane(this)" data-path='^/.pane-navigator'><i class='icon-step-backward'></i></button>
+    <button class='next-pane btn btn-small' onclick="kb.nextPane(this)" data-path='^/.pane-navigator'><i class='icon-step-forward'></i></button>
+
+    <div class='cell' style='position: relative'>
+      <div class='pane-navigator'>
+        <div class='pane cell'>
+          <p>Pane1</p>
+        </div>
+        <div class='pane cell'>
+          <p>Pane2</p>
+        </div>
+        <div class='pane cell'>
+          <p>Pane3</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="vendor/zepto-1.0rc1.js"></script>
+  <script src="../knockback-pane-navigator.js"></script>
+
+  <script type='text/javascript'>
+    var pane_navigator_el = $('.pane-navigator')[0];
+    var pane_navigator = new kb.PaneNavigator(pane_navigator_el, {no_detach: true});
+    kb.utils.wrappedPaneNavigator(pane_navigator_el, pane_navigator); // cache the pane_navigator for use by kb. It should be released with kb.utils.wrappedPaneNavigator(pane_navigator_el, null)
+    pane_navigator.push(new kb.Pane(pane_navigator_el.children[0]));
+  </script>
+  <!-- ****************** -->
+  <!-- Source -->
+  <!-- ****************** -->
+  <script src="vendor/backbone/underscore-1.3.3.js"></script>
+  <script type='text/javascript'>
+    $('body').append($('<div style="position: absolute; top: 220px"><h1>Example Source</h1><pre>' +_.escape(document.body.innerHTML.substring(0, document.body.innerHTML.indexOf('<!-- ****************** -->')))+'</pre></div>')[0]);
+  </script>
+
+</body>
+</html>

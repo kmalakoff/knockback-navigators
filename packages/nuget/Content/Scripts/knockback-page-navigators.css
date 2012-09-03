@@ -1,0 +1,9 @@
+/* pane-navigators take up their parent */
+.pane-navigator             {position: absolute; padding: 0; margin: 0; left: 0; right: 0; top: 0; bottom: 0; overflow: hidden;}
+.pane-navigator.page        {overflow: visible;} /* will resize the browser window */
+.pane-navigator.page.embed  {overflow: hidden;} /* will stay in its pane instead of resizing the page */
+
+/* panes take up their pane-navigator */
+.pane                 {position: absolute; padding: 0; margin: 0; width: 100%; display: none;} /* default panes are not visible */
+.pane.active          {display: block;} /* visible only if active */
+.pane.on-top          {z-index: 100;} /* default overlay z-index */
