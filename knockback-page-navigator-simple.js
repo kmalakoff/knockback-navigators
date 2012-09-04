@@ -38,7 +38,7 @@
       return null;
     };
     ko.removeNode = function(el) {
-      return $(el).detach();
+      return $(el).remove();
     };
     ko.observable = function(initial_value) {
       var value;
@@ -88,10 +88,6 @@
     _.isElement = function(obj) {
       return obj && (obj.nodeType === 1);
     };
-  }
-
-  if (this.Zepto) {
-    this.Zepto.fn.detach = this.Zepto.fn.remove;
   }
 
   if (this.x$) {
@@ -146,7 +142,7 @@
         return active_page;
       }
       if ((previous_page = this.activePage())) {
-        previous_page.deactivate(this.options);
+        previous_page.destroy(this.options);
       }
       active_page = new kb.Pane(info, window.location.hash);
       active_page.activate(this.el);
@@ -187,8 +183,8 @@
       'init': function(element, value_accessor, all_bindings_accessor, view_model) {
         var options, page_navigator;
         options = ko.utils.unwrapObservable(value_accessor());
-        if (!('no_detach' in options)) {
-          options.no_detach = true;
+        if (!('no_remove' in options)) {
+          options.no_remove = true;
         }
         page_navigator = new kb.PageNavigatorSimple(element, options);
         kb.utils.wrappedPageNavigator(element, page_navigator);
@@ -243,9 +239,9 @@
       if (options == null) {
         options = {};
       }
-      this.create = null;
       this.deactivate(options);
       this.removeElement(options, true);
+      this.create = null;
       return this.el = null;
     };
 
@@ -293,14 +289,18 @@
       if (!this.el) {
         return this;
       }
-      if (options.no_detach) {
+      if (options.no_remove) {
         return;
       }
-      if (((this.create || force) && !options.no_destroy) && ko.removeNode) {
+      if (force || (this.create && !options.no_destroy)) {
         ko.removeNode(this.el);
         this.el = null;
       } else {
-        $(this.el).detach();
+        if (force) {
+          $(this.el).remove();
+        } else if (this.el.parentNode) {
+          this.el.parentNode.removeChild(this.el);
+        }
       }
       return this;
     };
@@ -316,10 +316,8 @@
         $(el).append(this.el);
       }
       view_model = this.view_model ? this.view_model : ko.dataFor(this.el);
-      if (view_model != null) {
-        if (typeof view_model.activate === "function") {
-          view_model.activate(this);
-        }
+      if (view_model && view_model.activate) {
+        view_model.activate(this);
       }
       return this;
     };
@@ -334,10 +332,8 @@
       }
       $(this.el).removeClass('active');
       view_model = this.view_model ? this.view_model : ko.dataFor(this.el);
-      if (view_model != null) {
-        if (typeof view_model.deactivate === "function") {
-          view_model.deactivate(this);
-        }
+      if (view_model && view_model.deactivate) {
+        view_model.deactivate(this);
       }
       this.removeElement(options);
       return this;

@@ -41,7 +41,7 @@
 
   <script type='text/javascript'>
     var pane_navigator_el = $('.pane-navigator')[0];
-    var pane_navigator = new kb.PaneNavigator(pane_navigator_el, {no_detach: true});
+    var pane_navigator = new kb.PaneNavigator(pane_navigator_el, {no_remove: true});
     kb.utils.wrappedPaneNavigator(pane_navigator_el, pane_navigator); // cache the pane_navigator for use by kb. It should be released with kb.utils.wrappedPaneNavigator(pane_navigator_el, null)
     pane_navigator.push(new kb.Pane(pane_navigator_el.children[0]));
   </script>

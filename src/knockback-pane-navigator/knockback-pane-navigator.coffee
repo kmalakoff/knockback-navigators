@@ -20,20 +20,21 @@ class kb.PaneNavigator
     @clear({silent: true})
 
   clear: (options={}) ->
+    # cancel the transition
+    @cancelTransition()
+
     # destroy the active pane
     active_pane.destroy(@) if (active_pane = @activePane())
 
     # clear silently
     array = @panes()
-    panes = array.slice()
+    panes = array.slice() # copy so triggering only happens after clearing (not for each pane)
     panes.pop() # remove the active pane, since it was destroyed
-    array.splice(0, array.length)
+    array.splice(0, array.length) # clear
 
-    # deactivate panes
+    # destroy panes
     while pane = panes.pop()
-      if pane.el
-        pane.destroy(@)
-        pane.el = null unless @el # we are being destroyed so clear all references (el will not be cleared if it is a DOM-owned node)
+      pane.destroy(@) if pane.el
 
     # now trigger an update
     @panes([]) unless options.silent
@@ -92,7 +93,7 @@ class kb.PaneNavigator
 
     # override the transition
     active_pane = @activePane()
-    # active_pane.transition = options.transition if 'transition' of options # override transition
+    active_pane.transition = options.transition if 'transition' of options # override transition
 
     # activate or re-create the active pane (if it was uncached)
     @panes.pop()
@@ -103,7 +104,7 @@ class kb.PaneNavigator
     # deactivate the pane
     clean_up_fn = =>
       @cleanupTransition()
-      active_pane.deactivate(@) if active_pane
+      active_pane.destroy(@) if active_pane
 
     # create and start a transition
     if active_pane and (active_pane.transition or @transition)

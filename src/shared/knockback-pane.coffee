@@ -4,11 +4,10 @@ class kb.Pane
     @setInfo(info)
 
   destroy: (options={}) ->
-    @create = null # we are done, no more caching
-
     # deactivate and remove from DOM
     @deactivate(options)
     @removeElement(options, true) # force
+    @create = null
     @el = null
 
   # @private
@@ -34,14 +33,17 @@ class kb.Pane
   # @private
   removeElement: (options={}, force) ->
     return @ unless @el
-    return if options.no_detach
+    return if options.no_remove
 
     # remove from DOM and release
-    if ((@create or force) and not options.no_destroy) and ko.removeNode
+    if force or (@create and not options.no_destroy)
       ko.removeNode(@el)
       @el = null
     else
-      $(@el).detach()
+      if force
+        $(@el).remove()
+      else if @el.parentNode
+        @el.parentNode.removeChild(@el)
     @
 
   activate: (el) ->
@@ -53,7 +55,7 @@ class kb.Pane
 
     # notifications - activate
     view_model = if @view_model then @view_model else ko.dataFor(@el)
-    view_model?.activate?(@)
+    view_model.activate(@) if view_model and view_model.activate
     @
 
   deactivate: (options={}) ->
@@ -62,7 +64,7 @@ class kb.Pane
 
     # notifications - deactivate
     view_model = if @view_model then @view_model else ko.dataFor(@el)
-    view_model?.deactivate?(@)
+    view_model.deactivate(@) if view_model and view_model.deactivate
 
     # remove from DOM
     @removeElement(options)

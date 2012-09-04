@@ -14,7 +14,7 @@ unless ko.observable # no Knockout, make minimal fake ko.observable and and ko.o
 
   # lifecycle
   ko.dataFor = (el) -> null
-  ko.removeNode = (el) -> $(el).detach()
+  ko.removeNode = (el) -> $(el).remove()
 
   # observables
   ko.observable = (initial_value) ->
@@ -40,9 +40,6 @@ unless _.bindAll
 
 unless _.isElement
   _.isElement = (obj) -> return obj and (obj.nodeType is 1)
-
-# PATCH: alias Zepto detach() to remove()
-@Zepto.fn.detach = @Zepto.fn.remove if @Zepto
 
 # alias xui to $
 @$ = @x$ if @x$

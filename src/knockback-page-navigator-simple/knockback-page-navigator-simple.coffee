@@ -1,6 +1,6 @@
 class kb.PageNavigatorSimple
 
-  # @option options [Object] {no_detach: boolean}
+  # @option options [Object] {no_remove: boolean}
   constructor: (el, @options={}) ->
     el or throwMissing(@, 'el')
 
@@ -39,13 +39,14 @@ class kb.PageNavigatorSimple
       $(@el).append(active_page.el) unless active_page.el.parentNode is @el
       return active_page
 
-    # deactivate
-    previous_page.deactivate(@options) if (previous_page = @activePage())
+    # destroy previous
+    previous_page.destroy(@options) if (previous_page = @activePage())
 
     # create a new page
     active_page = new kb.Pane(info, window.location.hash)
     active_page.activate(@el)
     @active_page(active_page)
+
     return active_page
 
   ####################################

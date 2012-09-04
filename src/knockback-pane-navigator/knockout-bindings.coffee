@@ -2,7 +2,7 @@ if ko.bindingHandlers
   ko.bindingHandlers['PaneNavigator'] =
     'init': (element, value_accessor, all_bindings_accessor, view_model) ->
       options = ko.utils.unwrapObservable(value_accessor())
-      options.no_detach = true unless 'no_detach' of options
+      options.no_remove = true unless 'no_remove' of options
       pane_navigator = new kb.PaneNavigator(element, options)
 
       # add to the element

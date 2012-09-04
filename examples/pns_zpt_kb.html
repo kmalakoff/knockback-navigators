@@ -67,7 +67,7 @@
     // Page Routing and Navigating
     // Don't allow pages to be detached since they are owned by the DOM (default is to assume dynamic pages and to therefore detach)
     ////////////////////////////////////
-    var page_navigator = new kb.PageNavigatorSimple($('#app')[0], {no_detach: true});
+    var page_navigator = new kb.PageNavigatorSimple($('#app')[0], {no_remove: true});
     var router = new Backbone.Router()
     router.route('', null, page_navigator.dispatcher(function(){
       page_navigator.loadPage($('#main')[0]);

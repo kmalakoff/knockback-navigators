@@ -1,6 +1,6 @@
 class kb.PageNavigatorPanes
 
-  # @option options [Object] {no_detach: boolean}
+  # @option options [Object] {no_remove: boolean}
   constructor: (el, options={}) ->
     el or throwMissing(@, 'el')
 

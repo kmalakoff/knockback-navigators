@@ -35,11 +35,11 @@ In order to filter loading of page URLs (eg. not reloading the active page if th
 
 ###Basic Usage (Static Pages)
 
-If you want to bind  to a static page, you should provide the '{no_detach: true}' option so if only hides, but does not detach elements when a page is deactivated.
+If you want to bind  to a static page, you should provide the '{no_remove: true}' option so if only hides, but does not detach elements when a page is deactivated.
 
 BackboneJS:
 ```
-var page_navigator = new kb.PageNavigatorPanes($('#app')[0], {no_detach: true});
+var page_navigator = new kb.PageNavigatorPanes($('#app')[0], {no_remove: true});
 var router = new Backbone.Router()
 router.route('', null, page_navigator.dispatcher(function(){ page_navigator.loadPage($('#main')[0]); }));
 router.route('page1', null, page_navigator.dispatcher(function(){ page_navigator.loadPage($('#page1')[0]); }));
@@ -49,7 +49,7 @@ Backbone.history.start({hashChange: true});
 
 PathJS:
 ```
-var page_navigator = new kb.PageNavigatorPanes($('#app')[0], {no_detach: true});
+var page_navigator = new kb.PageNavigatorPanes($('#app')[0], {no_remove: true});
 Path.map('').to(page_navigator.dispatcher(function(){ page_navigator.loadPage($('#main')[0]); }));
 Path.map('#page1').to(page_navigator.dispatcher(function(){ page_navigator.loadPage($('#page1')[0]); }));
 Path.map('#page2').to(page_navigator.dispatcher(function(){ page_navigator.loadPage($('#page2')[0]); }));
@@ -186,7 +186,7 @@ You can manually bind a pane-navigator:
 </div>
 
 var pane_navigator_el = $('.pane-navigator')[0];
-var pane_navigator = new kb.PaneNavigator(pane_navigator_el, {no_detach: true, transition: 'NavigationSlide'});
+var pane_navigator = new kb.PaneNavigator(pane_navigator_el, {no_remove: true, transition: 'NavigationSlide'});
 kb.utils.wrappedPaneNavigator(pane_navigator_el, pane_navigator);
 pane_navigator.push(new kb.Pane(pane_navigator_el.children[0]));
 ```

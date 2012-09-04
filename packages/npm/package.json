@@ -12,7 +12,7 @@
   },
 
   "optionalDependencies": {
-    "knockback": "=0.16.0"
+    "knockback": ">=0.16.0"
   },
 
   "version"       : "0.1.0"
