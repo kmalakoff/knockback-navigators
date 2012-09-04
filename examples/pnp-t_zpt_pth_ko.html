@@ -56,7 +56,7 @@
     // Page Routing and Navigating
     // Don't allow pages to be detached since they are owned by the DOM (default is to assume dynamic pages and to therefore detach)
     ////////////////////////////////////
-    var page_navigator = new kb.PageNavigatorPanes($('#app')[0], {no_detach: true});
+    var page_navigator = new kb.PageNavigatorPanes($('#app')[0], {no_remove: true});
     Path.map('').to(page_navigator.dispatcher(function(){
       page_navigator.loadPage({el: $('#main')[0], transition: 'FadeIn'});
     }));
