@@ -21,7 +21,7 @@ class kb.PaneNavigator
 
   clear: (options={}) ->
     # cancel the transition
-    @cancelTransition()
+    @cleanupTransition(true)
 
     # destroy the active pane
     active_pane.destroy(@) if (active_pane = @activePane())
@@ -51,7 +51,7 @@ class kb.PaneNavigator
     return unless active_pane # no pane
 
     # cancel the transition
-    @cancelTransition()
+    @cleanupTransition(true)
     active_pane.transition = options.transition if 'transition' of options # override transition
 
     # activate and store
@@ -60,7 +60,9 @@ class kb.PaneNavigator
 
     # clean up previous
     previous_pane = @previousPane()
+    cleaned_up = false
     clean_up_fn = =>
+      return if cleaned_up; cleaned_up = true
       @cleanupTransition()
 
       if previous_pane
@@ -89,7 +91,7 @@ class kb.PaneNavigator
     return null unless previous_pane # no where to go back to
 
     # cancel the transition
-    @cancelTransition()
+    @cleanupTransition(true)
 
     # override the transition
     active_pane = @activePane()
@@ -98,11 +100,10 @@ class kb.PaneNavigator
     # activate or re-create the active pane (if it was uncached)
     @panes.pop()
 
-    # re-activate the previous pane
-    previous_pane.activate(@el)
-
-    # deactivate the pane
+    # destroy the active pane
+    cleaned_up = false
     clean_up_fn = =>
+      return if cleaned_up; cleaned_up = true
       @cleanupTransition()
       active_pane.destroy(@) if active_pane
 
@@ -146,6 +147,8 @@ class kb.PaneNavigator
     delete options.inverse
 
     # create the info
+    active_pane.activate(@el) if active_pane # ensure there is an element
+    previous_pane.activate(@el) if previous_pane # ensure there is an element
     info =
       container_el: @el
       from_el: if previous_pane then previous_pane.el else null
@@ -157,15 +160,11 @@ class kb.PaneNavigator
     @active_transition.transition.start()
 
   # @private
-  cancelTransition: ->
+  cleanupTransition: (cancel) ->
     return unless @active_transition
-    transition = @active_transition.transition
-    @active_transition = null
-    transition.cancel()
-
-  # @private
-  cleanupTransition: ->
-    @active_transition = null
+    transition = @active_transition; @active_transition = null
+    transition.transition.cancel() if cancel
+    transition.callback()
 
 ####################################
 # Module

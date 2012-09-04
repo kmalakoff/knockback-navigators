@@ -264,7 +264,7 @@
       if (options == null) {
         options = {};
       }
-      this.cancelTransition();
+      this.cleanupTransition(true);
       if ((active_pane = this.activePane())) {
         active_pane.destroy(this);
       }
@@ -303,7 +303,7 @@
     };
 
     PaneNavigator.prototype.push = function(active_pane, options) {
-      var clean_up_fn, previous_pane,
+      var clean_up_fn, cleaned_up, previous_pane,
         _this = this;
       if (options == null) {
         options = {};
@@ -311,7 +311,7 @@
       if (!active_pane) {
         return;
       }
-      this.cancelTransition();
+      this.cleanupTransition(true);
       if ('transition' in options) {
         active_pane.transition = options.transition;
       }
@@ -322,8 +322,13 @@
         this.panes.push(active_pane);
       }
       previous_pane = this.previousPane();
+      cleaned_up = false;
       clean_up_fn = function() {
         var panes;
+        if (cleaned_up) {
+          return;
+        }
+        cleaned_up = true;
         _this.cleanupTransition();
         if (previous_pane) {
           if (_this.no_history) {
@@ -344,7 +349,7 @@
     };
 
     PaneNavigator.prototype.pop = function(options) {
-      var active_pane, clean_up_fn, previous_pane,
+      var active_pane, clean_up_fn, cleaned_up, previous_pane,
         _this = this;
       if (options == null) {
         options = {};
@@ -353,14 +358,18 @@
       if (!previous_pane) {
         return null;
       }
-      this.cancelTransition();
+      this.cleanupTransition(true);
       active_pane = this.activePane();
       if ('transition' in options) {
         active_pane.transition = options.transition;
       }
       this.panes.pop();
-      previous_pane.activate(this.el);
+      cleaned_up = false;
       clean_up_fn = function() {
+        if (cleaned_up) {
+          return;
+        }
+        cleaned_up = true;
         _this.cleanupTransition();
         if (active_pane) {
           return active_pane.destroy(_this);
@@ -410,6 +419,12 @@
         options.forward = !options.forward;
       }
       delete options.inverse;
+      if (active_pane) {
+        active_pane.activate(this.el);
+      }
+      if (previous_pane) {
+        previous_pane.activate(this.el);
+      }
       info = {
         container_el: this.el,
         from_el: previous_pane ? previous_pane.el : null,
@@ -423,18 +438,17 @@
       return this.active_transition.transition.start();
     };
 
-    PaneNavigator.prototype.cancelTransition = function() {
+    PaneNavigator.prototype.cleanupTransition = function(cancel) {
       var transition;
       if (!this.active_transition) {
         return;
       }
-      transition = this.active_transition.transition;
+      transition = this.active_transition;
       this.active_transition = null;
-      return transition.cancel();
-    };
-
-    PaneNavigator.prototype.cleanupTransition = function() {
-      return this.active_transition = null;
+      if (cancel) {
+        transition.transition.cancel();
+      }
+      return transition.callback();
     };
 
     return PaneNavigator;
@@ -682,12 +696,8 @@
       if (force || (this.create && !options.no_destroy)) {
         ko.removeNode(this.el);
         this.el = null;
-      } else {
-        if (force) {
-          $(this.el).remove();
-        } else if (this.el.parentNode) {
-          this.el.parentNode.removeChild(this.el);
-        }
+      } else if (this.el.parentNode) {
+        this.el.parentNode.removeChild(this.el);
       }
       return this;
     };

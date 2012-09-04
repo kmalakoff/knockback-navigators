@@ -14,7 +14,7 @@ kb.transistions.FadeIn = (info, options) ->
     $to_el.css({'min-height': $container_el.height()})
     $container_el.css({'overflow': 'hidden'})
     duration = if 'duration' of options then options.duration else 500
-    if (options.forward and not options.inverse) or (not options.forward and options.inverse)
+    if options.forward
       $to_el.css({'opacity': 0})
       $to_el.animate({'opacity': 1}, 1000, 'swing', @callback)
     else # reverse

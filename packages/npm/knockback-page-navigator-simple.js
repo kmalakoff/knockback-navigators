@@ -295,12 +295,8 @@
       if (force || (this.create && !options.no_destroy)) {
         ko.removeNode(this.el);
         this.el = null;
-      } else {
-        if (force) {
-          $(this.el).remove();
-        } else if (this.el.parentNode) {
-          this.el.parentNode.removeChild(this.el);
-        }
+      } else if (this.el.parentNode) {
+        this.el.parentNode.removeChild(this.el);
       }
       return this;
     };

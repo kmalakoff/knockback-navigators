@@ -79,7 +79,7 @@
       $container_el.css({
         'overflow': 'hidden'
       });
-      if ((options.forward && !options.inverse) || (!options.forward && options.inverse)) {
+      if (options.forward) {
         $to_el.css({
           bottom: -container_height
         });
@@ -123,7 +123,7 @@
         'overflow': 'hidden'
       });
       duration = 'duration' in options ? options.duration : 500;
-      if ((options.forward && !options.inverse) || (!options.forward && options.inverse)) {
+      if (options.forward) {
         $to_el.css({
           'opacity': 0
         });

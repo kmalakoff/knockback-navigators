@@ -35,15 +35,14 @@ class kb.Pane
     return @ unless @el
     return if options.no_remove
 
-    # remove from DOM and release
+    # dispose of the node
     if force or (@create and not options.no_destroy)
       ko.removeNode(@el)
       @el = null
-    else
-      if force
-        $(@el).remove()
-      else if @el.parentNode
-        @el.parentNode.removeChild(@el)
+
+    # just remove from the DOM (may reuse later)
+    else if @el.parentNode
+      @el.parentNode.removeChild(@el)
     @
 
   activate: (el) ->

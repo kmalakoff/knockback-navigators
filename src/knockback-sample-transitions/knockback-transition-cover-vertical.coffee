@@ -17,7 +17,7 @@ kb.transistions.CoverVertical = (info, options) ->
     $to_el.addClass('on-top')
     $to_el.css({'min-height': container_height})
     $container_el.css({'overflow': 'hidden'})
-    if (options.forward and not options.inverse) or (not options.forward and options.inverse)
+    if options.forward
       $to_el.css({bottom: -container_height})
       $to_el.animate({bottom: '0px'}, duration, 'linear', @callback)
     else # reverse
