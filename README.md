@@ -1,5 +1,7 @@
 [![Build Status](https://secure.travis-ci.org/kmalakoff/knockback-navigators.png)](http://travis-ci.org/kmalakoff/knockback-navigators)
 
+![logo](https://github.com/kmalakoff/knockback-navigators/raw/master/media/logo.png)
+
 KnockbackNavigators.js provides page navigators, a pane navigator, and transition animations to help you make dynamic, single-page applications. They are platform-agnostic so you can even use them without using Knockback.js or Knockout.js!
 
 * [API Documentation](http://kmalakoff.github.com/knockback-navigators/doc/index.html)
