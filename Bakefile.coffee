@@ -106,9 +106,8 @@ module.exports =
 
   _postinstall:
     commands: [
-      # knockback dependencies
-      'cp -v knockback/knockback-core-stack.js vendor/knockback-core-stack.js'
-      'cp -v knockback/knockback-core-stack.min.js vendor/knockback-core-stack.min.js'
+      # tests
+      'cp -v knockback/knockback-core-stack.js test/vendor/knockback-core-stack.js'
 
       # examples
       'cp -v knockback/knockback-core-stack.js examples/vendor/knockback-core-stack.js'

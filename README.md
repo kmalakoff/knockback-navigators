@@ -40,6 +40,7 @@ In order to filter loading of page URLs (eg. not reloading the active page if th
 If you want to bind  to a static page, you should provide the '{no_remove: true}' option so if only hides, but does not detach elements when a page is deactivated.
 
 BackboneJS:
+
 ```
 var page_navigator = new kb.PageNavigatorPanes($('#app')[0], {no_remove: true});
 var router = new Backbone.Router()
@@ -50,6 +51,7 @@ Backbone.history.start({hashChange: true});
 ```
 
 PathJS:
+
 ```
 var page_navigator = new kb.PageNavigatorPanes($('#app')[0], {no_remove: true});
 Path.map('').to(page_navigator.dispatcher(function(){ page_navigator.loadPage($('#main')[0]); }));
@@ -282,7 +284,7 @@ var view_model = ko.dataFor(pane.el); // get the ViewModel from the bound elemen
 view_model.activate(el);
 ```
 
-# Not Using Knockback.js or Knockout.js
+# Not Using Knockback.js nor Knockout.js
 If you do not use Knockback.js or Knockout.js, you may want to provide custom memory management hooks instead of these defaults:
 
 ```

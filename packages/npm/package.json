@@ -10,10 +10,5 @@
     "type": "git",
     "url": "http://github.com/kmalakoff/knockback-navigators.git"
   },
-
-  "optionalDependencies": {
-    "knockback": ">=0.16.0"
-  },
-
   "version"       : "0.1.0"
 }
