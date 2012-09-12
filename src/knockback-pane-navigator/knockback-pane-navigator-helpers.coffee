@@ -1,9 +1,22 @@
-# add a utility
+kb.transistions or= {}
+
+# only used by kb.PaneNavigator
+unless _.indexOf
+  _.indexOf = (array, value) -> (return index if test is value) for index, test of array; return -1
+
+# utilities namespace
 kb.utils or= {}
+
+# Dual-purpose getter/setter for retrieving and storing a kb.PaneNavigator on an element.
+#
+# @return [kb.PaneNavigator] the pane navigator
+# @example
+#   pane_navigator = kb.utils.wrappedPaneNavigator(element)
 kb.utils.wrappedPaneNavigator = (el, value) ->
   return el.__kb_pane_navigator if (arguments.length is 1) or (el.__kb_pane_navigator is value)
   el.__kb_pane_navigator.destroy() if el.__kb_pane_navigator
   el.__kb_pane_navigator = value
+  return value
 
 # custom find by path
 if $.fn
@@ -20,6 +33,8 @@ if $.fn
             current_el = if $current_el.length then $current_el[0] else null
           else
             current_el = current_el.parentNode
+        else if component is '..'
+          current_el = current_el.parentNode
         else
           $current_el = $(current_el).find(component)
           current_el = if $current_el.length then $current_el[0] else null
@@ -50,7 +65,12 @@ if $.fn
 
       return null
 
-# publish
+# A helper that can be bound to a click event in your HTML for going to the next pane if it exists.
+# It will try to find your pane navigator using $(el).findPaneNavigator() which either uses the 'data-path' attribute which is an extended selector format for paths or looks down from the grandparent element or up using $(el).closest('.pane-navigator').
+# The exended selector path format introduces the following path-related symbols for a path of selectors: '/', '..', '^'. The first two should be familiar from the filesystem; whereas, '^' uses $(el).closest(selector) to look up the tree by selector.
+#
+# @example Go to the next pane using the pane navigator on the closest element with the 'pane-navigator' class
+#    <button onclick="kb.nextPane(this)" data-path='^/.pane-navigator'></button>
 kb.nextPane = (obj, event) ->
   el = if _.isElement(obj) then obj else (if obj.currentTarget then obj.currentTarget else event.currentTarget)
   pane_navigator = $(el).findPaneNavigator() # find pane navigator
@@ -64,6 +84,12 @@ kb.nextPane = (obj, event) ->
     break if _.isElement(next_el) and $(next_el).hasClass('pane') # found it
   pane_navigator.push(new kb.Pane(next_el)) if next_el
 
+# A helper that can be bound to a click event in your HTML for going to the previous pane if it exists.
+# It will try to find your pane navigator using $(el).findPaneNavigator() which either uses the 'data-path' attribute which is an extended selector format for paths or looks down from the grandparent element or up using $(el).closest('.pane-navigator').
+# The exended selector path format introduces the following path-related symbols for a path of selectors: '/', '..', '^'. The first two should be familiar from the filesystem; whereas, '^' uses $(el).closest(selector) to look up the tree by selector.
+#
+# @example Go to the previous pane using the pane navigator on the closest element with the 'pane-navigator' class
+#    <button onclick="kb.previousPane(this)" data-path='^/.pane-navigator'></button>
 kb.previousPane = (obj, event) ->
   el = if _.isElement(obj) then obj else (if obj.currentTarget then obj.currentTarget else event.currentTarget)
   pane_navigator = $(el).findPaneNavigator() # find pane navigator

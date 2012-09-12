@@ -1,12 +1,13 @@
-kb.transistions or= {}
-
-# only used by kb.PaneNavigator
-unless _.indexOf
-  _.indexOf = (array, value) -> (return index if test is value) for index, test of array; return -1
-
+# Pane Navigator that simply replaces the active page element when it changes and cleans up the previous if it exists.
+#
+# @note If using Knockout, 'hasHistory', 'activePage', and 'activeUrl' methods can be can be observed for changes.
+#
 class kb.PaneNavigator
-  # options
-  # - no_history - default is with history
+  # @param [Element] el the container element for the pane navigator
+  # @param [Object] options create options
+  # @option options [Boolean] no_remove do not remove elements from the DOM with they are inactive. Useful if you are using a static DOM hierarchy rather than generating the elements dynamically.
+  # @option options [Boolean] no_history if you would like to not store the history of panes, but only have one in memory at a time (default is with history)
+  # @option options [String|Object] transition default transition options. Either a name or `{name: 'TransitionName', option1: option2: ...}`
   constructor: (el, options) ->
     el or throwMissing(@, 'el')
 

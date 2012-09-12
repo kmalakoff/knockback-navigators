@@ -1,6 +1,14 @@
+# Pane Navigator that uses an embedded kb.PaneManager for transitions and history.
+#
+# @note If using Knockout, 'hasHistory', 'activePage', 'activeUrl', 'previousPage', and 'previousUrl' methods can be can be observed for changes.
+#
 class kb.PageNavigatorPanes
 
-  # @option options [Object] {no_remove: boolean}
+  # @param [Element] el the container element for the page navigator
+  # @param [Object] options create options
+  # @option options [Boolean] no_remove do not remove elements from the DOM with they are inactive. Useful if you are using a static DOM hierarchy rather than generating the elements dynamically.
+  # @option options [Boolean] no_history if you would like to not store the history of panes, but only have one in memory at a time (default is with history)
+  # @option options [String|Object] transition default transition options. Either a name or `{name: 'TransitionName', option1: option2: ...}`
   constructor: (el, options={}) ->
     el or throwMissing(@, 'el')
 
@@ -19,8 +27,8 @@ class kb.PageNavigatorPanes
 
   ####################################
   # Querying Page State
-  # - If using Knockout, these methods can be can be observed for changes
   ####################################
+
   hasHistory: -> return not @pane_navigator.no_history
   activePage: -> return @pane_navigator.activePane()
   activeUrl: -> return if (active_page = @pane_navigator.activePane()) then active_page.url else null
@@ -56,6 +64,8 @@ class kb.PageNavigatorPanes
   ####################################
   # Route Dispatching
   ####################################
+
+  # Create a dispatcher function that can be bound to your router and that will correct dispatch url changes (for example, reuse a page if it is already loaded)
   dispatcher: (callback) ->
     page_navigator = @
     return ->

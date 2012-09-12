@@ -1,6 +1,12 @@
+# Pane Navigator that simply replaces the active page element when it changes and cleans up the previous if it exists.
+#
+# @note If using Knockout, 'hasHistory', 'activePage', and 'activeUrl' methods can be can be observed for changes.
+#
 class kb.PageNavigatorSimple
 
-  # @option options [Object] {no_remove: boolean}
+  # @param [Element] el the container element for the page navigator
+  # @param [Object] options create options
+  # @option options [Boolean] no_remove do not remove elements from the DOM with they are inactive. Useful if you are using a static DOM hierarchy rather than generating the elements dynamically.
   constructor: (el, @options={}) ->
     el or throwMissing(@, 'el')
 
@@ -18,8 +24,8 @@ class kb.PageNavigatorSimple
 
   ####################################
   # Querying Page State
-  # - If using Knockout, these methods can be can be observed for changes
   ####################################
+
   hasHistory: -> return false
   activePage: -> return @active_page()
   activeUrl: -> return if (active_page = @active_page()) then active_page.url else null
@@ -52,6 +58,8 @@ class kb.PageNavigatorSimple
   ####################################
   # Route Dispatching
   ####################################
+
+  # Create a dispatcher function that can be bound to your router and that will correct dispatch url changes (for example, reuse a page if it is already loaded)
   dispatcher: (callback) ->
     page_navigator = @
     return ->

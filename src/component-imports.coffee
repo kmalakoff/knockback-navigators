@@ -1,6 +1,7 @@
 ####################################
 # INTERNAL HELPERS
 ####################################
+# @private
 throwUnexpected = (instance, message) -> throw "#{instance.constructor.name}: #{message} is unexpected"
 
 # import Knockback is it exists

@@ -6057,11 +6057,11 @@ kb = (function() {
     return el;
   };
 
-  kb.renderAutoReleasedTemplate = function(template, view_model, options) {
+  kb.renderTemplate = function(template, view_model, options) {
     if (options == null) {
       options = {};
     }
-    legacyWarning('kb.renderAutoReleasedTemplate', '0.16.4', 'Please use kb.renderTemplate instead');
+    legacyWarning('kb.renderTemplate', '0.16.4', 'Please use kb.renderTemplate instead');
     return this.renderTemplate(template, view_model, options = {});
   };
 

@@ -1,3 +1,13 @@
+# Constructor for a CoverVertical transition animation.
+#
+# @param [Object] info the hierarchy information for the transition.
+# @option info [Element] container_el the parent container for the pane elements
+# @option info [Element] from_el the element being transitioned from
+# @option info [Element] to_el the element being transitioned to
+# @option info [Function] callback the callback that must be called when the tranition animation is completed
+# @param [Object] options the transition options.
+# @option options [Boolean] forward play the transition animation in a forward or reverse direction
+# @option options [Float] duration specify a duarion for the animation (default is 500)
 kb.transistions.CoverVertical = (info, options) ->
   # extract state and parameters
   initial_state = new kb.TransitionSavedState(info, {to_el: ['min-height', 'bottom'], container_el: ['overflow']})

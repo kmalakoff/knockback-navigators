@@ -12,7 +12,7 @@ module.exports =
       'src/knockback-pane-navigator/knockback-pane-navigator.coffee'
       'src/knockback-pane-navigator/knockback-pane-navigator-helpers.coffee'
       'src/knockback-pane-navigator/knockout-bindings.coffee'
-      'src/shared/knockback-page-navigator.coffee'
+      'src/shared/knockback-page-navigator-helpers.coffee'
       'src/shared/knockback-pane.coffee'
       'src/shared/knockback-transition-saved-state.coffee'
     ]
@@ -25,7 +25,7 @@ module.exports =
       'src/component-imports.coffee'
       'src/knockback-page-navigator-simple/knockback-page-navigator-simple.coffee'
       'src/knockback-page-navigator-simple/knockout-bindings.coffee'
-      'src/shared/knockback-page-navigator.coffee'
+      'src/shared/knockback-page-navigator-helpers.coffee'
       'src/shared/knockback-pane.coffee'
     ]
 

@@ -223,21 +223,6 @@
     };
   }
 
-  kb.transistions || (kb.transistions = {});
-
-  if (!_.indexOf) {
-    _.indexOf = function(array, value) {
-      var index, test;
-      for (index in array) {
-        test = array[index];
-        if (test === value) {
-          return index;
-        }
-      }
-      return -1;
-    };
-  }
-
   kb.PaneNavigator = (function() {
 
     function PaneNavigator(el, options) {
@@ -459,6 +444,21 @@
     exports.PaneNavigator = kb.PaneNavigator;
   }
 
+  kb.transistions || (kb.transistions = {});
+
+  if (!_.indexOf) {
+    _.indexOf = function(array, value) {
+      var index, test;
+      for (index in array) {
+        test = array[index];
+        if (test === value) {
+          return index;
+        }
+      }
+      return -1;
+    };
+  }
+
   kb.utils || (kb.utils = {});
 
   kb.utils.wrappedPaneNavigator = function(el, value) {
@@ -468,7 +468,8 @@
     if (el.__kb_pane_navigator) {
       el.__kb_pane_navigator.destroy();
     }
-    return el.__kb_pane_navigator = value;
+    el.__kb_pane_navigator = value;
+    return value;
   };
 
   if ($.fn) {
@@ -489,6 +490,8 @@
             } else {
               current_el = current_el.parentNode;
             }
+          } else if (component === '..') {
+            current_el = current_el.parentNode;
           } else {
             $current_el = $(current_el).find(component);
             current_el = $current_el.length ? $current_el[0] : null;
@@ -615,6 +618,12 @@
     return window.location.hash = url;
   };
 
+  kb.loadUrlFn = function(url, transition) {
+    return function() {
+      return kb.loadUrl(url, transition);
+    };
+  };
+
   kb.utils || (kb.utils = {});
 
   kb.utils.wrappedPageNavigator = function(el, value) {
@@ -624,7 +633,8 @@
     if (el.__kb_page_navigator) {
       el.__kb_page_navigator.destroy();
     }
-    return el.__kb_page_navigator = value;
+    el.__kb_page_navigator = value;
+    return value;
   };
 
   kb.Pane = (function() {

@@ -71,12 +71,12 @@ Path.dispatch(window.location.hash);
 
 ###Dynamic Pages using Knockback.js
 
-You can dynamic pages either by hand or using Knockback.js's 'kb.renderAutoReleasedTemplate(template_name, view_model, options)' function.
+You can dynamic pages either by hand or using Knockback.js's 'kb.renderTemplate(template_name, view_model, options)' function.
 
 ```
 ...
 router.route('', null, page_navigator.dispatcher(function(){
-  page_navigator.loadPage( kb.renderAutoReleasedTemplate('page', new PageViewModel(pages.get('main'))) );
+  page_navigator.loadPage( kb.renderTemplate('page', new PageViewModel(pages.get('main'))) );
 }));
 ...
 ```
@@ -86,7 +86,7 @@ You can also force pages to unload when they are not active, but supplying a 'cr
 ```
 ...
 router.route('', null, page_navigator.dispatcher(function(){
-  create: function() { return kb.renderAutoReleasedTemplate('page', new PageViewModel(pages.get('page1'))) }
+  create: function() { return kb.renderTemplate('page', new PageViewModel(pages.get('page1'))) }
 }));
 ...
 ```
@@ -101,7 +101,7 @@ Transitions during routing:
 ...
 router.route('', null, page_navigator.dispatcher(function(){
   page_navigator.loadPage({
-    el: kb.renderAutoReleasedTemplate('page', new PageViewModel(pages.get('main'))),
+    el: kb.renderTemplate('page', new PageViewModel(pages.get('main'))),
     transition: 'FadeIn'
   });
 }));
@@ -114,7 +114,7 @@ With options:
 ...
 router.route('', null, page_navigator.dispatcher(function(){
   page_navigator.loadPage({
-    el: kb.renderAutoReleasedTemplate('page', new PageViewModel(pages.get('main'))),
+    el: kb.renderTemplate('page', new PageViewModel(pages.get('main'))),
     transition: {name: 'FadeIn', duration: 1000}
   });
 }));
@@ -250,7 +250,7 @@ There are three ways to do this in Knockback:
 
 ```
 // Auto-released Template
-var el = kb.renderAutoReleasedTemplate('template_name', view_model, options);
+var el = kb.renderTemplate('template_name', view_model, options);
 
 // OR: When applying bindings
 kb.applyBindings(view_model, el);

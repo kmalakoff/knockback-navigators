@@ -214,6 +214,12 @@
     return window.location.hash = url;
   };
 
+  kb.loadUrlFn = function(url, transition) {
+    return function() {
+      return kb.loadUrl(url, transition);
+    };
+  };
+
   kb.utils || (kb.utils = {});
 
   kb.utils.wrappedPageNavigator = function(el, value) {
@@ -223,7 +229,8 @@
     if (el.__kb_page_navigator) {
       el.__kb_page_navigator.destroy();
     }
-    return el.__kb_page_navigator = value;
+    el.__kb_page_navigator = value;
+    return value;
   };
 
   kb.Pane = (function() {
