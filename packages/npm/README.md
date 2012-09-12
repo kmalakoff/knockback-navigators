@@ -7,29 +7,37 @@ KnockbackNavigators.js provides page navigators, a pane navigator, and transitio
 * [API Documentation](http://kmalakoff.github.com/knockback-navigators/doc/index.html)
 * [Live Examples](http://kmalakoff.github.com/knockback-navigators/)
 
-##You can get the shared CSS file here:
+#Download Latest (0.1.0):
 
-* [knockback-navigators.css][9]
+Please see the [release notes](https://github.com/kmalakoff/knockback-navigators/blob/master/RELEASE_NOTES.md) for upgrade pointers.
+
+**Core Components**
+
+* knockback-navigators.css [(dev)](https://raw.github.com/kmalakoff/knockback-navigators/0.1.0/knockback-navigators.css): shared styling for panes and page navigators
+* knockback-page-navigator-panes.js [(min)](https://raw.github.com/kmalakoff/knockback-navigators/0.1.0/knockback-page-navigator-panes.js) or [(dev)](https://raw.github.com/kmalakoff/knockback-navigators/0.1.0/knockback-page-navigator-panes.min.js)
+* knockback-page-navigator-simple.js [(min)](https://raw.github.com/kmalakoff/knockback-navigators/0.1.0/knockback-page-navigator-simple.js) or [(dev)](https://raw.github.com/kmalakoff/knockback-navigators/0.1.0/knockback-page-navigator-simple.min.js)
+* knockback-pane-navigator.js [(min)](https://raw.github.com/kmalakoff/knockback-navigators/0.1.0/knockback-pane-navigator.js) or [(dev)](https://raw.github.com/kmalakoff/knockback-navigators/0.1.0/knockback-pane-navigator.min.js)
+
+**Optional/Non production**
+
+* knockback-sample-transitions.js [(min)](https://raw.github.com/kmalakoff/knockback-navigators/0.1.0/lib/knockback-sample-transitions.js) or [(dev)](https://raw.github.com/kmalakoff/knockback-navigators/0.1.0/lib/knockback-sample-transitions.min.js)
+
+If you have some production quality transitions that you'd like to submit to the library, please [let me know](http://kmalakoff.github.com/knockback/issues).
 
 ### Dependencies
 
-* You will need to provide a DOM manipulation library like [jQuery][10] or [Zepto][11] or [XUI][12] (XUI: tween not supported).
+* You will need to provide a DOM manipulation library like [jQuery](http://jquery.com/) or [Zepto](http://zeptojs.com/) or [XUI](http://xuijs.com/) (XUI: tween animations not supported).
 
 kb.PageNavigatorPanes
 -----------------------
 
 This component provides a page navigator with history and optional transition animations. If you are using Knockout.js or Knockback.js, you can observe changes to the active page (for example, to update menu links).
 
-##You can get it here:
-
-* [Development version][1]
-* [Production version][2]
-
 **Note**: this bundles knockback-pane-navigator.js so no need to include knockback-pane-navigator.js separately.
 
 #Requirements:
 
-* You will need to provide a routing solution like [Backbone.Router][13], [PathJS][14], etc
+* You will need to provide a routing solution like [Backbone.Router](http://backbonejs.org/), [PathJS](https://github.com/mtrpcic/pathjs), etc
 
 #Usage
 
@@ -148,14 +156,9 @@ kb.PageNavigatorSimple
 
 This component provides a page navigator with no history and no transitions. In addition to adding a little structure to your application, if you are using Knockout.js or Knockback.js, you can observe changes to the active page (for example, to update menu links).
 
-##You can get it here:
-
-* [Development version][3]
-* [Production version][4]
-
 #Requirements:
 
-* You will need to provide a routing solution like [Backbone.Router][13], [PathJS][14], etc
+* You will need to provide a routing solution like [Backbone.Router](http://backbonejs.org/), [PathJS](https://github.com/mtrpcic/pathjs), etc
 
 #Usage
 
@@ -166,11 +169,6 @@ kb.PaneNavigator
 -----------------------
 
 This component provides a way to embed moveable panes within you HTML (for example, sliding between items one at a time) with or without transition animations and provides the page transition functionality to kb.PageNavigatorPanes.
-
-##You can get it here:
-
-* [Development version][5]
-* [Production version][6]
 
 #Usage
 
@@ -237,13 +235,6 @@ state = new kb.TransitionSavedState(info, {to_el: ['min-height'], container_el: 
 $(info.to_el).hide().fadeIn(500, state.callback);
 ```
 
-##There are some sample animations here (but they are only for reference):
-
-* [Development version][7]
-* [Production version][8]
-
-If you have some production quality transitions that you'd like to submit to the library, please [let me know](http://kmalakoff.github.com/knockback/issues).
-
 Note on Lifecycle Management
 -----------------------
 
@@ -309,19 +300,3 @@ Building, Running and Testing the library
 ###Commands:
 
 Look at: https://github.com/kmalakoff/easy-bake
-
-[1]: https://raw.github.com/kmalakoff/knockback-navigators/0.1.0/knockback-page-navigator-panes.js
-[2]: https://raw.github.com/kmalakoff/knockback-navigators/0.1.0/knockback-page-navigator-panes.min.js
-[3]: https://raw.github.com/kmalakoff/knockback-navigators/0.1.0/knockback-page-navigator-simple.js
-[4]: https://raw.github.com/kmalakoff/knockback-navigators/0.1.0/knockback-page-navigator-simple.min.js
-[5]: https://raw.github.com/kmalakoff/knockback-navigators/0.1.0/knockback-pane-navigator.js
-[6]: https://raw.github.com/kmalakoff/knockback-navigators/0.1.0/knockback-pane-navigator.min.js
-[7]: https://raw.github.com/kmalakoff/knockback-navigators/0.1.0/knockback-sample-transitions.js
-[8]: https://raw.github.com/kmalakoff/knockback-navigators/0.1.0/knockback-sample-transitions.min.js
-[9]: https://raw.github.com/kmalakoff/knockback-navigators/0.1.0/knockback-navigators.css
-
-[10]: http://jquery.com/
-[11]: http://zeptojs.com/
-[12]: http://xuijs.com/
-[13]: http://backbonejs.org/
-[14]: https://github.com/mtrpcic/pathjs

@@ -57,6 +57,9 @@ module.exports =
   publishing:
     _build:
       commands: [
+        # create docs
+        'codo src'
+
         # npm
         'cp README.md packages/npm/README.md'
 
