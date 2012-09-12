@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset='UTF-8'>
+  <title>CoffeeScript API Documentation</title>
+  <link rel='stylesheet' href='../../assets/codo.css' type='text/css'>
+  <script src='../../assets/codo.js'></script>
+  <script src='../../assets/search_data.js'></script>
+</head>
+  <body>
+    <div id='base' data-path='../../'></div>
+<div id='header'>
+  <div id='menu'>
+    <a href='../../class_index.html' title='Index'>Index</a>
+    &raquo;
+    <span class='title'>knockback-pane-navigator</span>
+    &raquo;
+    <span class='title'>knockback-pane-navigator-helpers.coffee</span>
+    <nav>
+      <ul>
+        <li class='noframes'>
+          (<a class='noframes' href='#'>no frames</a>)
+        </li>
+      </ul>
+    </nav>
+    <div id='search'>
+      <a id='class_list_link' href='../../class_list.html'>Classes</a>
+      <a id='file_list_link' href='../../file_list.html'>Files</a>
+      <a id='method_list_link' href='../../method_list.html'>Methods</a>
+      <a id='extra_list_link' href='../../extra_list.html'>Extras</a>
+    </div>
+  </div>
+  <iframe id='search_frame'></iframe>
+  <div id='fuzzySearch'>
+    <input type='text'>
+    <ol></ol>
+  </div>
+  <div id='help'>
+    <p>
+      Quickly fuzzy find classes, mixins, methods, file:
+    </p>
+    <ul>
+      <li>
+        <span>Ctrl-T</span>
+        Open fuzzy finder dialog
+      </li>
+    </ul>
+    <p>
+      In frame mode you can toggle the list naviation frame on the left side:
+    </p>
+    <ul>
+      <li>
+        <span>Ctrl-L</span>
+        Toggle list view
+      </li>
+    </ul>
+    <p>
+      You can focus a list in frame mode or toggle a tab in frameless mode:
+    </p>
+    <ul>
+      <li>
+        <span>Ctrl-C</span>
+        Class list
+      </li>
+      <li>
+        <span>Ctrl-I</span>
+        Mixin list
+      </li>
+      <li>
+        <span>Ctrl-F</span>
+        File list
+      </li>
+      <li>
+        <span>Ctrl-M</span>
+        Method list
+      </li>
+      <li>
+        <span>Ctrl-E</span>
+        Extras list
+      </li>
+    </ul>
+    <p>
+      You can focus and blur the search input:
+    </p>
+    <ul>
+      <li>
+        <span>Ctrl-S</span>
+        Focus search input
+      </li>
+      <li>
+        <span>Esc</span>
+        Blur search input
+      </li>
+    </ul>
+    <p>
+      In frameless mode you can close the list tab:
+    </p>
+    <ul>
+      <li>
+        <span>Esc</span>
+        Close list tab
+      </li>
+    </ul>
+  </div>
+</div>
+    <div id='content'>
+      <h1>
+        File:
+        knockback-pane-navigator-helpers.coffee
+      </h1>
+      <table class='box'>
+        <tr>
+          <td>Defined in:</td>
+          <td>knockback-pane-navigator</td>
+        </tr>
+      </table>
+      <h2>Method Summary</h2>
+      <ul class='summary'>
+  <li>
+    <span class='signature'>
+      <a href='#kb.utils.wrappedPaneNavigator-file'>
+        ? (kb.PaneNavigator) <strong>kb.utils.wrappedPaneNavigator</strong>(el, value)
+      </a>
+    </span>
+    <span class='desc'>
+      Dual-purpose getter/setter for retrieving and storing a kb.PaneNavigator on an element.
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#kb.nextPane-file'>
+        ? (void) <strong>kb.nextPane</strong>(obj, event)
+      </a>
+    </span>
+    <span class='desc'>
+      A helper that can be bound to a click event in your HTML for going to the next pane if it exists.
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#kb.previousPane-file'>
+        ? (void) <strong>kb.previousPane</strong>(obj, event)
+      </a>
+    </span>
+    <span class='desc'>
+      A helper that can be bound to a click event in your HTML for going to the previous pane if it exists.
+    </span>
+  </li>
+</ul>
+      <h2>Method Details</h2>
+      <div class='methods'>
+  <div class='method_details'>
+    <p class='signature' id='kb.utils.wrappedPaneNavigator-file'>
+      ? (kb.PaneNavigator) <strong>kb.utils.wrappedPaneNavigator</strong>(el, value)
+    </p>
+    <div class='docstring'>
+  <p>Dual-purpose getter/setter for retrieving and storing a kb.PaneNavigator on an element.</p>
+  <div class='examples'>
+    <h3>Examples:</h3>
+    <h4>
+      
+    </h4>
+    <pre><code class='coffee'>pane_navigator = kb.utils.wrappedPaneNavigator(element)</code></pre>
+  </div>
+</div>
+<div class='tags'>
+  <h3>Returns:</h3>
+  <ul class='return'>
+    <li>
+      <span class='type'></span>
+      (<tt><a href='../../classes/kb/PaneNavigator.html'>kb.PaneNavigator</a></tt>)
+      &mdash;
+      <span class='desc'>the pane navigator</span>
+    </li>
+  </ul>
+</div>
+  </div>
+  <div class='method_details'>
+    <p class='signature' id='kb.nextPane-file'>
+      ? (void) <strong>kb.nextPane</strong>(obj, event)
+    </p>
+    <div class='docstring'>
+  <p>A helper that can be bound to a click event in your HTML for going to the next pane if it exists.<br />It will try to find your pane navigator using $(el).findPaneNavigator() which either uses the &#39;data-path&#39; attribute which is an extended selector format for paths or looks down from the grandparent element or up using $(el).closest(&#39;.pane-navigator&#39;).<br />The exended selector path format introduces the following path-related symbols for a path of selectors: &#39;/&#39;, &#39;..&#39;, &#39;^&#39;. The first two should be familiar from the filesystem; whereas, &#39;^&#39; uses $(el).closest(selector) to look up the tree by selector.</p>
+  <div class='examples'>
+    <h3>Examples:</h3>
+    <h4>
+      Go to the next pane using the pane navigator on the closest element with the 'pane-navigator' class
+    </h4>
+    <pre><code class='coffee'> &lt;button onclick=&quot;kb.nextPane(this)&quot; data-path=&#39;^/.pane-navigator&#39;&gt;&lt;/button&gt;</code></pre>
+  </div>
+</div>
+<div class='tags'>
+</div>
+  </div>
+  <div class='method_details'>
+    <p class='signature' id='kb.previousPane-file'>
+      ? (void) <strong>kb.previousPane</strong>(obj, event)
+    </p>
+    <div class='docstring'>
+  <p>A helper that can be bound to a click event in your HTML for going to the previous pane if it exists.<br />It will try to find your pane navigator using $(el).findPaneNavigator() which either uses the &#39;data-path&#39; attribute which is an extended selector format for paths or looks down from the grandparent element or up using $(el).closest(&#39;.pane-navigator&#39;).<br />The exended selector path format introduces the following path-related symbols for a path of selectors: &#39;/&#39;, &#39;..&#39;, &#39;^&#39;. The first two should be familiar from the filesystem; whereas, &#39;^&#39; uses $(el).closest(selector) to look up the tree by selector.</p>
+  <div class='examples'>
+    <h3>Examples:</h3>
+    <h4>
+      Go to the previous pane using the pane navigator on the closest element with the 'pane-navigator' class
+    </h4>
+    <pre><code class='coffee'> &lt;button onclick=&quot;kb.previousPane(this)&quot; data-path=&#39;^/.pane-navigator&#39;&gt;&lt;/button&gt;</code></pre>
+  </div>
+</div>
+<div class='tags'>
+</div>
+  </div>
+</div>
+    </div>
+    <div id='footer'>
+  Generated on
+  Thu Sep 13 2012 08:18:45 GMT+0900 (JST)
+  by
+  <a href='https://github.com/netzpirat/codo' title='CoffeeScript API documentation generator'>Codo</a>
+  v1.4.1
+  (Node.js v0.8.7).
+  &#10034;
+  Press Ctrl-h to see the keyboard shortcuts
+  &#10034;
+  <a href='http://twitter.com/#!/netzpirat'>@netzpirat</a>
+  &#10034;
+  <a href='https://mksoft.ch'>mksoft.ch</a>
+</div>
+  </body>
+</html>

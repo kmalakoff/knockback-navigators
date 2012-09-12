@@ -25,9 +25,9 @@
     </nav>
     <div id='search'>
       <a id='class_list_link' href='../../class_list.html'>Classes</a>
-      <a id='mixin_list_link' href='../../mixin_list.html'>Mixins</a>
-      <a id='method_list_link' href='../../method_list.html'>Methods</a>
       <a id='file_list_link' href='../../file_list.html'>Files</a>
+      <a id='method_list_link' href='../../method_list.html'>Methods</a>
+      <a id='extra_list_link' href='../../extra_list.html'>Extras</a>
     </div>
   </div>
   <iframe id='search_frame'></iframe>
@@ -67,12 +67,16 @@
         Mixin list
       </li>
       <li>
+        <span>Ctrl-F</span>
+        File list
+      </li>
+      <li>
         <span>Ctrl-M</span>
         Method list
       </li>
       <li>
-        <span>Ctrl-F</span>
-        File list
+        <span>Ctrl-E</span>
+        Extras list
       </li>
     </ul>
     <p>
@@ -110,6 +114,16 @@
           <td>src/knockback-pane-navigator/knockback-pane-navigator.coffee</td>
         </tr>
       </table>
+      <h2>Overview</h2>
+      <div class='docstring'>
+  <div class='note'>
+    <strong>Note:</strong>
+    If using Knockout, &#39;hasHistory&#39;, &#39;activePage&#39;, and &#39;activeUrl&#39; methods can be can be observed for changes.
+  </div>
+  <p>Pane Navigator that simply replaces the active page element when it changes and cleans up the previous if it exists.</p>
+</div>
+<div class='tags'>
+</div>
       <h2>Instance Method Summary</h2>
       <ul class='summary'>
   <li>
@@ -120,7 +134,7 @@
     </span>
     <span class='constructor note title'>Constructor</span>
     <span class='desc'>
-      options - no_history - default is with history
+      
     </span>
   </li>
   <li>
@@ -200,10 +214,56 @@
     <p class='signature' id='constructor-instance'>
       - (void) <strong>constructor</strong>(el, options)
     </p>
-    <div class='docstring'>
-  <p>options - no_history - default is with history </p> 
-</div>
-<div class='tags'>
+    <div class='tags'>
+  <h3>Parameters:</h3>
+  <ul class='param'>
+    <li>
+      <span class='name'>el</span>
+      <span class='type'>
+        (<tt>Element</tt>)
+      </span>
+      &mdash;
+      <span class='desc'>the container element for the pane navigator</span>
+    </li>
+    <li>
+      <span class='name'>options</span>
+      <span class='type'>
+        (<tt>Object</tt>)
+      </span>
+      &mdash;
+      <span class='desc'>create options</span>
+    </li>
+  </ul>
+  <h3>
+    Options Hash:
+    (options):
+  </h3>
+  <ul class='options'>
+    <li>
+      <span class='name'>no_remove</span>
+      <span class='type'>
+        (<tt>Boolean</tt>)
+      </span>
+      &mdash;
+      <span class='desc'>do not remove elements from the DOM with they are inactive. Useful if you are using a static DOM hierarchy rather than generating the elements dynamically.</span>
+    </li>
+    <li>
+      <span class='name'>no_history</span>
+      <span class='type'>
+        (<tt>Boolean</tt>)
+      </span>
+      &mdash;
+      <span class='desc'>if you would like to not store the history of panes, but only have one in memory at a time (default is with history)</span>
+    </li>
+    <li>
+      <span class='name'>transition</span>
+      <span class='type'>
+        (<tt>String|Object</tt>)
+      </span>
+      &mdash;
+      <span class='desc'>default transition options. Either a name or <code>{name: &#39;TransitionName&#39;, option1: option2: ...}</code></span>
+    </li>
+  </ul>
 </div>
   </div>
 </div>
@@ -262,10 +322,10 @@
     </div>
     <div id='footer'>
   Generated on
-  Mon Sep 03 2012 22:44:50 GMT+0900 (JST)
+  Thu Sep 13 2012 08:18:45 GMT+0900 (JST)
   by
   <a href='https://github.com/netzpirat/codo' title='CoffeeScript API documentation generator'>Codo</a>
-  v1.2.3
+  v1.4.1
   (Node.js v0.8.7).
   &#10034;
   Press Ctrl-h to see the keyboard shortcuts

@@ -13,9 +13,9 @@
   <div id='menu'>
     <a href='../../class_index.html' title='Index'>Index</a>
     &raquo;
-    <span class='title'>kb</span>
+    <span class='title'>knockback-sample-transitions</span>
     &raquo;
-    <span class='title'>Pane</span>
+    <span class='title'>knockback-transition-cover-vertical.coffee</span>
     <nav>
       <ul>
         <li class='noframes'>
@@ -105,90 +105,117 @@
 </div>
     <div id='content'>
       <h1>
-        Class:
-        kb.Pane
+        File:
+        knockback-transition-cover-vertical.coffee
       </h1>
       <table class='box'>
         <tr>
           <td>Defined in:</td>
-          <td>src/shared/knockback-pane.coffee</td>
+          <td>knockback-sample-transitions</td>
         </tr>
       </table>
-      <h2>Instance Method Summary</h2>
+      <h2>Method Summary</h2>
       <ul class='summary'>
   <li>
     <span class='signature'>
-      <a href='#constructor-instance'>
-        - (void) <strong>constructor</strong>(info, url)
-      </a>
-    </span>
-    <span class='constructor note title'>Constructor</span>
-    <span class='desc'>
-      
-    </span>
-  </li>
-  <li>
-    <span class='signature'>
-      <a href='#destroy-instance'>
-        - (void) <strong>destroy</strong>(options = {})
+      <a href='#kb.transistions.CoverVertical-file'>
+        ? (void) <strong>kb.transistions.CoverVertical</strong>(info, options)
       </a>
     </span>
     <span class='desc'>
-      
-    </span>
-  </li>
-  <li>
-    <span class='signature'>
-      <a href='#activate-instance'>
-        - (void) <strong>activate</strong>(el)
-      </a>
-    </span>
-    <span class='desc'>
-      
-    </span>
-  </li>
-  <li>
-    <span class='signature'>
-      <a href='#deactivate-instance'>
-        - (void) <strong>deactivate</strong>(options = {})
-      </a>
-    </span>
-    <span class='desc'>
-      
+      Constructor for a CoverVertical transition animation.
     </span>
   </li>
 </ul>
-      <h2>Constructor Details</h2>
+      <h2>Method Details</h2>
       <div class='methods'>
   <div class='method_details'>
-    <p class='signature' id='constructor-instance'>
-      - (void) <strong>constructor</strong>(info, url)
+    <p class='signature' id='kb.transistions.CoverVertical-file'>
+      ? (void) <strong>kb.transistions.CoverVertical</strong>(info, options)
     </p>
-    <div class='tags'>
+    <div class='docstring'>
+  <p>Constructor for a CoverVertical transition animation.</p>
 </div>
-  </div>
-</div>
-      <h2>Instance Method Details</h2>
-      <div class='methods'>
-  <div class='method_details'>
-    <p class='signature' id='destroy-instance'>
-      - (void) <strong>destroy</strong>(options = {})
-    </p>
-    <div class='tags'>
-</div>
-  </div>
-  <div class='method_details'>
-    <p class='signature' id='activate-instance'>
-      - (void) <strong>activate</strong>(el)
-    </p>
-    <div class='tags'>
-</div>
-  </div>
-  <div class='method_details'>
-    <p class='signature' id='deactivate-instance'>
-      - (void) <strong>deactivate</strong>(options = {})
-    </p>
-    <div class='tags'>
+<div class='tags'>
+  <h3>Parameters:</h3>
+  <ul class='param'>
+    <li>
+      <span class='name'>info</span>
+      <span class='type'>
+        (<tt>Object</tt>)
+      </span>
+      &mdash;
+      <span class='desc'>the hierarchy information for the transition.</span>
+    </li>
+    <li>
+      <span class='name'>options</span>
+      <span class='type'>
+        (<tt>Object</tt>)
+      </span>
+      &mdash;
+      <span class='desc'>the transition options.</span>
+    </li>
+  </ul>
+  <h3>
+    Options Hash:
+    (info):
+  </h3>
+  <ul class='options'>
+    <li>
+      <span class='name'>container_el</span>
+      <span class='type'>
+        (<tt>Element</tt>)
+      </span>
+      &mdash;
+      <span class='desc'>the parent container for the pane elements</span>
+    </li>
+    <li>
+      <span class='name'>from_el</span>
+      <span class='type'>
+        (<tt>Element</tt>)
+      </span>
+      &mdash;
+      <span class='desc'>the element being transitioned from</span>
+    </li>
+    <li>
+      <span class='name'>to_el</span>
+      <span class='type'>
+        (<tt>Element</tt>)
+      </span>
+      &mdash;
+      <span class='desc'>the element being transitioned to</span>
+    </li>
+    <li>
+      <span class='name'>callback</span>
+      <span class='type'>
+        (<tt>Function</tt>)
+      </span>
+      &mdash;
+      <span class='desc'>the callback that must be called when the tranition animation is completed</span>
+    </li>
+  </ul>
+  <h3>
+    Options Hash:
+    (options):
+  </h3>
+  <ul class='options'>
+    <li>
+      <span class='name'>forward</span>
+      <span class='type'>
+        (<tt>Boolean</tt>)
+      </span>
+      &mdash;
+      <span class='desc'>play the transition animation in a forward or reverse direction</span>
+    </li>
+    <li>
+      <span class='name'>duration</span>
+      <span class='type'>
+        (<tt>Float</tt>)
+      </span>
+      &mdash;
+      <span class='desc'>specify a duarion for the animation (default is 500)</span>
+    </li>
+  </ul>
 </div>
   </div>
 </div>

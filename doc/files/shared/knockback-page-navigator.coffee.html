@@ -13,9 +13,9 @@
   <div id='menu'>
     <a href='../../class_index.html' title='Index'>Index</a>
     &raquo;
-    <span class='title'>kb</span>
+    <span class='title'>shared</span>
     &raquo;
-    <span class='title'>Pane</span>
+    <span class='title'>knockback-page-navigator.coffee</span>
     <nav>
       <ul>
         <li class='noframes'>
@@ -105,97 +105,123 @@
 </div>
     <div id='content'>
       <h1>
-        Class:
-        kb.Pane
+        File:
+        knockback-page-navigator.coffee
       </h1>
       <table class='box'>
         <tr>
           <td>Defined in:</td>
-          <td>src/shared/knockback-pane.coffee</td>
+          <td>shared</td>
         </tr>
       </table>
-      <h2>Instance Method Summary</h2>
+      <h2>Method Summary</h2>
       <ul class='summary'>
   <li>
     <span class='signature'>
-      <a href='#constructor-instance'>
-        - (void) <strong>constructor</strong>(info, url)
+      <a href='#kb.loadUrl-file'>
+        ? (void) <strong>kb.loadUrl</strong>(url, transition)
       </a>
     </span>
-    <span class='constructor note title'>Constructor</span>
     <span class='desc'>
-      
+      Helper to load a url.
     </span>
   </li>
   <li>
     <span class='signature'>
-      <a href='#destroy-instance'>
-        - (void) <strong>destroy</strong>(options = {})
+      <a href='#kb.loadUrlFn-file'>
+        ? (void) <strong>kb.loadUrlFn</strong>(url, transition)
       </a>
     </span>
     <span class='desc'>
-      
+      Helper that creates a function that can be used in your HTML bindings for loading a url.
     </span>
   </li>
   <li>
     <span class='signature'>
-      <a href='#activate-instance'>
-        - (void) <strong>activate</strong>(el)
+      <a href='#kb.utils.wrappedPageNavigator-file'>
+        ? (kb.PageNavigatorSimple|kb.PageNavigatorPanes) <strong>kb.utils.wrappedPageNavigator</strong>(el, value)
       </a>
     </span>
     <span class='desc'>
-      
-    </span>
-  </li>
-  <li>
-    <span class='signature'>
-      <a href='#deactivate-instance'>
-        - (void) <strong>deactivate</strong>(options = {})
-      </a>
-    </span>
-    <span class='desc'>
-      
+      Dual-purpose getter/setter for retrieving and storing a kb.PageNavigatorSimple or kb.PageNavigatorPanes on an element.
     </span>
   </li>
 </ul>
-      <h2>Constructor Details</h2>
+      <h2>Method Details</h2>
       <div class='methods'>
   <div class='method_details'>
-    <p class='signature' id='constructor-instance'>
-      - (void) <strong>constructor</strong>(info, url)
+    <p class='signature' id='kb.loadUrl-file'>
+      ? (void) <strong>kb.loadUrl</strong>(url, transition)
     </p>
-    <div class='tags'>
+    <div class='docstring'>
+  <p>Helper to load a url.</p>
 </div>
-  </div>
-</div>
-      <h2>Instance Method Details</h2>
-      <div class='methods'>
-  <div class='method_details'>
-    <p class='signature' id='destroy-instance'>
-      - (void) <strong>destroy</strong>(options = {})
-    </p>
-    <div class='tags'>
-</div>
-  </div>
-  <div class='method_details'>
-    <p class='signature' id='activate-instance'>
-      - (void) <strong>activate</strong>(el)
-    </p>
-    <div class='tags'>
+<div class='tags'>
+  <h3>Parameters:</h3>
+  <ul class='param'>
+    <li>
+      <span class='name'>url</span>
+      <span class='type'>
+        (<tt>String</tt>)
+      </span>
+      &mdash;
+      <span class='desc'>the url to load</span>
+    </li>
+  </ul>
 </div>
   </div>
   <div class='method_details'>
-    <p class='signature' id='deactivate-instance'>
-      - (void) <strong>deactivate</strong>(options = {})
+    <p class='signature' id='kb.loadUrlFn-file'>
+      ? (void) <strong>kb.loadUrlFn</strong>(url, transition)
     </p>
-    <div class='tags'>
+    <div class='docstring'>
+  <p>Helper that creates a function that can be used in your HTML bindings for loading a url. Use this when you need to declare the loadUrl function but you are not calling it immediately</p><p>@param [] url the url to load</p>
+</div>
+<div class='tags'>
+  <h3>Parameters:</h3>
+  <ul class='param'>
+    <li>
+      <span class='name'>url</span>
+      <span class='type'>
+        (<tt>String</tt>)
+      </span>
+      &mdash;
+      <span class='desc'>the url to load</span>
+    </li>
+  </ul>
+</div>
+  </div>
+  <div class='method_details'>
+    <p class='signature' id='kb.utils.wrappedPageNavigator-file'>
+      ? (kb.PageNavigatorSimple|kb.PageNavigatorPanes) <strong>kb.utils.wrappedPageNavigator</strong>(el, value)
+    </p>
+    <div class='docstring'>
+  <p>Dual-purpose getter/setter for retrieving and storing a kb.PageNavigatorSimple or kb.PageNavigatorPanes on an element.</p>
+  <div class='examples'>
+    <h3>Examples:</h3>
+    <h4>
+      
+    </h4>
+    <pre><code class='coffee'>page_navigator = kb.utils.wrappedPageNavigator(element)</code></pre>
+  </div>
+</div>
+<div class='tags'>
+  <h3>Returns:</h3>
+  <ul class='return'>
+    <li>
+      <span class='type'></span>
+      (<tt>kb.PageNavigatorSimple|kb.PageNavigatorPanes</tt>)
+      &mdash;
+      <span class='desc'>the page navigator</span>
+    </li>
+  </ul>
 </div>
   </div>
 </div>
     </div>
     <div id='footer'>
   Generated on
-  Thu Sep 13 2012 08:18:45 GMT+0900 (JST)
+  Thu Sep 13 2012 08:04:45 GMT+0900 (JST)
   by
   <a href='https://github.com/netzpirat/codo' title='CoffeeScript API documentation generator'>Codo</a>
   v1.4.1
