@@ -21,8 +21,10 @@ kb.loadUrlFn = (url, transition) ->
     kb.loadUrl(url, transition)
 
     # stop the event handling chains
-    event.stopPropagation() if event and event.currentTarget
-    return false
+    (not vm or not vm.stopPropagation) or (event = vm) # not a ViewModel, but an event
+    if event and event.stopPropagation
+      event.stopPropagation()
+      event.preventDefault()
 
 # utilities namespace
 kb.utils or= {}

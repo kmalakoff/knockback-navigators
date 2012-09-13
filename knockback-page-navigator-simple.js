@@ -217,10 +217,11 @@
   kb.loadUrlFn = function(url, transition) {
     return function(vm, event) {
       kb.loadUrl(url, transition);
-      if (event && event.currentTarget) {
+      (!vm || !vm.stopPropagation) || (event = vm);
+      if (event && event.stopPropagation) {
         event.stopPropagation();
+        return event.preventDefault();
       }
-      return false;
     };
   };
 
