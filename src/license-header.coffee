@@ -1,5 +1,5 @@
 ###
-  knockback-navigators.js 0.1.0
+  knockback-navigators.js 0.1.1
   (c) 2012 Kevin Malakoff.
   KnockbackNavigators.js is freely distributable under the MIT license.
   See the following for full license details:

@@ -17,8 +17,12 @@ kb.loadUrl = (url, transition) ->
 # @param [String] url the url to load
 # @param [String|Object] transition transition options. Either a name or `{name: 'TransitionName', option1: option2: ...}`
 kb.loadUrlFn = (url, transition) ->
-  return ->
+  return (vm, event) ->
     kb.loadUrl(url, transition)
+
+    # stop the event handling chains
+    event.stopPropagation() if event and event.currentTarget
+    return false
 
 # utilities namespace
 kb.utils or= {}

@@ -7,20 +7,20 @@ KnockbackNavigators.js provides page navigators, a pane navigator, and transitio
 * [API Documentation](http://kmalakoff.github.com/knockback-navigators/doc/index.html)
 * [Live Examples](http://kmalakoff.github.com/knockback-navigators/)
 
-#Download Latest (0.1.0):
+#Download Latest (0.1.1):
 
 Please see the [release notes](https://github.com/kmalakoff/knockback-navigators/blob/master/RELEASE_NOTES.md) for upgrade pointers.
 
 **Core Components**
 
-* knockback-navigators.css [(dev)](https://raw.github.com/kmalakoff/knockback-navigators/0.1.0/knockback-navigators.css): shared styling for panes and page navigators
-* knockback-page-navigator-panes.js [(min)](https://raw.github.com/kmalakoff/knockback-navigators/0.1.0/knockback-page-navigator-panes.js) or [(dev)](https://raw.github.com/kmalakoff/knockback-navigators/0.1.0/knockback-page-navigator-panes.min.js)
-* knockback-page-navigator-simple.js [(min)](https://raw.github.com/kmalakoff/knockback-navigators/0.1.0/knockback-page-navigator-simple.js) or [(dev)](https://raw.github.com/kmalakoff/knockback-navigators/0.1.0/knockback-page-navigator-simple.min.js)
-* knockback-pane-navigator.js [(min)](https://raw.github.com/kmalakoff/knockback-navigators/0.1.0/knockback-pane-navigator.js) or [(dev)](https://raw.github.com/kmalakoff/knockback-navigators/0.1.0/knockback-pane-navigator.min.js)
+* knockback-navigators.css [(dev)](https://raw.github.com/kmalakoff/knockback-navigators/0.1.1/knockback-navigators.css): shared styling for panes and page navigators
+* knockback-page-navigator-panes.js [(min)](https://raw.github.com/kmalakoff/knockback-navigators/0.1.1/knockback-page-navigator-panes.js) or [(dev)](https://raw.github.com/kmalakoff/knockback-navigators/0.1.1/knockback-page-navigator-panes.min.js)
+* knockback-page-navigator-simple.js [(min)](https://raw.github.com/kmalakoff/knockback-navigators/0.1.1/knockback-page-navigator-simple.js) or [(dev)](https://raw.github.com/kmalakoff/knockback-navigators/0.1.1/knockback-page-navigator-simple.min.js)
+* knockback-pane-navigator.js [(min)](https://raw.github.com/kmalakoff/knockback-navigators/0.1.1/knockback-pane-navigator.js) or [(dev)](https://raw.github.com/kmalakoff/knockback-navigators/0.1.1/knockback-pane-navigator.min.js)
 
 **Optional/Non production**
 
-* knockback-sample-transitions.js [(min)](https://raw.github.com/kmalakoff/knockback-navigators/0.1.0/lib/knockback-sample-transitions.js) or [(dev)](https://raw.github.com/kmalakoff/knockback-navigators/0.1.0/lib/knockback-sample-transitions.min.js)
+* knockback-sample-transitions.js [(min)](https://raw.github.com/kmalakoff/knockback-navigators/0.1.1/lib/knockback-sample-transitions.js) or [(dev)](https://raw.github.com/kmalakoff/knockback-navigators/0.1.1/lib/knockback-sample-transitions.min.js)
 
 If you have some production quality transitions that you'd like to submit to the library, please [let me know](http://kmalakoff.github.com/knockback/issues).
 
