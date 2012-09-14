@@ -10,12 +10,7 @@ $(document).ready( ->
   require('knockback-page-navigator-panes') if (typeof(require) isnt 'undefined')
 
   test("TEST DEPENDENCY MISSING", ->
-    ok(!!ko, 'ko')
-    ok(!!_, '_')
-    ok(!!Backbone, 'Backbone')
-    ok(!!kb, 'kb')
-    ok(!!kb, 'kb')
-    ok(!!kb.PageNavigatorPanes, 'kb.PageNavigatorPanes')
+    ok(!!_, '_'); ok(!!Backbone, 'Backbone'); ok(!!ko, 'ko'); ok(!!kb, 'kb'); ok(!!kb.PageNavigatorPanes, 'kb.PageNavigatorPanes')
   )
 
   test("1. Basic Usage", ->
@@ -23,6 +18,7 @@ $(document).ready( ->
 
     el = $('<div></div>')[0]
     page_navigator = new kb.PageNavigatorPanes(el)
+    equal(el, page_navigator.el, "container element")
 
     # equal(kb.statistics.registeredStatsString('all released'), 'all released', "Cleanup: stats"); kb.statistics = null
   )

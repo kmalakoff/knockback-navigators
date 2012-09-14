@@ -118,4 +118,10 @@ module.exports =
       'cp -v knockout-client/knockout.debug.js examples/vendor/knockout.js'
       'cp -v backbone examples/vendor/backbone/backbone.js'
       'cp -v underscore examples/vendor/backbone/underscore.js'
+
+      # amd tests
+      'cp -v underscore test/vendor/underscore.js'
+      'cp -v backbone test/vendor/backbone.js'
+      'cp -v knockout-client/knockout.debug.js test/vendor/knockout.js'
+      'cp -v knockback/knockback-core.js test/vendor/knockback-core.js'
     ]
