@@ -1,9 +1,9 @@
 module.exports =
   knockback_page_navigator_panes:
     join: 'knockback-page-navigator-panes.js'
+    wrapper: 'src/knockback-page-navigator-panes/module-loader.js'
     compress: true
     files: [
-      'src/license-header.coffee'
       'src/component-imports.coffee'
       'src/knockback-page-navigator-panes/knockback-page-navigator-panes.coffee'
       'src/knockback-page-navigator-panes/knockout-bindings.coffee'
@@ -19,9 +19,9 @@ module.exports =
 
   knockback_page_navigator_simple:
     join: 'knockback-page-navigator-simple.js'
+    wrapper: 'src/knockback-page-navigator-simple/module-loader.js'
     compress: true
     files: [
-      'src/license-header.coffee'
       'src/component-imports.coffee'
       'src/knockback-page-navigator-simple/knockback-page-navigator-simple.coffee'
       'src/knockback-page-navigator-simple/knockout-bindings.coffee'
@@ -31,9 +31,9 @@ module.exports =
 
   knockback_pane_navigator:
     join: 'knockback-pane-navigator.js'
+    wrapper: 'src/knockback-pane-navigator/module-loader.js'
     compress: true
     files: [
-      'src/license-header.coffee'
       'src/component-imports.coffee'
       'src/knockback-pane-navigator/knockback-pane-navigator.coffee'
       'src/knockback-pane-navigator/knockback-pane-navigator-helpers.coffee'
@@ -42,16 +42,17 @@ module.exports =
       'src/shared/knockback-transition-saved-state.coffee'
     ]
 
-  knockback_sample_transitions:
-    join: 'knockback-sample-transitions.js'
+  knockback_sample_transitions_jquery:
+    join: 'knockback-sample-transitions-jquery.js'
+    wrapper: 'src/knockback-sample-transitions-jquery/module-loader.js'
     output: 'lib'
     compress: true
     files: [
-      'src/license-header.coffee'
-      'src/knockback-sample-transitions/knockback-transition-helpers.coffee'
-      'src/knockback-sample-transitions/knockback-transition-cover-vertical.coffee'
-      'src/knockback-sample-transitions/knockback-transition-fade-in.coffee'
-      'src/knockback-sample-transitions/knockback-transition-navigation-slide.coffee'
+      'src/knockback-sample-transitions-jquery/component-imports.coffee'
+      'src/knockback-sample-transitions-jquery/knockback-transition-helpers.coffee'
+      'src/knockback-sample-transitions-jquery/knockback-transition-cover-vertical.coffee'
+      'src/knockback-sample-transitions-jquery/knockback-transition-fade-in.coffee'
+      'src/knockback-sample-transitions-jquery/knockback-transition-navigation-slide.coffee'
     ]
 
   publishing:
@@ -70,8 +71,8 @@ module.exports =
         'cp knockback-page-navigator-simple.min.js packages/npm/knockback-page-navigator-simple.min.js'
         'cp knockback-pane-navigator.js packages/npm/knockback-pane-navigator.js'
         'cp knockback-pane-navigator.min.js packages/npm/knockback-pane-navigator.min.js'
-        'cp lib/knockback-sample-transitions.js packages/npm/lib/knockback-sample-transitions.js'
-        'cp lib/knockback-sample-transitions.min.js packages/npm/lib/knockback-sample-transitions.min.js'
+        'cp lib/knockback-sample-transitions-jquery.js packages/npm/lib/knockback-sample-transitions-jquery.js'
+        'cp lib/knockback-sample-transitions-jquery.min.js packages/npm/lib/knockback-sample-transitions-jquery.min.js'
 
         # nuget
         'cp knockback-navigators.css packages/nuget/Content/Scripts/knockback-navigators.css'
@@ -81,8 +82,8 @@ module.exports =
         'cp knockback-page-navigator-simple.min.js packages/nuget/Content/Scripts/knockback-page-navigator-simple.min.js'
         'cp knockback-pane-navigator.js packages/nuget/Content/Scripts/knockback-pane-navigator.js'
         'cp knockback-pane-navigator.min.js packages/nuget/Content/Scripts/knockback-pane-navigator.min.js'
-        'cp lib/knockback-sample-transitions.js packages/nuget/Content/Scripts/lib/knockback-sample-transitions.js'
-        'cp lib/knockback-sample-transitions.min.js packages/nuget/Content/Scripts/lib/knockback-sample-transitions.min.js'
+        'cp lib/knockback-sample-transitions-jquery.js packages/nuget/Content/Scripts/lib/knockback-sample-transitions-jquery.js'
+        'cp lib/knockback-sample-transitions-jquery.min.js packages/nuget/Content/Scripts/lib/knockback-sample-transitions-jquery.min.js'
       ]
 
   tests:

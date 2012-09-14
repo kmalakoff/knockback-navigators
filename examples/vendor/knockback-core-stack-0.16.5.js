@@ -6061,7 +6061,7 @@ kb = (function() {
     if (options == null) {
       options = {};
     }
-    legacyWarning('kb.renderAutoReleasedTemplate', '0.16.5', 'Please use kb.renderTemplate instead');
+    legacyWarning('kb.renderAutoReleasedTemplate', '0.16.3', 'Please use kb.renderTemplate instead');
     return this.renderTemplate(template, view_model, options = {});
   };
 
@@ -6338,7 +6338,7 @@ kb.utils = (function() {
   };
 
   utils.release = function(obj) {
-    legacyWarning('kb.utils.release', '0.16.5', 'Please use kb.release instead');
+    legacyWarning('kb.utils.release', '0.16.0', 'Please use kb.release instead');
     return kb.release(obj);
   };
 
@@ -7262,7 +7262,7 @@ kb.viewModel = function(model, options, view_model) {
 };
 
 kb.observables = function(model, binding_info, view_model) {
-  legacyWarning('kb.observables', '0.16.5', 'Please use kb.viewModel instead');
+  legacyWarning('kb.observables', '0.16.0', 'Please use kb.viewModel instead');
   return new kb.ViewModel(model, binding_info, view_model);
 };
 
@@ -7294,7 +7294,7 @@ kb.CollectionObservable = (function() {
       this.sorted_index_fn = ko.observable(this._sortAttributeFn(options.sort_attribute));
     } else {
       if (options.sorted_index) {
-        legacyWarning(this, '0.16.5', 'use sorted_index_fn instead');
+        legacyWarning(this, '0.16.3', 'use sorted_index_fn instead');
         options.sorted_index_fn = options.sorted_index;
       }
       this.sorted_index_fn = ko.observable(options.sorted_index_fn);

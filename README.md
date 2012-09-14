@@ -20,7 +20,7 @@ Please see the [release notes](https://github.com/kmalakoff/knockback-navigators
 
 **Optional/Non production**
 
-* knockback-sample-transitions.js [(min)](https://raw.github.com/kmalakoff/knockback-navigators/0.1.1/lib/knockback-sample-transitions.js) or [(dev)](https://raw.github.com/kmalakoff/knockback-navigators/0.1.1/lib/knockback-sample-transitions.min.js)
+* knockback-sample-transitions-jquery.js [(min)](https://raw.github.com/kmalakoff/knockback-navigators/0.1.1/lib/knockback-sample-transitions-jquery.js) or [(dev)](https://raw.github.com/kmalakoff/knockback-navigators/0.1.1/lib/knockback-sample-transitions-jquery.min.js)
 
 If you have some production quality transitions that you'd like to submit to the library, please [let me know](http://kmalakoff.github.com/knockback/issues).
 

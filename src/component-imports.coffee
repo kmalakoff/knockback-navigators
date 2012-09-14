@@ -5,8 +5,8 @@
 throwUnexpected = (instance, message) -> throw "#{instance.constructor.name}: #{message} is unexpected"
 
 # import Knockback is it exists
-try (kb = if (typeof(require) != 'undefined') then require('knockback') else @kb) catch e then {}
-@kb = kb or= {} # empty namesapce
+try (@kb = kb = if not @kb and (typeof(require) isnt 'undefined') then require('knockback') else @kb) catch e then {}
+@kb or= kb or= {} # empty namesapce
 
 # import Knockout or provide a replacement for ko.observable and ko.observableArray
 try (ko = if (typeof(require) != 'undefined') then require('knockout') else @ko) catch e then {}
