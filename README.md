@@ -24,6 +24,15 @@ Please see the [release notes](https://github.com/kmalakoff/knockback-navigators
 
 If you have some production quality transitions that you'd like to submit to the library, please [let me know](http://kmalakoff.github.com/knockback/issues).
 
+###Module Loading
+
+Knockback-Navigators.js is compatible with Require.js and AMD module loading. Module names:
+
+* 'knockback-page-navigator-panes' - knockback-page-navigator-panes.js. Comes bundled with knockback-pane-navigator.js
+* 'knockback-page-navigator-simple' - knockback-page-navigator-simple.js.
+* 'knockback-pane-navigator-simple' - knockback-pane-navigator.js.
+* 'knockback-sample-transitions-jquery' - knockback-sample-transitions-jquery.js.
+
 ### Dependencies
 
 * You will need to provide a DOM manipulation library like [jQuery](http://jquery.com/) or [Zepto](http://zeptojs.com/) or [XUI](http://xuijs.com/) (XUI: tween animations not supported).

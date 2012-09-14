@@ -3,8 +3,8 @@ $(document).ready( ->
 
   # Knockback and depdenencies
   require(['underscore', 'backbone', 'knockout', 'knockback', 'knockback-page-navigator-simple'], (_, Backbone, ko, kb) ->
-    _ or (_ = kb._)
-    Backbone or (Backbone = kb.Backbone)
+    _ or= @_
+    Backbone or= @Backbone
 
     test("TEST DEPENDENCY MISSING", ->
       ok(!!_, '_'); ok(!!Backbone, 'Backbone'); ok(!!ko, 'ko'); ok(!!kb, 'kb'); ok(!!kb.PageNavigatorSimple, 'kb.PageNavigatorSimple')
