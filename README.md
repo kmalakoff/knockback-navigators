@@ -7,6 +7,8 @@ KnockbackNavigators.js provides page navigators, a pane navigator, and transitio
 * [API Documentation](http://kmalakoff.github.com/knockback-navigators/doc/index.html)
 * [Live Examples](http://kmalakoff.github.com/knockback-navigators/)
 
+**Note**: if you are using Knockback-Navigators.js with Knockback.js without a module loader, you must include Knockback.js before Knockback-Navigators.js.
+
 #Download Latest (0.1.1):
 
 Please see the [release notes](https://github.com/kmalakoff/knockback-navigators/blob/master/RELEASE_NOTES.md) for upgrade pointers.

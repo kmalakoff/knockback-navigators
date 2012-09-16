@@ -12,7 +12,7 @@
 <body>
   <a class='btn' href='../index.html#page_navigator_panes' style='position: absolute; z-index: 200'>More Examples</a>
 
-  <div id='app'>
+  <div kb-inject="AppViewModel">
     <!-- VIEWS -->
     <div class='pane' id='main'>
       <div class='hero-unit'>
@@ -39,25 +39,30 @@
 
   <script src="vendor/xui-2.3.2.js"></script>
   <script src="vendor/path-0.8.4.js"></script>
+  <script src="vendor/knockback-core-stack-0.16.5.js"></script>
   <script src="../knockback-page-navigator-panes.js"></script>
 
   <script type='text/javascript'>
-    ////////////////////////////////////
-    // Page Routing and Navigating
-    // Don't allow pages to be detached since they are owned by the DOM (default is to assume dynamic pages and to therefore detach)
-    ////////////////////////////////////
-    var page_navigator = new kb.PageNavigatorPanes($('#app')[0], {no_remove: true});
-    Path.map('').to(page_navigator.dispatcher(function(){
-      page_navigator.loadPage($('#main')[0]);
-    }));
-    Path.map('#page1').to(page_navigator.dispatcher(function(){
-      page_navigator.loadPage($('#page1')[0]);
-    }));
-    Path.map('#page2').to(page_navigator.dispatcher(function(){
-      page_navigator.loadPage($('#page2')[0]);
-    }));
-    Path.listen();
-    Path.dispatch(window.location.hash);
+    var AppViewModel = function(vm, el) {
+      ////////////////////////////////////
+      // Page Routing and Navigating
+      // Don't allow pages to be detached since they are owned by the DOM (default is to assume dynamic pages and to therefore detach)
+      ////////////////////////////////////
+      var page_navigator = new kb.PageNavigatorPanes(el, {no_remove: true});
+      Path.map('').to(page_navigator.dispatcher(function(){
+        page_navigator.loadPage($(el).find('#main')[0]);
+      }));
+      Path.map('#page1').to(page_navigator.dispatcher(function(){
+        page_navigator.loadPage($(el).find('#page1')[0]);
+      }));
+      Path.map('#page2').to(page_navigator.dispatcher(function(){
+        page_navigator.loadPage($(el).find('#page2')[0]);
+      }));
+      Path.listen();
+
+      // start routing after the ViewModel is bound (and the elements have been generated)
+      this.afterBinding = function() { Path.dispatch(window.location.hash); };
+    };
 
   </script>
   <!-- ****************** -->

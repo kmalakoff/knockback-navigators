@@ -5963,7 +5963,7 @@ ko.exportSymbol('nativeTemplateEngine', ko.nativeTemplateEngine);
   Dependencies: Knockout.js, Backbone.js, and Underscore.js.
 */
 
-var Backbone, KB_TYPE_ARRAY, KB_TYPE_COLLECTION, KB_TYPE_MODEL, KB_TYPE_SIMPLE, KB_TYPE_UNKNOWN, addStatisticsEvent, arraySplice, collapseOptions, kb, ko, legacyWarning, onReady, throwMissing, throwUnexpected, _, _argumentsAddKey, _unwrapModels, _wrappedKey,
+var Backbone, KB_TYPE_ARRAY, KB_TYPE_COLLECTION, KB_TYPE_MODEL, KB_TYPE_SIMPLE, KB_TYPE_UNKNOWN, addStatisticsEvent, arraySplice, buildEvalWithinScopeFunction, collapseOptions, kb, ko, legacyWarning, onReady, throwMissing, throwUnexpected, _, _argumentsAddKey, _unwrapModels, _wrappedKey,
   __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
 kb = (function() {
@@ -6100,11 +6100,11 @@ kb.Backbone = Backbone = !this.Backbone && (typeof require !== 'undefined') ? re
 kb.ko = ko = !this.ko && (typeof require !== 'undefined') ? require('knockout') : this.ko;
 
 throwMissing = function(instance, message) {
-  throw "" + instance.constructor.name + ": " + message + " is missing";
+  throw "" + (_.isString(instance) ? instance : instance.constructor.name) + ": " + message + " is missing";
 };
 
 throwUnexpected = function(instance, message) {
-  throw "" + instance.constructor.name + ": " + message + " is unexpected";
+  throw "" + (_.isString(instance) ? instance : instance.constructor.name) + ": " + message + " is unexpected";
 };
 
 legacyWarning = function(identifier, last_version, message) {
@@ -7000,7 +7000,7 @@ kb.Observable = (function() {
     if (this.m && !arguments.length) {
       new_value = this.m.get(ko.utils.unwrapObservable(this.key));
     }
-    new_value || (new_value = null);
+    (new_value !== void 0) || (new_value = null);
     new_type = kb.utils.valueType(new_value);
     if (!this.__kb_value || (this.__kb_value.__kb_destroyed || (this.__kb_value.__kb_null && new_value))) {
       this.__kb_value = null;
@@ -7664,78 +7664,119 @@ kb.sortedIndexWrapAttr = kb.siwa = function(attribute_name, wrapper_constructor)
 */
 
 
+buildEvalWithinScopeFunction = function(expression, scopeLevels) {
+  var functionBody, i;
+  functionBody = "return ( " + expression + " )";
+  i = -1;
+  while (++i < scopeLevels) {
+    functionBody = "with(sc[" + i + "]) { " + functionBody + " }";
+  }
+  return new Function("sc", functionBody);
+};
+
 ko.bindingHandlers['inject'] = {
   'init': function(element, value_accessor, all_bindings_accessor, view_model) {
-    var data, wrapper;
-    data = ko.utils.unwrapObservable(value_accessor());
-    wrapper = ko.dependentObservable(function() {
-      var key, value, _results;
-      if (_.isFunction(data)) {
-        return new data(view_model, element, value_accessor, all_bindings_accessor);
-      } else if (_.isObject(data)) {
-        _results = [];
-        for (key in data) {
-          value = data[key];
-          if (_.isObject(value) && value.resolve && _.isFunction(value.resolve)) {
-            _results.push(view_model[key] = value.resolve(view_model, element, value_accessor, all_bindings_accessor));
-          } else {
-            _results.push(view_model[key] = value);
-          }
-        }
-        return _results;
-      }
-    });
-    return wrapper.dispose();
+    return kb.inject(ko.utils.unwrapObservable(value_accessor()), view_model, element, value_accessor, all_bindings_accessor);
   }
 };
 
-kb.injectApps = function(root) {
-  var app, apps, getAppElements, options, _i, _len;
-  apps = [];
-  getAppElements = function(el) {
+kb.inject = function(data, view_model, element, value_accessor, all_bindings_accessor, nested) {
+  var inject, result, wrapper;
+  inject = function(data) {
+    var key, target, value;
+    if (_.isFunction(data)) {
+      view_model = new data(view_model, element, value_accessor, all_bindings_accessor);
+      kb.releaseOnNodeRemove(view_model, element);
+    } else {
+      if (data.view_model) {
+        view_model = new data.view_model(view_model, element, value_accessor, all_bindings_accessor);
+        kb.releaseOnNodeRemove(view_model, element);
+      }
+      for (key in data) {
+        value = data[key];
+        if (key === 'view_model') {
+          continue;
+        }
+        if (key === 'create') {
+          value(view_model, element, value_accessor, all_bindings_accessor);
+        } else if (_.isObject(value) && !_.isFunction(value)) {
+          target = nested || (value && value.create) ? {} : view_model;
+          view_model[key] = kb.inject(value, target, element, value_accessor, all_bindings_accessor, true);
+        } else {
+          view_model[key] = value;
+        }
+      }
+    }
+    return view_model;
+  };
+  if (nested) {
+    return inject(data);
+  } else {
+    result = (wrapper = ko.dependentObservable(function() {
+      return inject(data);
+    }))();
+    wrapper.dispose();
+    return result;
+  }
+};
+
+kb.injectViewModels = function(root) {
+  var afterBinding, app, beforeBinding, data, expression, findElements, options, results, _i, _len;
+  results = [];
+  findElements = function(el) {
     var attr, child_el, _i, _len, _ref;
     if (!el.__kb_injected) {
       if (el.attributes && (attr = _.find(el.attributes, function(attr) {
-        return attr.name === 'kb-app';
+        return attr.name === 'kb-inject';
       }))) {
         el.__kb_injected = true;
-        apps.push([el, attr]);
+        results.push({
+          el: el,
+          view_model: {},
+          binding: attr.value
+        });
       }
     }
     _ref = el.childNodes;
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {
       child_el = _ref[_i];
-      getAppElements(child_el);
+      findElements(child_el);
     }
   };
-  getAppElements(root || document);
-  for (_i = 0, _len = apps.length; _i < _len; _i++) {
-    app = apps[_i];
-    if (app[1].value) {
-      options = ko.utils.buildEvalWithinScopeFunction("{" + app[1].value + "}", 0)();
+  findElements(root || document);
+  for (_i = 0, _len = results.length; _i < _len; _i++) {
+    app = results[_i];
+    if (expression = app.binding) {
+      (expression.search(/[:]/) < 0) || (expression = "{" + expression + "}");
+      data = buildEvalWithinScopeFunction(expression, 0)();
+      data || (data = {});
+      (!data.options) || (options = data.options, delete data.options);
+      options || (options = {});
+      app.view_model = kb.inject(data, app.view_model, app.el, null, null, true);
+      afterBinding = app.view_model.afterBinding || options.afterBinding;
+      beforeBinding = app.view_model.beforeBinding || options.beforeBinding;
     }
-    options || (options = {});
-    options.view_model || (options.view_model = {});
-    if (options.beforeBinding) {
-      options.beforeBinding(options.view_model, app[0], options);
+    if (beforeBinding) {
+      beforeBinding(app.view_model, app.el, options);
     }
-    kb.applyBindings(options.view_model, app[0], {});
-    if (options.afterBinding) {
-      options.afterBinding(options.view_model, app[0], options);
+    kb.applyBindings(app.view_model, app.el, options);
+    if (afterBinding) {
+      afterBinding(app.view_model, app.el, options);
     }
   }
+  return results;
 };
 
 if (this.$) {
   this.$(function() {
-    return kb.injectApps();
+    return kb.injectViewModels();
   });
 } else {
   (onReady = function() {
     if (document.readyState !== "complete") {
       return setTimeout(onReady, 0);
     }
-    return kb.injectApps();
+    return kb.injectViewModels();
   })();
 }
 ; return kb;});

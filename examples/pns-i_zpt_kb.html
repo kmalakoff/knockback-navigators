@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KnockbackNavigators.js Interactive Tests</title>
+  <link rel="stylesheet" href="vendor/normalize.css">
+  <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.css">
+  <link rel="stylesheet" href="../knockback-navigators.css">
+</head>
+<body>
+  <a class='btn' href='../index.html#page_navigator_simple' style='position: absolute; z-index: 200'>More Examples</a>
+
+  <div data-bind="foreach: pages" kb-inject="AppViewModel">
+
+    <!-- VIEWS -->
+    <div class='pane' data-bind="attr: {id: id}">
+      <div class='hero-unit'>
+        <!-- ko if: $data.back -->
+          <a class='btn btn-small' data-bind="click: function(){kb.loadUrl(back().href(), back_transition()); }"><i class='icon-step-backward'></i><span> Back</span></a>
+        <!-- /ko -->
+        <!-- ko if: $data.next -->
+          <a class='btn btn-warning btn-small' data-bind="attr: {href: next().href()}, text: next().title"></a>
+        <!-- /ko -->
+        <h1 data-bind="text: title"></h1>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="vendor/zepto-1.0rc1.js"></script>
+  <script src="vendor/knockback-core-stack-0.16.5.js"></script>
+  <script src="../knockback-page-navigator-simple.js"></script>
+
+  <script type='text/javascript'>
+    ////////////////////////////////////
+    // ViewModels
+    ////////////////////////////////////
+    var PageViewModel = kb.ViewModel.extend({
+      constructor: function(model, options) {
+        kb.ViewModel.prototype.constructor.call(this, model, {options: options, factories: {
+          'back': PageViewModel, // provide a custom view model for relationships
+          'next': PageViewModel
+        }});
+        return this;
+      }
+    });
+    var AppViewModel = function(vm, el) {
+      ////////////////////////////////////
+      // Models
+      ////////////////////////////////////
+      var pages = new Backbone.Collection([
+        new Backbone.Model({title: 'Main', id: 'main', href: '#'}),
+        new Backbone.Model({title: 'Page1', id: 'page1', href: '#page1'}),
+        new Backbone.Model({title: 'Page2', id: 'page2', href: '#page2'})
+      ]);
+      // Initialize relationships between pages - NOTE: you can use BackboneRelational to automate this at model creation time (of course, this is just an example so you might not use models for your pages)
+      pages.get('main').set({next: pages.get('page1')});
+      pages.get('page1').set({back: pages.get('main'), back_transition: {name: 'NavigationSlide', inverse: true}, next: pages.get('page2')});
+      pages.get('page2').set({back: pages.get('page1'), back_transition: {name: 'CoverVertical', inverse: true}});
+
+      this.pages = kb.collectionObservable(pages, {view_model: PageViewModel});
+
+      ////////////////////////////////////
+      // Page Routing and Navigating
+      // Don't allow pages to be detached since they are owned by the DOM (default is to assume dynamic pages and to therefore detach)
+      ////////////////////////////////////
+      var page_navigator = new kb.PageNavigatorSimple(el, {no_remove: true});
+      var router = new Backbone.Router()
+      router.route('', null, page_navigator.dispatcher(function(){
+        page_navigator.loadPage($(el).find('#main')[0]);
+      }));
+      router.route('page1', null, page_navigator.dispatcher(function(){
+        page_navigator.loadPage($(el).find('#page1')[0]);
+      }));
+      router.route('page2', null, page_navigator.dispatcher(function(){
+        page_navigator.loadPage($(el).find('#page2')[0]);
+      }));
+
+      // start routing after the ViewModel is bound (and the elements have been generated)
+      this.afterBinding = function() { Backbone.history.start({hashChange: true}); };
+    };
+
+  </script>
+  <!-- ****************** -->
+  <!-- Source -->
+  <!-- ****************** -->
+  <script src="vendor/backbone/underscore-1.3.3.js"></script>
+  <script type='text/javascript'>
+    $('body').append($('<div style="position: absolute; top: 220px"><h1>Example Source</h1><pre>' +_.escape(document.body.innerHTML.substring(0, document.body.innerHTML.indexOf('<!-- ****************** -->')))+'</pre></div>')[0]);
+  </script>
+
+</body>
+</html>

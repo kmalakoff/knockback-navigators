@@ -36,13 +36,13 @@ class kb.PageNavigatorSimple
   # @option info [Element] el a DOM element
   # @option info [Function] create a function to create the element when the page becomes active
   loadPage: (info) ->
-    throw 'missing page info' unless info
+    info or throwMissing(@, 'page info')
 
     # already active
     if @activeUrl() is window.location.hash
       active_page = @activePage()
       active_page.el or pane_navigator.ensureElement(active_page)
-      $(@el).append(active_page.el) unless active_page.el.parentNode is @el
+      @el.appendChild(active_page.el) unless active_page.el.parentNode is @el
       return active_page
 
     # destroy previous
@@ -63,8 +63,9 @@ class kb.PageNavigatorSimple
   dispatcher: (callback) ->
     page_navigator = @
     return ->
-      return if page_navigator.destroyed # the path libraries typically do not allow cleanup or router changing
-      page_navigator.routeTriggered(@, callback, arguments)
+      # track destroy because the path libraries typically do not allow cleanup or router changing
+      page_navigator.destroyed or page_navigator.routeTriggered(@, callback, arguments)
+      return
 
   # @private
   routeTriggered: (router, callback, args) ->

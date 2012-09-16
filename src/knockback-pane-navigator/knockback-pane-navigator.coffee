@@ -90,6 +90,7 @@ class kb.PaneNavigator
   pop: (options={}) ->
     previous_pane = @previousPane()
     return null unless previous_pane # no where to go back to
+    previous_pane.activate(@el) # re-activate the pane
 
     # cancel the transition
     @cleanupTransition(true)
@@ -135,7 +136,7 @@ class kb.PaneNavigator
     transition = if active_pane.transition then active_pane.transition else @transition
     return null unless transition
     transition = {name: transition} if (typeof(transition) is 'string')
-    throw "transition #{transition.name} not found" unless kb.transistions[transition.name]
+    kb.transistions[transition.name] or throwMissing(@, "transition #{transition.name}")
 
     # resolve the transition options
     options = {forward: forward}

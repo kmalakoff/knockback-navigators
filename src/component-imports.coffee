@@ -1,8 +1,8 @@
 ####################################
 # INTERNAL HELPERS
 ####################################
-# @private
-throwUnexpected = (instance, message) -> throw "#{instance.constructor.name}: #{message} is unexpected"
+throwMissing = (instance, message) -> throw "#{if _.isString(instance) then instance else instance.constructor.name}: #{message} is missing"
+throwUnexpected = (instance, message) -> throw "#{if _.isString(instance) then instance else instance.constructor.name}: #{message} is unexpected"
 
 # import Knockback is it exists
 try (@kb = kb = if not @kb and (typeof(require) isnt 'undefined') then require('knockback') else @kb) catch e then {}

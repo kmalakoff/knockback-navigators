@@ -23,10 +23,10 @@ class kb.Pane
   # @private
   ensureElement: ->
     return @el if @el
-    throw 'expecting create' unless @create
+    @create or throwMissing(@, 'create')
     info = @create.apply(@, @args)
     @setInfo(info)  if info
-    throw 'expecting el' unless @el
+    @el or throwMissing(@, 'element')
     $(@el).addClass('pane') if @el # ensure the 'pane' class exists for css
     @
 
@@ -45,12 +45,12 @@ class kb.Pane
       @el.parentNode.removeChild(@el)
     @
 
-  activate: (el) ->
+  activate: (container_el) ->
     # append to container
     @ensureElement()
     return if $(@el).hasClass('active') # already active
     $(@el).addClass('active')
-    $(el).append(@el) unless @el.parentNode is el
+    container_el.appendChild(@el) unless @el.parentNode is container_el
 
     # notifications - activate
     view_model = if @view_model then @view_model else ko.dataFor(@el)

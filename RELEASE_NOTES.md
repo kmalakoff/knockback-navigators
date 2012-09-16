@@ -5,6 +5,7 @@ Please refer to the following release notes when upgrading your version of Knock
 * added AMD loader to all components.
 * updated kb.loadUrl and added kb.loadUrlFn so they can be called directly from an HTML View
 * renamed knockback-sample-transitions to knockback-sample-transitions-jquery
+* XUI bug fixed: reverse on panes and appending source code
 
 ## 0.1.0
 
