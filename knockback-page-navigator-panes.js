@@ -36,7 +36,7 @@ this.kb || (this.kb = kb || (kb = {}));
 this.Backbone || (this.Backbone = this.kb.Backbone);
 
 try {
-  ko = typeof require !== 'undefined' ? require('knockout') : this.ko;
+  ko = !this.ko && (typeof require !== 'undefined') ? require('knockout') : this.ko;
 } catch (e) {
   ({});
 }
