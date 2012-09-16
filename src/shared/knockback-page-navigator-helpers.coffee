@@ -4,13 +4,22 @@ kb.override_transitions = []
 kb.popOverrideTransition = ->
   if kb.override_transitions.length then kb.override_transitions.pop() else null
 
+# Use a known dispatcher to route a url. Default is setting the window.location.hash.
+# If you require supporting for a different router, override/replace this method.
+kb.dispatchUrl = (url) ->
+  window.location.hash = url # TODO: this is asynchronous...is this error-resistent enough?
+  if window.Backbone and window.Backbone.History.started
+    window.Backbone.history.loadUrl(url)
+  else if window.Path
+    window.Path.dispatch(url)
+
 # Helper to load a url.
 #
 # @param [String] url the url to load
 # @param [String|Object] transition transition options. Either a name or `{name: 'TransitionName', option1: option2: ...}`
 kb.loadUrl = (url, transition) ->
   kb.override_transitions.push(transition)
-  window.location.hash = url # this is asynchronous. TODO: is this error-resistent enough?
+  kb.dispatchUrl(url)
 
 # Helper that creates a function that can be used in your HTML bindings for loading a url. Use this when you need to declare the loadUrl function but you are not calling it immediately
 #

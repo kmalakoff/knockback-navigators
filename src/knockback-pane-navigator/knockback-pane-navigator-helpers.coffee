@@ -19,7 +19,7 @@ kb.utils.wrappedPaneNavigator = (el, value) ->
   return value
 
 # custom find by path
-if $.fn
+if @$ and $.fn
   $.fn.findByPath = (path) ->
     results = []
     for el in this

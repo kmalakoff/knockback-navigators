@@ -33,6 +33,8 @@ try {
 
 this.kb || (this.kb = kb || (kb = {}));
 
+this.Backbone || (this.Backbone = this.kb.Backbone);
+
 try {
   ko = typeof require !== 'undefined' ? require('knockout') : this.ko;
 } catch (e) {
@@ -160,7 +162,7 @@ kb.PageNavigatorPanes = (function() {
       active_page = this.activePage();
       active_page.el || pane_navigator.ensureElement(active_page);
       if (active_page.el.parentNode !== this.el) {
-        $(this.el).append(active_page.el);
+        this.el.appendChild(active_page.el);
       }
       return active_page;
     }
@@ -181,10 +183,7 @@ kb.PageNavigatorPanes = (function() {
     var page_navigator;
     page_navigator = this;
     return function() {
-      if (page_navigator.destroyed) {
-        return;
-      }
-      return page_navigator.routeTriggered(this, callback, arguments);
+      page_navigator.destroyed || page_navigator.routeTriggered(this, callback, arguments);
     };
   };
 
@@ -349,6 +348,7 @@ kb.PaneNavigator = (function() {
     if (!previous_pane) {
       return null;
     }
+    previous_pane.activate(this.el);
     this.cleanupTransition(true);
     active_pane = this.activePane();
     if ('transition' in options) {
@@ -476,7 +476,7 @@ kb.utils.wrappedPaneNavigator = function(el, value) {
   return value;
 };
 
-if ($.fn) {
+if (this.$ && $.fn) {
   $.fn.findByPath = function(path) {
     var $current_el, component, components, current_el, el, results, _i, _j, _len, _len1;
     results = [];
@@ -617,9 +617,18 @@ kb.popOverrideTransition = function() {
   }
 };
 
+kb.dispatchUrl = function(url) {
+  window.location.hash = url;
+  if (window.Backbone && window.Backbone.History.started) {
+    return window.Backbone.history.loadUrl(url);
+  } else if (window.Path) {
+    return window.Path.dispatch(url);
+  }
+};
+
 kb.loadUrl = function(url, transition) {
   kb.override_transitions.push(transition);
-  return window.location.hash = url;
+  return kb.dispatchUrl(url);
 };
 
 kb.loadUrlFn = function(url, transition) {
@@ -717,15 +726,15 @@ kb.Pane = (function() {
     return this;
   };
 
-  Pane.prototype.activate = function(el) {
+  Pane.prototype.activate = function(container_el) {
     var view_model;
     this.ensureElement();
     if ($(this.el).hasClass('active')) {
       return;
     }
     $(this.el).addClass('active');
-    if (this.el.parentNode !== el) {
-      $(el).append(this.el);
+    if (this.el.parentNode !== container_el) {
+      container_el.appendChild(this.el);
     }
     view_model = this.view_model ? this.view_model : ko.dataFor(this.el);
     if (view_model && view_model.activate) {

@@ -7,6 +7,10 @@ KnockbackNavigators.js provides page navigators, a pane navigator, and transitio
 * [API Documentation](http://kmalakoff.github.com/knockback-navigators/doc/index.html)
 * [Live Examples](http://kmalakoff.github.com/knockback-navigators/)
 
+**Note**: if you are using Knockback-Navigators.js with Knockback.js without a module loader, you must include Knockback.js before Knockback-Navigators.js.
+
+**Note**: Currenty Knockback-Navigators.js only supports the window.location.hash functions. If anyone has recommendations for generalizing it for Push State as well, please submit an issue to make your proposal. The main issue is leaving the routing solution up to the library user (allowing for any routing solution) and generalizing the mechanism for checking the fragment to route.
+
 #Download Latest (0.1.1):
 
 Please see the [release notes](https://github.com/kmalakoff/knockback-navigators/blob/master/RELEASE_NOTES.md) for upgrade pointers.
@@ -26,7 +30,7 @@ If you have some production quality transitions that you'd like to submit to the
 
 ###Module Loading
 
-Knockback-Navigators.js is compatible with Require.js and AMD module loading. Module names:
+Knockback-Navigators.js is compatible with RequireJS, CommonJS, Brunch and AMD module loading. Module names:
 
 * 'knockback-page-navigator-panes' - knockback-page-navigator-panes.js. Comes bundled with knockback-pane-navigator.js
 * 'knockback-page-navigator-simple' - knockback-page-navigator-simple.js.

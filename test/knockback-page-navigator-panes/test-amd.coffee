@@ -11,13 +11,32 @@ $(document).ready( ->
     )
 
     test("1. Basic Usage", ->
-      # kb.statistics = new kb.Statistics() # turn on stats
-
       el = $('<div></div>')[0]
       page_navigator = new kb.PageNavigatorPanes(el)
       equal(el, page_navigator.el, "container element")
+    )
 
-      # equal(kb.statistics.registeredStatsString('all released'), 'all released', "Cleanup: stats"); kb.statistics = null
+    test("2. Click-Based navigation", ->
+      # onclick
+      el = $("""
+        <a onclick="kb.loadUrl('test1', {name: 'NavigationSlide', inverse: true})">Examples</a>
+      """)[0]
+      window.location.hash = ''
+      equal(window.location.hash, '', "onclick: no location hash")
+      $(el).click()
+      equal(window.location.hash, '#test1', "onclick: test1 location hash")
+      equal(kb.popOverrideTransition().name, 'NavigationSlide', "onclick: transition found")
+
+      # bound view model
+      el = $("""
+        <a data-bind="click: kb.loadUrlFn('test1', {name: 'NavigationSlide', inverse: true})">Examples</a>
+      """)[0]
+      ko.applyBindings({}, el)
+      window.location.hash = ''
+      equal(window.location.hash, '', "onclick: no location hash")
+      $(el).click()
+      equal(window.location.hash, '#test1', "onclick: test1 location hash")
+      equal(kb.popOverrideTransition().name, 'NavigationSlide', "onclick: transition found")
     )
   )
 )

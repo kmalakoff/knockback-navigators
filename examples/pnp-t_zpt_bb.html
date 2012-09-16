@@ -17,22 +17,22 @@
     <!-- VIEWS -->
     <div class='pane' id='main'>
       <div class='hero-unit'>
-        <a href='#page1' class='btn btn-warning btn-small'>Page1</a>
+        <a onclick="kb.loadUrl('page1')" class='btn btn-warning btn-small'>Page1</a>
         <h1>Main</h1>
       </div>
     </div>
 
     <div class='pane' id='page1'>
       <div class='hero-unit'>
-        <a href='#' class='btn btn-small'><i class='icon-step-backward'></i><span> Back</span></a>
-        <a href='#page2' class='btn btn-warning btn-small'>Page2</a>
+        <a onclick="kb.loadUrl('')" class='btn btn-small'><i class='icon-step-backward'></i><span> Back</span></a>
+        <a onclick="kb.loadUrl('page2')" class='btn btn-warning btn-small'>Page2</a>
         <h1>Page1</h1>
       </div>
     </div>
 
     <div class='pane' id='page2'>
       <div class='hero-unit'>
-        <a href='#page1' class='btn btn-small'><i class='icon-step-backward'></i><span> Back</span></a>
+        <a onclick="kb.loadUrl('page1')" class='btn btn-small'><i class='icon-step-backward'></i><span> Back</span></a>
         <h1>Page2</h1>
       </div>
     </div>

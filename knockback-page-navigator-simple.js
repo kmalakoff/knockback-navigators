@@ -33,6 +33,8 @@ try {
 
 this.kb || (this.kb = kb || (kb = {}));
 
+this.Backbone || (this.Backbone = this.kb.Backbone);
+
 try {
   ko = typeof require !== 'undefined' ? require('knockout') : this.ko;
 } catch (e) {
@@ -212,9 +214,18 @@ kb.popOverrideTransition = function() {
   }
 };
 
+kb.dispatchUrl = function(url) {
+  window.location.hash = url;
+  if (window.Backbone && window.Backbone.History.started) {
+    return window.Backbone.history.loadUrl(url);
+  } else if (window.Path) {
+    return window.Path.dispatch(url);
+  }
+};
+
 kb.loadUrl = function(url, transition) {
   kb.override_transitions.push(transition);
-  return window.location.hash = url;
+  return kb.dispatchUrl(url);
 };
 
 kb.loadUrlFn = function(url, transition) {

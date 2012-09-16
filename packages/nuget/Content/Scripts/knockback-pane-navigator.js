@@ -33,6 +33,8 @@ try {
 
 this.kb || (this.kb = kb || (kb = {}));
 
+this.Backbone || (this.Backbone = this.kb.Backbone);
+
 try {
   ko = typeof require !== 'undefined' ? require('knockout') : this.ko;
 } catch (e) {
@@ -222,6 +224,7 @@ kb.PaneNavigator = (function() {
     if (!previous_pane) {
       return null;
     }
+    previous_pane.activate(this.el);
     this.cleanupTransition(true);
     active_pane = this.activePane();
     if ('transition' in options) {
@@ -349,7 +352,7 @@ kb.utils.wrappedPaneNavigator = function(el, value) {
   return value;
 };
 
-if ($.fn) {
+if (this.$ && $.fn) {
   $.fn.findByPath = function(path) {
     var $current_el, component, components, current_el, el, results, _i, _j, _len, _len1;
     results = [];
@@ -551,15 +554,15 @@ kb.Pane = (function() {
     return this;
   };
 
-  Pane.prototype.activate = function(el) {
+  Pane.prototype.activate = function(container_el) {
     var view_model;
     this.ensureElement();
     if ($(this.el).hasClass('active')) {
       return;
     }
     $(this.el).addClass('active');
-    if (this.el.parentNode !== el) {
-      $(el).append(this.el);
+    if (this.el.parentNode !== container_el) {
+      container_el.appendChild(this.el);
     }
     view_model = this.view_model ? this.view_model : ko.dataFor(this.el);
     if (view_model && view_model.activate) {

@@ -7,9 +7,10 @@ throwUnexpected = (instance, message) -> throw "#{if _.isString(instance) then i
 # import Knockback is it exists
 try (@kb = kb = if not @kb and (typeof(require) isnt 'undefined') then require('knockback') else @kb) catch e then {}
 @kb or= kb or= {} # empty namesapce
+@Backbone or= @kb.Backbone
 
 # import Knockout or provide a replacement for ko.observable and ko.observableArray
-try (ko = if (typeof(require) != 'undefined') then require('knockout') else @ko) catch e then {}
+try (ko = if not @ko and (typeof(require) != 'undefined') then require('knockout') else @ko) catch e then {}
 ko or= {} # empty namesapce
 unless ko.observable # no Knockout, make minimal fake ko.observable and and ko.observableArray for simplifying the watching API
 

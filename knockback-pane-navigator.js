@@ -33,6 +33,8 @@ try {
 
 this.kb || (this.kb = kb || (kb = {}));
 
+this.Backbone || (this.Backbone = this.kb.Backbone);
+
 try {
   ko = typeof require !== 'undefined' ? require('knockout') : this.ko;
 } catch (e) {
@@ -350,7 +352,7 @@ kb.utils.wrappedPaneNavigator = function(el, value) {
   return value;
 };
 
-if ($.fn) {
+if (this.$ && $.fn) {
   $.fn.findByPath = function(path) {
     var $current_el, component, components, current_el, el, results, _i, _j, _len, _len1;
     results = [];
