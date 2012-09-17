@@ -1,7 +1,7 @@
 $(document).ready( ->
-  module("knockback-page-navigators-simple-amd.js")
+  module("knockback-pane-navigators-amd.js")
 
-  # Knockback and depdenencies
+  # library and dependencies
   require(['underscore', 'backbone', 'knockout', 'knockback', 'knockback-pane-navigator'], (_, Backbone, ko, kb) ->
     _ or= @_
     Backbone or= @Backbone
