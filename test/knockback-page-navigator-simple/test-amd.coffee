@@ -1,4 +1,4 @@
-$(document).ready( ->
+$(->
   module("knockback-page-navigators-simple-amd.js")
 
   # library and dependencies

@@ -1,4 +1,4 @@
-$(document).ready( ->
+$(->
   module("knockback-page-navigators-panes-amd.js")
 
   # library and dependencies
