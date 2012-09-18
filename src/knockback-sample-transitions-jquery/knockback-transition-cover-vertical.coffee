@@ -33,4 +33,4 @@ kb.transistions.CoverVertical = (info, options) ->
     else # reverse
       $to_el.css({bottom: '0px'})
       $to_el.animate({bottom: -container_height}, duration, 'linear', @callback)
-  @
+  return

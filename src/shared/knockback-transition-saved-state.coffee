@@ -23,7 +23,7 @@ class kb.TransitionSavedState
     if css_keys
       state.css[key] = el.style[key] for key in css_keys
     @el_states.push({el: el, state: state})
-    @
+    return
 
   restore: ->
     for entry in @el_states
@@ -33,7 +33,7 @@ class kb.TransitionSavedState
       for key, value of state.css
         el.style[key] = value
     @el_states = null # restore only once
-    @
+    return
 
 ####################################
 # Module

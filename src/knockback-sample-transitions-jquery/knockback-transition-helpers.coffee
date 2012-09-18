@@ -19,9 +19,9 @@ if @Zepto
     for el in @
       replacement_callback = wrapAnimCallback(el, properties, callback) # wrap the callback so it can be cancelled
     _anim_fn.call(@, properties, duration, ease, replacement_callback)
-    @
+    return @
 
   $.fn.stop = ->
     for el in @
       $(el).trigger(el.__kb_zepto_endEvent) if el.__kb_zepto_endEvent # trigger the end
-    @
+    return @

@@ -35,4 +35,4 @@ kb.transistions.NavigationSlide = (info, options) ->
       $from_el.animate({left: '0px'}, duration, 'linear')
       $to_el.css({left: '0px'})
       $to_el.animate({left: width}, duration, 'linear', @callback)
-  @
+  return

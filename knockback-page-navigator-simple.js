@@ -284,7 +284,6 @@ kb.Pane = (function() {
     if (this.el) {
       $(this.el).addClass('pane');
     }
-    return this;
   };
 
   Pane.prototype.ensureElement = function() {
@@ -301,7 +300,6 @@ kb.Pane = (function() {
     if (this.el) {
       $(this.el).addClass('pane');
     }
-    return this;
   };
 
   Pane.prototype.removeElement = function(options, force) {
@@ -320,7 +318,6 @@ kb.Pane = (function() {
     } else if (this.el.parentNode) {
       this.el.parentNode.removeChild(this.el);
     }
-    return this;
   };
 
   Pane.prototype.activate = function(container_el) {
@@ -337,7 +334,6 @@ kb.Pane = (function() {
     if (view_model && view_model.activate) {
       view_model.activate(this);
     }
-    return this;
   };
 
   Pane.prototype.deactivate = function(options) {
@@ -354,7 +350,6 @@ kb.Pane = (function() {
       view_model.deactivate(this);
     }
     this.removeElement(options);
-    return this;
   };
 
   return Pane;

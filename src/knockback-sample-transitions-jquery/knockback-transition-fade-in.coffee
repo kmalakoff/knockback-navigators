@@ -30,4 +30,4 @@ kb.transistions.FadeIn = (info, options) ->
     else # reverse
       $to_el.css({'opacity': 1})
       $to_el.animate({'opacity': 0}, 1000, 'swing', @callback)
-  @
+  return

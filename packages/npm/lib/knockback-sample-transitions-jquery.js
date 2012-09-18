@@ -107,7 +107,6 @@ kb.transistions.CoverVertical = function(info, options) {
       }, duration, 'linear', this.callback);
     }
   };
-  return this;
 };
 
 kb.transistions.FadeIn = function(info, options) {
@@ -151,7 +150,6 @@ kb.transistions.FadeIn = function(info, options) {
       }, 1000, 'swing', this.callback);
     }
   };
-  return this;
 };
 
 kb.transistions.NavigationSlide = function(info, options) {
@@ -206,7 +204,6 @@ kb.transistions.NavigationSlide = function(info, options) {
       }, duration, 'linear', this.callback);
     }
   };
-  return this;
 };
 ; return kb;});
 }).call(this);
