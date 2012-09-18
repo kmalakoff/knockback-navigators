@@ -452,7 +452,6 @@ kb.Factory = (function() {
       create_info = factories[path];
       this.paths[kb.utils.pathJoin(owner_path, path)] = create_info;
     }
-    return this;
   };
 
   Factory.prototype.hasPathMappings = function(factories, owner_path) {
@@ -789,7 +788,6 @@ kb.ModelWatcher = (function() {
       }
       info.model(this.m) && info.model;
     }
-    return this;
   };
 
   ModelWatcher.prototype.releaseCallbacks = function(obj) {
@@ -836,7 +834,6 @@ kb.ModelWatcher = (function() {
         }
       }
     }
-    return this;
   };
 
   ModelWatcher.prototype._onModelUnloaded = function(model) {
@@ -857,7 +854,6 @@ kb.ModelWatcher = (function() {
         }
       }
     }
-    return this;
   };
 
   ModelWatcher.prototype._modelBindRelatationalInfo = function(event_name, info) {
@@ -882,7 +878,6 @@ kb.ModelWatcher = (function() {
         this.m.bind("update:" + info.key, info.rel_fn);
       }
     }
-    return this;
   };
 
   ModelWatcher.prototype._modelUnbindRelatationalInfo = function(event_name, info) {
@@ -896,7 +891,6 @@ kb.ModelWatcher = (function() {
       this.m.unbind("update:" + info.key, info.rel_fn);
     }
     info.rel_fn = null;
-    return this;
   };
 
   return ModelWatcher;
@@ -1064,7 +1058,7 @@ kb.Observable = (function() {
     (new_value !== void 0) || (new_value = null);
     new_type = kb.utils.valueType(new_value);
     if (!this.__kb_value || (this.__kb_value.__kb_destroyed || (this.__kb_value.__kb_null && new_value))) {
-      this.__kb_value = null;
+      this.__kb_value = void 0;
       this.value_type = void 0;
     }
     value = this.__kb_value;
@@ -1100,7 +1094,7 @@ kb.Observable = (function() {
     this.value_type = KB_TYPE_UNKNOWN;
     creator = create_options.creator;
     previous_value = this.__kb_value;
-    this.__kb_value = null;
+    this.__kb_value = void 0;
     if (previous_value) {
       kb.release(previous_value);
     }
@@ -1118,10 +1112,11 @@ kb.Observable = (function() {
         }
       }
     } else {
-      this.value_type = KB_TYPE_SIMPLE;
       if (_.isArray(new_value)) {
+        this.value_type = KB_TYPE_ARRAY;
         value = ko.observableArray(new_value);
       } else {
+        this.value_type = KB_TYPE_SIMPLE;
         value = ko.observable(new_value);
       }
     }
@@ -1290,7 +1285,6 @@ kb.ViewModel = (function() {
       create_options.key = key;
       this[vm_key] = this.__kb.view_model[vm_key] = kb.observable(model, create_options, this);
     }
-    return this;
   };
 
   ViewModel.prototype._mapObservables = function(model, mappings) {
@@ -1314,7 +1308,6 @@ kb.ViewModel = (function() {
       this.__kb.model_keys[mapping_info.key] = true;
       this[vm_key] = this.__kb.view_model[vm_key] = kb.observable(model, _.defaults(mapping_info, create_options), this);
     }
-    return this;
   };
 
   return ViewModel;
@@ -1656,7 +1649,6 @@ kb.CollectionObservable = (function() {
     this.in_edit++;
     collection.reset(models);
     this.in_edit--;
-    return this;
   };
 
   CollectionObservable.prototype._sortAttributeFn = function(sort_attribute) {
