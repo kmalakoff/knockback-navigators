@@ -2,6 +2,22 @@
 #
 # @note If using Knockout, 'hasHistory', 'activePage', and 'activeUrl' methods can be can be observed for changes.
 #
+root = @
+
+ACTIVE_CHECK_INTERVAL = 100
+checkPanesForActivate = (pane_navigator) ->
+  # check for active pane change no longer in DOM
+  if active_pane = pane_navigator.activePane()
+    parent_el = active_pane.el.parentNode
+    while parent_el and (parent_el isnt pane_navigator.el)
+      parent_el = parent_el.parentNode
+    return if parent_el # still the parent
+    pane_navigator.clear() # no longer active
+
+  # check for active pane appearing
+  $pane_els = $(pane_navigator.el).children().filter('.pane')
+  pane_navigator.push(new kb.Pane($pane_els[0])) if $pane_els.length
+
 class kb.PaneNavigator
   # @param [Element] el the container element for the pane navigator
   # @param [Object] options create options
@@ -16,7 +32,11 @@ class kb.PaneNavigator
     @el = if el and el.length then el[0] else el
     $(@el).addClass('pane-navigator') # ensure the 'pane-navigator' class exists for css
 
+    # start checking the DOM for changes
+    @interval = root.setInterval(=> checkPanesForActivate(@))
+
   destroy: ->
+    root.clearInterval(@interval); @interval = null
     @el = null
     @clear({silent: true})
 

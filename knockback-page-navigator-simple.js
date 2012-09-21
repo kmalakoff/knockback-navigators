@@ -232,10 +232,7 @@ kb.loadUrlFn = function(url, transition) {
   return function(vm, event) {
     kb.loadUrl(url, transition);
     (!vm || !vm.stopPropagation) || (event = vm);
-    if (event && event.stopPropagation) {
-      event.stopPropagation();
-      return event.preventDefault();
-    }
+    !(event && event.stopPropagation) || (event.stopPropagation(), event.preventDefault());
   };
 };
 

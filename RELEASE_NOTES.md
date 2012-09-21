@@ -1,5 +1,9 @@
 Please refer to the following release notes when upgrading your version of Knockback-Navigators.js.
 
+## 0.1.2
+
+* made pane navigator check for DOM changes using setInterval to ensure an active element is always present.
+
 ## 0.1.1
 
 * added AMD loader to all components.
