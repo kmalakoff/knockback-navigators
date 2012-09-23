@@ -1,4 +1,4 @@
-kb.transistions or= {}
+FALLBACK_ANIMATION_DURATION = kb.FALLBACK_ANIMATION_DURATION = 300
 
 # add animation $.fn.stop to Zepto.
 # Note: this code is not guaranteed to work under all circumstances since it is a Monkey-Patch.

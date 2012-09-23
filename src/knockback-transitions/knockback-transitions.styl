@@ -1,0 +1,199 @@
+/*
+  knockback-tranitions.css 0.1.1
+  (c) 2011, 2012 Kevin Malakoff - http://kmalakoff.github.com/knockback/
+  License: MIT (http://www.opensource.org/licenses/mit-license.php)
+  Port of jQueryMobile transitions (https://github.com/jquery/jquery-mobile) to stylus for auto generation of vendor prefixes.
+*/
+
+@import 'nib'
+
+.in-transition {
+/*  pointer-events: none;*/
+  position: absolute;
+}
+
+.in {
+  animation-timing-function: ease-out;
+  animation-duration: 350ms;
+}
+.out {
+  animation-timing-function: ease-in;
+  animation-duration: 225ms;
+}
+
+@-keyframes fadein {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@-keyframes fadeout {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+.fade.out {
+  opacity: 0;
+  animation-duration: 125ms;
+  animation-name: fadeout;
+}
+.fade.in {
+  opacity: 1;
+  animation-duration: 225ms;
+  animation-name: fadein;
+}
+.pop {
+  transform-origin: 50% 50%;
+}
+.pop.in {
+  transform: scale(1);
+  opacity: 1;
+  animation-name: popin;
+  animation-duration: 350ms;
+}
+.pop.out {
+  animation-name: fadeout;
+  opacity: 0;
+  animation-duration: 100ms;
+}
+.pop.in.reverse {
+  animation-name: fadein;
+}
+.pop.out.reverse {
+  transform: scale(.8);
+  animation-name: popout;
+}
+@keyframes popin {
+  from {
+    transform: scale(.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@keyframes popout {
+    from {
+        transform: scale(1);
+        opacity: 1;
+    }
+    to {
+        transform: scale(.8);
+        opacity: 0;
+    }
+}
+
+/* keyframes for slidein from sides */
+@keyframes slideinfromright {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+@keyframes slideinfromleft {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
+}
+
+/* keyframes for slideout to sides */
+@keyframes slideouttoleft {
+  from { transform: translateX(0); }
+  to { transform: translateX(-100%); }
+}
+@keyframes slideouttoright {
+  from { transform: translateX(0); }
+  to { transform: translateX(100%); }
+}
+
+.slide.out, .slide.in {
+  animation-timing-function: ease-out;
+  animation-duration: 350ms;
+}
+.slide.out {
+  transform: translateX(-100%);
+  animation-name: slideouttoleft;
+}
+.slide.in {
+  transform: translateX(0);
+  animation-name: slideinfromright;
+}
+.slide.out.reverse {
+  transform: translateX(100%);
+  animation-name: slideouttoright;
+}
+.slide.in.reverse {
+  transform: translateX(0);
+  animation-name: slideinfromleft;
+}
+.slidefade.out {
+  transform: translateX(-100%);
+  animation-name: slideouttoleft;
+  animation-duration: 225ms;
+}
+.slidefade.in {
+  transform: translateX(0);
+  animation-name: fadein;
+  animation-duration: 200ms;
+}
+.slidefade.out.reverse {
+  transform: translateX(100%);
+  animation-name: slideouttoright;
+  animation-duration: 200ms;
+}
+.slidefade.in.reverse {
+  transform: translateX(0);
+  animation-name: fadein;
+  animation-duration: 200ms;
+}
+/* slide down */
+.slidedown.out {
+  animation-name: fadeout;
+  animation-duration: 100ms;
+}
+.slidedown.in {
+  transform: translateY(0);
+  animation-name: slideinfromtop;
+  animation-duration: 250ms;
+}
+.slidedown.in.reverse {
+  animation-name: fadein;
+  animation-duration: 150ms;
+}
+.slidedown.out.reverse {
+  transform: translateY(-100%);
+  animation-name: slideouttotop;
+  animation-duration: 200ms;
+}
+@keyframes slideinfromtop {
+  from { transform: translateY(-100%); }
+  to { transform: translateY(0); }
+}
+@keyframes slideouttotop {
+  from { transform: translateY(0); }
+  to { transform: translateY(-100%); }
+}
+
+/* slide up */
+.slideup.out {
+  animation-name: fadeout;
+  animation-duration: 100ms;
+}
+.slideup.in {
+  transform: translateY(0);
+  animation-name: slideinfrombottom;
+  animation-duration: 250ms;
+}
+.slideup.in.reverse {
+  animation-name: fadein;
+  animation-duration: 150ms;
+}
+.slideup.out.reverse {
+  transform: translateY(100%);
+  animation-name: slideouttobottom;
+  animation-duration: 200ms;
+}
+@keyframes slideinfrombottom {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+@keyframes slideouttobottom {
+  from { transform: translateY(0); }
+  to { transform: translateY(100%); }
+}

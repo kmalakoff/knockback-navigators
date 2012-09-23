@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="vendor/normalize.css">
   <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.css">
   <link rel="stylesheet" href="../knockback-navigators.css">
+  <link rel="stylesheet" href="../knockback-transitions.css">
 
   <style type="text/css">
     .cell                 {height: 120px; width: 120px; background-color: white} /* cell styling */
@@ -22,7 +23,7 @@
     <button class='btn btn-small' data-bind="click: kb.nextPane" data-path='^/.pane-navigator'><i class='icon-step-forward'></i></button>
 
     <div class='cell' style='position: relative'>
-      <div class='pane-navigator' data-bind="PaneNavigator: {transition: 'NavigationSlide'}">
+      <div class='pane-navigator' data-bind="PaneNavigator: {transition: 'Slide'}">
         <div class='pane cell'>
           <p>Pane1</p>
         </div>
@@ -40,7 +41,7 @@
   <script src="vendor/zepto-1.0rc1.js"></script>
   <script src="vendor/knockout-2.1.0.js"></script>
   <script src="../knockback-pane-navigator.js"></script>
-  <script src="../lib/knockback-sample-transitions-jquery.js"></script>
+  <script src="..//knockback-transitions.js"></script>
 
   <script type='text/javascript'>
     ko.applyBindings({});
@@ -50,7 +51,7 @@
   <!-- ****************** -->
   <script src="vendor/backbone/underscore-1.3.3.js"></script>
   <script type='text/javascript'>
-    $('body').append($('<div style="position: absolute; top: 220px"><h1>Example Source</h1><pre>' +_.escape(document.body.innerHTML.substring(0, document.body.innerHTML.indexOf('<!-- ****************** -->')))+'</pre></div>')[0]);
+    $('body').append($('<div><h1>Example Source</h1><pre>' +_.escape(document.body.innerHTML.substring(0, document.body.innerHTML.indexOf('<!-- ****************** -->')))+'</pre></div>')[0]);
   </script>
 
 </body>

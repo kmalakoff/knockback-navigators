@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="vendor/normalize.css">
   <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.css">
   <link rel="stylesheet" href="../knockback-navigators.css">
+  <link rel="stylesheet" href="../knockback-transitions.css">
 
   <style type="text/css">
     .cell                 {height: 120px; width: 120px; background-color: white} /* cell styling */
@@ -39,7 +40,7 @@
 
   <script src="vendor/xui-2.3.2.js"></script>
   <script src="../knockback-pane-navigator.js"></script>
-  <script src="../lib/knockback-sample-transitions-jquery.js"></script>
+  <script src="..//knockback-transitions.js"></script>
 
   <script type='text/javascript'>
     var pane_navigator_el = $('.pane-navigator')[0];
@@ -52,7 +53,7 @@
   <!-- ****************** -->
   <script src="vendor/backbone/underscore-1.3.3.js"></script>
   <script type='text/javascript'>
-    var el = $('<div style="position: absolute; top: 220px"><h1>Example Source</h1><pre>' +_.escape(document.body.innerHTML.substring(0, document.body.innerHTML.indexOf('<!-- ****************** -->')))+'</pre></div>')[0];
+    var el = $('<div><h1>Example Source</h1><pre>' +_.escape(document.body.innerHTML.substring(0, document.body.innerHTML.indexOf('<!-- ****************** -->')))+'</pre></div>')[0];
     $('body')[0].appendChild(el);
   </script>
 

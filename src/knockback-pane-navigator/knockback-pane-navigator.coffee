@@ -76,7 +76,7 @@ class kb.PaneNavigator
     active_pane.transition = options.transition if 'transition' of options # override transition
 
     # activate and store
-    active_pane.activate(@el)
+    active_pane.ensureElement(@el)
     if options.silent then @panes().push(active_pane) else @panes.push(active_pane) # store new active pane
 
     # clean up previous
@@ -100,9 +100,11 @@ class kb.PaneNavigator
     # create and start a transition
     if active_pane and (active_pane.transition or @transition)
       @startTransition(active_pane, previous_pane, clean_up_fn, true)
+      active_pane.activate(@el)
 
     # clear previous now
     else
+      active_pane.activate(@el)
       clean_up_fn()
 
     return active_pane
@@ -110,7 +112,7 @@ class kb.PaneNavigator
   pop: (options={}) ->
     previous_pane = @previousPane()
     return null unless previous_pane # no where to go back to
-    previous_pane.activate(@el) # re-activate the pane
+    previous_pane.ensureElement()
 
     # cancel the transition
     @cleanupTransition(true)
@@ -132,9 +134,11 @@ class kb.PaneNavigator
     # create and start a transition
     if active_pane and (active_pane.transition or @transition)
       @startTransition(active_pane, previous_pane, clean_up_fn, false)
+      previous_pane.activate(@el) # re-activate the pane
 
     # clear previous now
     else
+      previous_pane.activate(@el) # re-activate the pane
       clean_up_fn()
 
     return previous_pane
@@ -156,7 +160,7 @@ class kb.PaneNavigator
     transition = if active_pane.transition then active_pane.transition else @transition
     return null unless transition
     transition = {name: transition} if (typeof(transition) is 'string')
-    kb.transistions[transition.name] or throwMissing(@, "transition #{transition.name}")
+    kb.active_transitions[transition.name] or throwMissing(@, "transition #{transition.name}")
 
     # resolve the transition options
     options = {forward: forward}
@@ -172,20 +176,30 @@ class kb.PaneNavigator
     active_pane.activate(@el) if active_pane # ensure there is an element
     previous_pane.activate(@el) if previous_pane # ensure there is an element
     info =
-      container_el: @el
-      from_el: if previous_pane then previous_pane.el else null
-      to_el: if active_pane then active_pane.el else null
+      container: @el
+      from: if previous_pane then previous_pane.el else null
+      to: if active_pane then active_pane.el else null
       callback: callback
 
-    # create the transition
-    @active_transition = {callback: callback, transition: new kb.transistions[transition.name](info, options)}
-    @active_transition.transition.start()
+    # save the state and set up the element
+    start_state = new kb.TransitionSavedState(info)
+    not info.to or $(info.to).addClass('in-transition')
+    not info.from or $(info.from).addClass('in-transition')
+    container_height = @el.clientHeight
+    unless container_height
+      container_height = if info.from then Math.max(info.to.clientHeight, info.from.clientHeight) else info.to.clientHeight
+    $(@el).css({'overflow': 'hidden', height: container_height})
+    @active_transition = {callback: callback, start_state: start_state, info: info}
+    new kb.active_transitions[transition.name](info, options)
 
   # @private
   cleanupTransition: (cancel) ->
     return unless @active_transition
     transition = @active_transition; @active_transition = null
-    transition.transition.cancel() if cancel
+    if cancel
+      not transition.info.to or $(transition.info.to).stopTransition()
+      not transition.info.from or $(transition.info.from).stopTransition()
+    transition.start_state.restore()
     transition.callback()
 
 ####################################

@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="vendor/normalize.css">
   <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.css">
   <link rel="stylesheet" href="../knockback-navigators.css">
+  <link rel="stylesheet" href="../knockback-transitions.css">
 </head>
 <body>
   <a class='btn' href='../index.html#page_navigator_panes' style='position: absolute; z-index: 200'>More Examples</a>
@@ -41,7 +42,7 @@
   <script src="vendor/zepto-1.0rc1.js"></script>
   <script src="vendor/path-0.8.4.js"></script>
   <script src="../knockback-page-navigator-panes.js"></script>
-  <script src="../lib/knockback-sample-transitions-jquery.js"></script>
+  <script src="..//knockback-transitions.js"></script>
 
   <script type='text/javascript'>
     ////////////////////////////////////
@@ -53,10 +54,10 @@
       page_navigator.loadPage({el: $('#main')[0], transition: 'FadeIn'});
     }));
     Path.map('#page1').to(page_navigator.dispatcher(function(){
-      page_navigator.loadPage({el: $('#page1')[0], transition: 'NavigationSlide'});
+      page_navigator.loadPage({el: $('#page1')[0], transition: 'Slide'});
     }));
     Path.map('#page2').to(page_navigator.dispatcher(function(){
-      page_navigator.loadPage({el: $('#page2')[0], transition: 'CoverVertical'});
+      page_navigator.loadPage({el: $('#page2')[0], transition: 'SlideUp'});
     }));
     Path.listen();
     Path.dispatch(window.location.hash);
@@ -67,7 +68,7 @@
   <!-- ****************** -->
   <script src="vendor/backbone/underscore-1.3.3.js"></script>
   <script type='text/javascript'>
-    $('body').append($('<div style="position: absolute; top: 220px"><h1>Example Source</h1><pre>' +_.escape(document.body.innerHTML.substring(0, document.body.innerHTML.indexOf('<!-- ****************** -->')))+'</pre></div>')[0]);
+    $('body').append($('<div><h1>Example Source</h1><pre>' +_.escape(document.body.innerHTML.substring(0, document.body.innerHTML.indexOf('<!-- ****************** -->')))+'</pre></div>')[0]);
   </script>
 
 </body>

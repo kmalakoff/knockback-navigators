@@ -28,7 +28,7 @@
     <file src="content/Scripts/knockback-pane-navigator.js" target="content/Scripts/knockback-pane-navigator.js" />
     <file src="content/Scripts/knockback-pane-navigator.min.js" target="content/Scripts/knockback-pane-navigator.min.js" />
 
-    <file src="content/Scripts/lib/knockback-transitions-jquery.js" target="content/Scripts/lib/knockback-transitions-jquery.js" />
-    <file src="content/Scripts/lib/knockback-transitions-jquery.min.js" target="content/Scripts/lib/knockback-transitions-jquery.min.js" />
+    <file src="content/Scripts/knockback-transitions-jquery.js" target="content/Scripts/knockback-transitions-jquery.js" />
+    <file src="content/Scripts/knockback-transitions-jquery.min.js" target="content/Scripts/knockback-transitions-jquery.min.js" />
   </files>
 </package>

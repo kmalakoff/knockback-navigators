@@ -1,4 +1,4 @@
-kb.transistions or= {}
+kb.transitions or= {}
 
 # only used by kb.PaneNavigator
 unless _.indexOf

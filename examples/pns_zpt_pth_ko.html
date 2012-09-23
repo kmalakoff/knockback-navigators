@@ -41,8 +41,8 @@
     var app_view_model = {
       pages: ko.observableArray([
         {title: 'Main', id: 'main', href: '#'},
-        {title: 'Page1', id: 'page1', href: '#page1', back_transition: {name: 'NavigationSlide', inverse: true}},
-        {title: 'Page2', id: 'page2', href: '#page2', back_transition: {name: 'CoverVertical', inverse: true}}
+        {title: 'Page1', id: 'page1', href: '#page1', back_transition: {name: 'Slide', inverse: true}},
+        {title: 'Page2', id: 'page2', href: '#page2', back_transition: {name: 'SlideUp', inverse: true}}
       ])
     };
     // Initialize relationships between pages
@@ -75,7 +75,7 @@
   <!-- ****************** -->
   <script src="vendor/backbone/underscore-1.3.3.js"></script>
   <script type='text/javascript'>
-    $('body').append($('<div style="position: absolute; top: 220px"><h1>Example Source</h1><pre>' +_.escape(document.body.innerHTML.substring(0, document.body.innerHTML.indexOf('<!-- ****************** -->')))+'</pre></div>')[0]);
+    $('body').append($('<div><h1>Example Source</h1><pre>' +_.escape(document.body.innerHTML.substring(0, document.body.innerHTML.indexOf('<!-- ****************** -->')))+'</pre></div>')[0]);
   </script>
 
 </body>

@@ -1,0 +1,18 @@
+/*
+  knockback-panes.css 0.1.1
+  (c) 2011, 2012 Kevin Malakoff - http://kmalakoff.github.com/knockback/
+  License: MIT (http://www.opensource.org/licenses/mit-license.php)
+  Dependencies: Knockout.js, Backbone.js, and Underscore.js.
+*/
+.pane {
+  padding: 0; margin: 0; width: 100%; /* panes take up their pane-navigator */
+  display: none; /* panes are not visible by default */
+}
+
+.pane.active {
+  display: block; /* visible if active or in a scrolling pane-navigator */
+}
+
+.pane.on-top {
+  z-index: 100; /* default overlay z-index */
+}

@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="vendor/normalize.css">
   <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.css">
   <link rel="stylesheet" href="../knockback-navigators.css">
+  <link rel="stylesheet" href="../knockback-transitions.css">
 
   <style type="text/css">
     .cell                 {height: 120px; width: 120px; background-color: white} /* cell styling */
@@ -39,11 +40,11 @@
 
   <script src="vendor/zepto-1.0rc1.js"></script>
   <script src="../knockback-pane-navigator.js"></script>
-  <script src="../lib/knockback-sample-transitions-jquery.js"></script>
+  <script src="..//knockback-transitions.js"></script>
 
   <script type='text/javascript'>
     var pane_navigator_el = $('.pane-navigator')[0];
-    var pane_navigator = new kb.PaneNavigator(pane_navigator_el, {no_remove: true, transition: 'NavigationSlide'});
+    var pane_navigator = new kb.PaneNavigator(pane_navigator_el, {no_remove: true, transition: 'Slide'});
     kb.utils.wrappedPaneNavigator(pane_navigator_el, pane_navigator); // cache the pane_navigator for use by kb. It should be released with kb.utils.wrappedPaneNavigator(pane_navigator_el, null)
     pane_navigator.push(new kb.Pane(pane_navigator_el.children[0]));
   </script>
@@ -52,7 +53,7 @@
   <!-- ****************** -->
   <script src="vendor/backbone/underscore-1.3.3.js"></script>
   <script type='text/javascript'>
-    $('body').append($('<div style="position: absolute; top: 220px"><h1>Example Source</h1><pre>' +_.escape(document.body.innerHTML.substring(0, document.body.innerHTML.indexOf('<!-- ****************** -->')))+'</pre></div>')[0]);
+    $('body').append($('<div><h1>Example Source</h1><pre>' +_.escape(document.body.innerHTML.substring(0, document.body.innerHTML.indexOf('<!-- ****************** -->')))+'</pre></div>')[0]);
   </script>
 
 </body>

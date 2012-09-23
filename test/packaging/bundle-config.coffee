@@ -7,4 +7,4 @@ module.exports =
     'knockback-page-navigator-panes': 'knockback-page-navigator-panes.js'
     'knockback-page-navigator-simple': 'knockback-page-navigator-simple.js'
     'knockback-pane-navigator': 'knockback-pane-navigator.js'
-    'knockback-sample-transitions-jquery': 'lib/knockback-sample-transitions-jquery.js'
+    'knockback-transitions': 'knockback-transitions.js'

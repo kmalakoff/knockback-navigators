@@ -14,7 +14,6 @@ module.exports =
       'src/knockback-pane-navigator/knockout-bindings.coffee'
       'src/shared/knockback-page-navigator-helpers.coffee'
       'src/shared/knockback-pane.coffee'
-      'src/shared/knockback-transition-saved-state.coffee'
     ]
 
   knockback_page_navigator_simple:
@@ -39,20 +38,32 @@ module.exports =
       'src/knockback-pane-navigator/knockback-pane-navigator-helpers.coffee'
       'src/knockback-pane-navigator/knockout-bindings.coffee'
       'src/shared/knockback-pane.coffee'
-      'src/shared/knockback-transition-saved-state.coffee'
     ]
 
-  knockback_sample_transitions_jquery:
-    join: 'knockback-sample-transitions-jquery.js'
-    wrapper: 'src/knockback-sample-transitions-jquery/module-loader.js'
-    output: 'lib'
+  knockback_transitions:
+    join: 'knockback-transitions.js'
+    wrapper: 'src/knockback-transitions/module-loader.js'
     compress: true
     files: [
-      'src/knockback-sample-transitions-jquery/component-imports.coffee'
-      'src/knockback-sample-transitions-jquery/knockback-transition-helpers.coffee'
-      'src/knockback-sample-transitions-jquery/knockback-transition-cover-vertical.coffee'
-      'src/knockback-sample-transitions-jquery/knockback-transition-fade-in.coffee'
-      'src/knockback-sample-transitions-jquery/knockback-transition-navigation-slide.coffee'
+      'src/knockback-transitions/component-imports.coffee'
+      'src/knockback-transitions/transition-helpers.coffee'
+      'src/knockback-transitions/transition-saved-state.coffee'
+      'src/knockback-transitions/css-transition-slide-up.coffee'
+      'src/knockback-transitions/css-transition-fade-in.coffee'
+      'src/knockback-transitions/css-transition-slide.coffee'
+      'src/knockback-transitions/fallback-transition-helpers.coffee'
+      'src/knockback-transitions/fallback-transition-slide-up.coffee'
+      'src/knockback-transitions/fallback-transition-fade-in.coffee'
+      'src/knockback-transitions/fallback-transition-slide.coffee'
+    ]
+    commands: [
+      'stylus --use nib --out . src/knockback-transitions/knockback-transitions.styl'
+    ]
+
+  knockback_navigators_css:
+    commands: [
+     'cat src/shared/knockback-page-navigators.css src/shared/knockback-panes.css > knockback-navigators.css'
+     'cp src/knockback-transitions/knockback-transitions.css knockback-transitions.css'
     ]
 
   publishing:
@@ -71,8 +82,9 @@ module.exports =
         'cp knockback-page-navigator-simple.min.js packages/npm/knockback-page-navigator-simple.min.js'
         'cp knockback-pane-navigator.js packages/npm/knockback-pane-navigator.js'
         'cp knockback-pane-navigator.min.js packages/npm/knockback-pane-navigator.min.js'
-        'cp lib/knockback-sample-transitions-jquery.js packages/npm/lib/knockback-sample-transitions-jquery.js'
-        'cp lib/knockback-sample-transitions-jquery.min.js packages/npm/lib/knockback-sample-transitions-jquery.min.js'
+        'cp knockback-transitions.js packages/npm/knockback-transitions.js'
+        'cp knockback-transitions.min.js packages/npm/knockback-transitions.min.js'
+        'cp knockback-transitions.css packages/npm/knockback-transitions.css'
 
         # nuget
         'cp knockback-navigators.css packages/nuget/Content/Scripts/knockback-navigators.css'
@@ -82,8 +94,9 @@ module.exports =
         'cp knockback-page-navigator-simple.min.js packages/nuget/Content/Scripts/knockback-page-navigator-simple.min.js'
         'cp knockback-pane-navigator.js packages/nuget/Content/Scripts/knockback-pane-navigator.js'
         'cp knockback-pane-navigator.min.js packages/nuget/Content/Scripts/knockback-pane-navigator.min.js'
-        'cp lib/knockback-sample-transitions-jquery.js packages/nuget/Content/Scripts/lib/knockback-sample-transitions-jquery.js'
-        'cp lib/knockback-sample-transitions-jquery.min.js packages/nuget/Content/Scripts/lib/knockback-sample-transitions-jquery.min.js'
+        'cp knockback-transitions.js packages/nuget/Content/Scripts/knockback-transitions.js'
+        'cp knockback-transitions.min.js packages/nuget/Content/Scripts/knockback-transitions.min.js'
+        'cp knockback-transitions.css packages/nuget/Content/Scripts/knockback-transitions.css'
       ]
 
   tests:

@@ -333,7 +333,7 @@ kb.PaneNavigator = (function() {
     if ('transition' in options) {
       active_pane.transition = options.transition;
     }
-    active_pane.activate(this.el);
+    active_pane.ensureElement(this.el);
     if (options.silent) {
       this.panes().push(active_pane);
     } else {
@@ -360,7 +360,9 @@ kb.PaneNavigator = (function() {
     };
     if (active_pane && (active_pane.transition || this.transition)) {
       this.startTransition(active_pane, previous_pane, clean_up_fn, true);
+      active_pane.activate(this.el);
     } else {
+      active_pane.activate(this.el);
       clean_up_fn();
     }
     return active_pane;
@@ -376,7 +378,7 @@ kb.PaneNavigator = (function() {
     if (!previous_pane) {
       return null;
     }
-    previous_pane.activate(this.el);
+    previous_pane.ensureElement();
     this.cleanupTransition(true);
     active_pane = this.activePane();
     if ('transition' in options) {
@@ -396,14 +398,16 @@ kb.PaneNavigator = (function() {
     };
     if (active_pane && (active_pane.transition || this.transition)) {
       this.startTransition(active_pane, previous_pane, clean_up_fn, false);
+      previous_pane.activate(this.el);
     } else {
+      previous_pane.activate(this.el);
       clean_up_fn();
     }
     return previous_pane;
   };
 
   PaneNavigator.prototype.startTransition = function(active_pane, previous_pane, callback, forward) {
-    var info, key, options, transition, use_previous, value, _ref, _ref1;
+    var container_height, info, key, options, start_state, transition, use_previous, value, _ref, _ref1;
     if (!active_pane) {
       return;
     }
@@ -423,7 +427,7 @@ kb.PaneNavigator = (function() {
         name: transition
       };
     }
-    kb.transistions[transition.name] || throwMissing(this, "transition " + transition.name);
+    kb.active_transitions[transition.name] || throwMissing(this, "transition " + transition.name);
     options = {
       forward: forward
     };
@@ -443,16 +447,28 @@ kb.PaneNavigator = (function() {
       previous_pane.activate(this.el);
     }
     info = {
-      container_el: this.el,
-      from_el: previous_pane ? previous_pane.el : null,
-      to_el: active_pane ? active_pane.el : null,
+      container: this.el,
+      from: previous_pane ? previous_pane.el : null,
+      to: active_pane ? active_pane.el : null,
       callback: callback
     };
+    start_state = new kb.TransitionSavedState(info);
+    !info.to || $(info.to).addClass('in-transition');
+    !info.from || $(info.from).addClass('in-transition');
+    container_height = this.el.clientHeight;
+    if (!container_height) {
+      container_height = info.from ? Math.max(info.to.clientHeight, info.from.clientHeight) : info.to.clientHeight;
+    }
+    $(this.el).css({
+      'overflow': 'hidden',
+      height: container_height
+    });
     this.active_transition = {
       callback: callback,
-      transition: new kb.transistions[transition.name](info, options)
+      start_state: start_state,
+      info: info
     };
-    return this.active_transition.transition.start();
+    return new kb.active_transitions[transition.name](info, options);
   };
 
   PaneNavigator.prototype.cleanupTransition = function(cancel) {
@@ -463,8 +479,10 @@ kb.PaneNavigator = (function() {
     transition = this.active_transition;
     this.active_transition = null;
     if (cancel) {
-      transition.transition.cancel();
+      !transition.info.to || $(transition.info.to).stopTransition();
+      !transition.info.from || $(transition.info.from).stopTransition();
     }
+    transition.start_state.restore();
     return transition.callback();
   };
 
@@ -476,7 +494,7 @@ if (typeof exports !== 'undefined') {
   exports.PaneNavigator = kb.PaneNavigator;
 }
 
-kb.transistions || (kb.transistions = {});
+kb.transitions || (kb.transitions = {});
 
 if (!_.indexOf) {
   _.indexOf = function(array, value) {
@@ -767,71 +785,6 @@ kb.Pane = (function() {
 
 if (typeof exports !== 'undefined') {
   exports.Pane = kb.Pane;
-}
-
-kb.TransitionSavedState = (function() {
-
-  function TransitionSavedState(info, el_map) {
-    var css_keys, el_key;
-    this.el_states = [];
-    if (!el_map) {
-      return;
-    }
-    for (el_key in el_map) {
-      css_keys = el_map[el_key];
-      this.push(info[el_key], css_keys);
-    }
-  }
-
-  TransitionSavedState.prototype.push = function(el, css_keys) {
-    var key, state, _i, _len;
-    if (!el) {
-      return;
-    }
-    state = {
-      className: '' + el.className,
-      css: {}
-    };
-    if (css_keys) {
-      for (_i = 0, _len = css_keys.length; _i < _len; _i++) {
-        key = css_keys[_i];
-        state.css[key] = el.style[key];
-      }
-    }
-    this.el_states.push({
-      el: el,
-      state: state
-    });
-  };
-
-  TransitionSavedState.prototype.restore = function() {
-    var el, entry, key, state, value, _i, _len, _ref, _ref1;
-    _ref = this.el_states;
-    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-      entry = _ref[_i];
-      el = entry.el;
-      state = entry.state;
-      if (!(el && state)) {
-        continue;
-      }
-      if ('className' in state) {
-        el.className = state.className;
-      }
-      _ref1 = state.css;
-      for (key in _ref1) {
-        value = _ref1[key];
-        el.style[key] = value;
-      }
-    }
-    this.el_states = null;
-  };
-
-  return TransitionSavedState;
-
-})();
-
-if (typeof exports !== 'undefined') {
-  exports.TransitionSavedState = kb.TransitionSavedState;
 }
 ; return kb;});
 }).call(this);

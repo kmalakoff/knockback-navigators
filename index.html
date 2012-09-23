@@ -21,7 +21,7 @@
     <ul class="nav">
       <li><a class='brand' href="https://github.com/kmalakoff/knockback-navigators">KnockbackNavigators.js</a></li>
       <li><a href='doc/index.html'>API</a></li>
-      <li><a onclick="kb.loadUrl('', {name: 'NavigationSlide', inverse: true})">Examples</a></li>
+      <li><a onclick="kb.loadUrl('', {name: 'Slide', inverse: true})">Examples</a></li>
     </ul>
   </div></div></div>
 
@@ -124,7 +124,7 @@
   <script src="examples/vendor/zepto-1.0rc1.js"></script>
   <script src="examples/vendor/path-0.8.4.js"></script>
   <script src="knockback-page-navigator-panes.js"></script>
-  <script src="lib/knockback-sample-transitions-jquery.js"></script>
+  <script src="knockback-transitions.js"></script>
 
   <script type='text/javascript'>
     ////////////////////////////////////
@@ -136,13 +136,13 @@
       page_navigator.loadPage({el: $('#main')[0], transition: 'FadeIn'});
     }));
     Path.map('#page_navigator_simple').to(page_navigator.dispatcher(function(){
-      page_navigator.loadPage({el: $('#page_navigator_simple')[0], transition: 'NavigationSlide'});
+      page_navigator.loadPage({el: $('#page_navigator_simple')[0], transition: 'Slide'});
     }));
     Path.map('#page_navigator_panes').to(page_navigator.dispatcher(function(){
-      page_navigator.loadPage({el: $('#page_navigator_panes')[0], transition: 'NavigationSlide'});
+      page_navigator.loadPage({el: $('#page_navigator_panes')[0], transition: 'Slide'});
     }));
     Path.map('#pane_navigator').to(page_navigator.dispatcher(function(){
-      page_navigator.loadPage({el: $('#pane_navigator')[0], transition: 'NavigationSlide'});
+      page_navigator.loadPage({el: $('#pane_navigator')[0], transition: 'Slide'});
     }));
     Path.listen();
     Path.dispatch(window.location.hash);
