@@ -8,7 +8,7 @@
 @import 'nib'
 
 .in-transition {
-/*  pointer-events: none;*/
+  pointer-events: none;
   position: absolute;
 }
 
@@ -21,23 +21,33 @@
   animation-duration: 225ms;
 }
 
-@-keyframes fadein {
+@keyframes fadein {
   from { opacity: 0; }
   to { opacity: 1; }
 }
-@-keyframes fadeout {
+@keyframes fadeout {
   from { opacity: 1; }
   to { opacity: 0; }
 }
 
 .fade.out {
   opacity: 0;
-  animation-duration: 125ms;
+  animation-duration: 500ms;
   animation-name: fadeout;
 }
 .fade.in {
   opacity: 1;
-  animation-duration: 225ms;
+  animation-duration: 500ms;
+  animation-name: fadein;
+}
+.fade.out.slow {
+  opacity: 0;
+  animation-duration: 800ms;
+  animation-name: fadeout;
+}
+.fade.in.slow {
+  opacity: 1;
+  animation-duration: 800ms;
   animation-name: fadein;
 }
 .pop {

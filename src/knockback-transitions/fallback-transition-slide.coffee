@@ -1,3 +1,5 @@
+kb.SLIDE_DURATION = 300
+
 # Constructor for a Slide transition animation.
 #
 # @param [Object] info the hierarchy information for the transition.
@@ -11,11 +13,11 @@
 kb.fallback_transitions.Slide = (info, options) ->
   (info.callback(); return) unless info.from # no transition
   $to = $(info.to); $from = $(info.from)
-  callback = -> $from.stop(); $to.stop(); info.callback()
+  callback = -> $to.stop(); $from.stop(); $to.off(kb.transitions.END_EVENT, callback); info.callback()
 
   # do animation
-  duration = if 'duration' of options then options.duration else FALLBACK_ANIMATION_DURATION
   width = $(info.container).width()
+  duration = kb.SLIDE_DURATION
   if options.forward
     $from.animate({left: info.from.clientLeft-width}, duration, 'linear')
     to_left = info.to.clientLeft
@@ -24,5 +26,5 @@ kb.fallback_transitions.Slide = (info, options) ->
     from_left = info.from.clientLeft
     $from.css({left: from_left-width}).animate({left: from_left}, duration, 'linear')
     $to.animate({left: info.to.clientLeft+width}, duration, 'linear', callback)
-  $to.startTransition(callback)
+  $to.one(kb.transitions.END_EVENT, callback)
 	return

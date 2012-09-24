@@ -1,3 +1,5 @@
+kb.SLIDE_UP_DURATION = 300
+
 # Constructor for a SlideUp transition animation.
 #
 # @param [Object] info the hierarchy information for the transition.
@@ -11,14 +13,13 @@
 kb.fallback_transitions.SlideUp = (info, options) ->
   (info.callback(); return) unless info.from # no transition
   $to = $(info.to)
-  callback = -> $to.stop(); info.callback()
+  callback = -> $to.stop(); $to.off(kb.transitions.END_EVENT, callback); info.callback()
 
   # do animation
-  duration = if 'duration' of options then options.duration else FALLBACK_ANIMATION_DURATION
   height = info.container.clientHeight; top = info.to.clientTop
   if options.forward
-    $to.addClass('on-top').css({top: top+height}).animate({top: top}, duration, 'linear', callback)
+    $to.addClass('on-top').css({top: top+height}).animate({top: top}, kb.SLIDE_UP_DURATION, 'linear', callback)
   else # reverse
-    $to.addClass('on-top').animate({top: top+height}, duration, 'linear', callback)
-  $to.startTransition(callback)
+    $to.addClass('on-top').animate({top: top+height}, kb.SLIDE_UP_DURATION, 'linear', callback)
+  $to.one(kb.transitions.END_EVENT, callback)
   return

@@ -121,19 +121,6 @@ router.route('', null, page_navigator.dispatcher(function(){
 ...
 ```
 
-With options:
-
-```
-...
-router.route('', null, page_navigator.dispatcher(function(){
-  page_navigator.loadPage({
-    el: kb.renderTemplate('page', new PageViewModel(pages.get('main'))),
-    transition: {name: 'FadeIn', duration: 1000}
-  });
-}));
-...
-```
-
 With buttons (HTML):
 
 ```

@@ -10,5 +10,8 @@
 # @option options [Float] duration specify a duarion for the animation (default is 500)
 kb.transitions.FadeIn = (info, options) ->
 	$to = $(info.to).css({'min-height': $(info.container).height()})
-	$to.startTransition((if options.forward then 'on-top fade in' else 'on-top fade out'), info.callback)
+	classes = 'on-top fade'
+	classes += (if options.forward then ' in' else ' out')
+	classes += ' slow' if options.slow
+	$to.startTransition(classes, info.callback)
 	return

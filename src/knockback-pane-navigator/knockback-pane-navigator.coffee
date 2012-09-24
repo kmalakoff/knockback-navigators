@@ -23,7 +23,7 @@ class kb.PaneNavigator
   # @param [Object] options create options
   # @option options [Boolean] no_remove do not remove elements from the DOM with they are inactive. Useful if you are using a static DOM hierarchy rather than generating the elements dynamically.
   # @option options [Boolean] no_history if you would like to not store the history of panes, but only have one in memory at a time (default is with history)
-  # @option options [String|Object] transition default transition options. Either a name or `{name: 'TransitionName', option1: option2: ...}`
+  # @option options [String] transition default transition options. Either a name or `{name: 'TransitionName', option1: option2: ...}`
   constructor: (el, options) ->
     el or throwMissing(@, 'el')
 

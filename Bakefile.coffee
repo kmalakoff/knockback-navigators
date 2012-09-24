@@ -56,14 +56,10 @@ module.exports =
       'src/knockback-transitions/fallback-transition-fade-in.coffee'
       'src/knockback-transitions/fallback-transition-slide.coffee'
     ]
-    commands: [
-      'stylus --use nib --out . src/knockback-transitions/knockback-transitions.styl'
-    ]
 
   knockback_navigators_css:
     commands: [
-     'cat src/shared/knockback-page-navigators.css src/shared/knockback-panes.css > knockback-navigators.css'
-     'cp src/knockback-transitions/knockback-transitions.css knockback-transitions.css'
+      'stylus --use nib --out . src/knockback-transitions/knockback-transitions.styl'
     ]
 
   publishing:

@@ -2,6 +2,7 @@ Please refer to the following release notes when upgrading your version of Knock
 
 ## 0.1.2
 
+* introduced css optimized transitions - now the transitions module is knockback-transitions instead of knockback-sample-transitions. Removed optoins from animations -> should all be possible to set using css classes.
 * made pane navigator check for DOM changes using setInterval to ensure an active element is always present.
 * introduced css transitions and renamed sample-transtions-jquery to default-transitions
 * made TransitionSavedState internal to pane navigators and automatically save and restore

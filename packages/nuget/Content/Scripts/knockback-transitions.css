@@ -2,10 +2,10 @@
   knockback-tranitions.css 0.1.1
   (c) 2011, 2012 Kevin Malakoff - http://kmalakoff.github.com/knockback/
   License: MIT (http://www.opensource.org/licenses/mit-license.php)
-  Dependencies: Knockout.js, Backbone.js, and Underscore.js.
+  Port of jQueryMobile transitions (https://github.com/jquery/jquery-mobile) to stylus for auto generation of vendor prefixes.
 */
 .in-transition {
-/*  pointer-events: none;*/
+  pointer-events: none;
   position: absolute;
 }
 .in {
@@ -32,35 +32,15 @@
   -ms-animation-duration: 225ms;
   animation-duration: 225ms;
 }
--keyframes fadein from {
-  opacity: 0;
-  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
-  filter: alpha(opacity=0);
-}
--keyframes fadein to {
-  opacity: 1;
-  -ms-filter: none;
-  filter: none;
-}
--keyframes fadeout from {
-  opacity: 1;
-  -ms-filter: none;
-  filter: none;
-}
--keyframes fadeout to {
-  opacity: 0;
-  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
-  filter: alpha(opacity=0);
-}
 .fade.out {
   opacity: 0;
   -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
   filter: alpha(opacity=0);
-  -webkit-animation-duration: 125ms;
-  -moz-animation-duration: 125ms;
-  -o-animation-duration: 125ms;
-  -ms-animation-duration: 125ms;
-  animation-duration: 125ms;
+  -webkit-animation-duration: 500ms;
+  -moz-animation-duration: 500ms;
+  -o-animation-duration: 500ms;
+  -ms-animation-duration: 500ms;
+  animation-duration: 500ms;
   -webkit-animation-name: fadeout;
   -moz-animation-name: fadeout;
   -o-animation-name: fadeout;
@@ -71,11 +51,41 @@
   opacity: 1;
   -ms-filter: none;
   filter: none;
-  -webkit-animation-duration: 225ms;
-  -moz-animation-duration: 225ms;
-  -o-animation-duration: 225ms;
-  -ms-animation-duration: 225ms;
-  animation-duration: 225ms;
+  -webkit-animation-duration: 500ms;
+  -moz-animation-duration: 500ms;
+  -o-animation-duration: 500ms;
+  -ms-animation-duration: 500ms;
+  animation-duration: 500ms;
+  -webkit-animation-name: fadein;
+  -moz-animation-name: fadein;
+  -o-animation-name: fadein;
+  -ms-animation-name: fadein;
+  animation-name: fadein;
+}
+.fade.out.slow {
+  opacity: 0;
+  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+  filter: alpha(opacity=0);
+  -webkit-animation-duration: 800ms;
+  -moz-animation-duration: 800ms;
+  -o-animation-duration: 800ms;
+  -ms-animation-duration: 800ms;
+  animation-duration: 800ms;
+  -webkit-animation-name: fadeout;
+  -moz-animation-name: fadeout;
+  -o-animation-name: fadeout;
+  -ms-animation-name: fadeout;
+  animation-name: fadeout;
+}
+.fade.in.slow {
+  opacity: 1;
+  -ms-filter: none;
+  filter: none;
+  -webkit-animation-duration: 800ms;
+  -moz-animation-duration: 800ms;
+  -o-animation-duration: 800ms;
+  -ms-animation-duration: 800ms;
+  animation-duration: 800ms;
   -webkit-animation-name: fadein;
   -moz-animation-name: fadein;
   -o-animation-name: fadein;
@@ -391,6 +401,136 @@
   -o-animation-duration: 200ms;
   -ms-animation-duration: 200ms;
   animation-duration: 200ms;
+}
+@-moz-keyframes fadein {
+  0% {
+    opacity: 0;
+    -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    filter: alpha(opacity=0);
+  }
+
+  100% {
+    opacity: 1;
+    -ms-filter: none;
+    filter: none;
+  }
+}
+@-webkit-keyframes fadein {
+  0% {
+    opacity: 0;
+    -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    filter: alpha(opacity=0);
+  }
+
+  100% {
+    opacity: 1;
+    -ms-filter: none;
+    filter: none;
+  }
+}
+@-o-keyframes fadein {
+  0% {
+    opacity: 0;
+    -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    filter: alpha(opacity=0);
+  }
+
+  100% {
+    opacity: 1;
+    -ms-filter: none;
+    filter: none;
+  }
+}
+@-ms-keyframes fadein {
+  0% {
+    opacity: 0;
+    -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    filter: alpha(opacity=0);
+  }
+
+  100% {
+    opacity: 1;
+    -ms-filter: none;
+    filter: none;
+  }
+}
+@keyframes fadein {
+  0% {
+    opacity: 0;
+    -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    filter: alpha(opacity=0);
+  }
+
+  100% {
+    opacity: 1;
+    -ms-filter: none;
+    filter: none;
+  }
+}
+@-moz-keyframes fadeout {
+  0% {
+    opacity: 1;
+    -ms-filter: none;
+    filter: none;
+  }
+
+  100% {
+    opacity: 0;
+    -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    filter: alpha(opacity=0);
+  }
+}
+@-webkit-keyframes fadeout {
+  0% {
+    opacity: 1;
+    -ms-filter: none;
+    filter: none;
+  }
+
+  100% {
+    opacity: 0;
+    -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    filter: alpha(opacity=0);
+  }
+}
+@-o-keyframes fadeout {
+  0% {
+    opacity: 1;
+    -ms-filter: none;
+    filter: none;
+  }
+
+  100% {
+    opacity: 0;
+    -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    filter: alpha(opacity=0);
+  }
+}
+@-ms-keyframes fadeout {
+  0% {
+    opacity: 1;
+    -ms-filter: none;
+    filter: none;
+  }
+
+  100% {
+    opacity: 0;
+    -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    filter: alpha(opacity=0);
+  }
+}
+@keyframes fadeout {
+  0% {
+    opacity: 1;
+    -ms-filter: none;
+    filter: none;
+  }
+
+  100% {
+    opacity: 0;
+    -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    filter: alpha(opacity=0);
+  }
 }
 @-moz-keyframes popin {
   0% {

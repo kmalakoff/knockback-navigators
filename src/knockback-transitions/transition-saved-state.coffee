@@ -12,7 +12,7 @@ class kb.TransitionSavedState
   constructor: (info) ->
     @el_states = []
     for name, el of info
-      not _.isElement(el) or @el_states.push({el: el, className: el.className, cssText: el.style.cssText})
+      not isElement(el) or @el_states.push({el: el, className: el.className, cssText: el.style.cssText})
     return
 
   # @private

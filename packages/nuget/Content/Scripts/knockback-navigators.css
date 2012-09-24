@@ -1,5 +1,5 @@
 /*
-  knockback-page-navigators.css 0.1.1
+  knockback-navigators.css 0.1.1
   (c) 2011, 2012 Kevin Malakoff - http://kmalakoff.github.com/knockback/
   License: MIT (http://www.opensource.org/licenses/mit-license.php)
   Dependencies: Knockout.js, Backbone.js, and Underscore.js.
@@ -9,19 +9,6 @@
   position: relative;
 }
 
-.pane-navigator.page {
-  overflow: visible; /* will resize the browser window */
-}
-
-.pane-navigator.page.embed {
-  overflow: hidden; /* will stay in its pane instead of resizing the page */
-}
-/*
-  knockback-panes.css 0.1.1
-  (c) 2011, 2012 Kevin Malakoff - http://kmalakoff.github.com/knockback/
-  License: MIT (http://www.opensource.org/licenses/mit-license.php)
-  Dependencies: Knockout.js, Backbone.js, and Underscore.js.
-*/
 .pane {
   padding: 0; margin: 0; width: 100%; /* panes take up their pane-navigator */
   display: none; /* panes are not visible by default */

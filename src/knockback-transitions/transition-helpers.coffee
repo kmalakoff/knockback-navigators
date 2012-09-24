@@ -1,3 +1,5 @@
+kb.MAX_TRANSITION = 800 # TODO: find a more reliable way to trigger transition end events
+
 # CSS TRANSITION SUPPORT (http://www.modernizr.com/)
 kb.transitions.END_EVENT = (->
   el = document.createElement('knockback')
@@ -24,11 +26,11 @@ $.fn.startTransition = (classes, callback) ->
     not callback or callback()
 
   # start transition
-  @removeClass(classes)
   @one(kb.transitions.END_EVENT, cleanupCallback)
   @addClass(classes)
 
-  setTimeout(cleanupCallback, 300)
+  # timeout for too long
+  setTimeout(cleanupCallback, kb.MAX_TRANSITION)
 
   return
 
