@@ -17,7 +17,6 @@ class kb.Pane
       @el = info
     else
       @[key] = value for key, value of info # mixin
-    $(@el).addClass('pane') if @el # ensure the 'pane' class exists for css
     return
 
   # @private
@@ -25,9 +24,9 @@ class kb.Pane
     return @el if @el
     @create or throwMissing(@, 'create')
     info = @create.apply(@, @args)
-    @setInfo(info)  if info
+    not info or @setInfo(info)
     @el or throwMissing(@, 'element')
-    $(@el).addClass('pane') if @el # ensure the 'pane' class exists for css
+    $(@el).addClass('pane') # ensure the 'pane' class exists for css
     return
 
   # @private

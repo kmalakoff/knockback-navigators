@@ -26,6 +26,7 @@ class kb.PageNavigatorSimple
   # Querying Page State
   ####################################
 
+  clear: -> @loadPage(null)
   hasHistory: -> return false
   activePage: -> return @active_page()
   activeUrl: -> return if (active_page = @active_page()) then active_page.url else null

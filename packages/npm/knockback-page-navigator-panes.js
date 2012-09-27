@@ -123,6 +123,10 @@ kb.PageNavigatorPanes = (function() {
     return this.pane_navigator = null;
   };
 
+  PageNavigatorPanes.prototype.clear = function() {
+    return this.pane_navigator.clear();
+  };
+
   PageNavigatorPanes.prototype.hasHistory = function() {
     return !this.pane_navigator.no_history;
   };
@@ -707,9 +711,6 @@ kb.Pane = (function() {
         this[key] = value;
       }
     }
-    if (this.el) {
-      $(this.el).addClass('pane');
-    }
   };
 
   Pane.prototype.ensureElement = function() {
@@ -719,13 +720,9 @@ kb.Pane = (function() {
     }
     this.create || throwMissing(this, 'create');
     info = this.create.apply(this, this.args);
-    if (info) {
-      this.setInfo(info);
-    }
+    !info || this.setInfo(info);
     this.el || throwMissing(this, 'element');
-    if (this.el) {
-      $(this.el).addClass('pane');
-    }
+    $(this.el).addClass('pane');
   };
 
   Pane.prototype.removeElement = function(options, force) {

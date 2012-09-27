@@ -29,6 +29,7 @@ class kb.PageNavigatorPanes
   # Querying Page State
   ####################################
 
+  clear: -> @pane_navigator.clear()
   hasHistory: -> return not @pane_navigator.no_history
   activePage: -> return @pane_navigator.activePane()
   activeUrl: -> return if (active_page = @pane_navigator.activePane()) then active_page.url else null

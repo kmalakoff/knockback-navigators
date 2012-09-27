@@ -1,4 +1,4 @@
-kb.MAX_TRANSITION = 800 # TODO: find a more reliable way to trigger transition end events
+kb.MAX_TRANSITION = 2000 # max transition fallback
 
 # CSS TRANSITION SUPPORT (http://www.modernizr.com/)
 kb.transitions.END_EVENT = (->
@@ -9,8 +9,8 @@ kb.transitions.END_EVENT = (->
     'OTransition'      : 'oTransitionEnd otransitionend'
     'msTransition'     : 'MSTransitionEnd'
     'transition'       : 'transitionend'
-  for style, event of END_EVENT_NAMES
-    return event if el.style[style] isnt undefined
+  # for style, event of END_EVENT_NAMES
+  #   return event if el.style[style] isnt undefined
   return 'kbTransitionEnd'
 )()
 
@@ -21,16 +21,16 @@ $.fn.startTransition = (classes, callback) ->
   (callback = classes; classes = null) if typeof(classes) is 'function'
 
   # end transition
+  timeout = null
   cleanupCallback = =>
-    @off(kb.transitions.END_EVENT, cleanupCallback);
+    @off(kb.transitions.END_EVENT, cleanupCallback)
+    clearTimeout(timeout)
     not callback or callback()
 
   # start transition
   @one(kb.transitions.END_EVENT, cleanupCallback)
   @addClass(classes)
-
-  # timeout for too long
-  setTimeout(cleanupCallback, kb.MAX_TRANSITION)
+  timeout = setTimeout(cleanupCallback, kb.MAX_TRANSITION) # timeout for too long
 
   return
 
