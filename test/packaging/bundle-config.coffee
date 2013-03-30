@@ -2,7 +2,7 @@ module.exports =
   'test/packaging/build/bundle-latest.js':
     underscore: 'underscore'
     backbone: 'backbone'
-    knockout: 'knockout-client'
+    knockout: 'knockout'
     knockback: 'knockback'
     'knockback-page-navigator-panes': 'knockback-page-navigator-panes.js'
     'knockback-page-navigator-simple': 'knockback-page-navigator-simple.js'

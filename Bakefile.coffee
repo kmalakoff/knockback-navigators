@@ -120,17 +120,17 @@ module.exports =
   _postinstall:
     commands: [
       # tests
-      'cp -v knockback/knockback-core-stack.js test/vendor/knockback-core-stack.js'
+      'cp -v knockback/knockback-core-stack.js vendor/test/knockback-core-stack.js'
 
       # examples
       'cp -v knockback/knockback-core-stack.js examples/vendor/knockback-core-stack.js'
-      'cp -v knockout-client/knockout.debug.js examples/vendor/knockout.js'
+      'cp knockout/build/output/knockout-latest.debug.js examples/vendor/knockout-2.2.1.js'
       'cp -v backbone examples/vendor/backbone/backbone.js'
       'cp -v underscore examples/vendor/backbone/underscore.js'
 
       # amd tests
-      'cp -v underscore test/vendor/underscore.js'
-      'cp -v backbone test/vendor/backbone.js'
-      'cp -v knockout-client/knockout.debug.js test/vendor/knockout.js'
-      'cp -v knockback/knockback-core.js test/vendor/knockback-core.js'
+      'cp -v underscore vendor/test/underscore.js'
+      'cp -v backbone vendor/test/backbone.js'
+      'cp knockout/build/output/knockout-latest.debug.js vendor/test/knockout-2.2.1.js'
+      'cp -v knockback/knockback-core.js vendor/test/knockback-core.js'
     ]
