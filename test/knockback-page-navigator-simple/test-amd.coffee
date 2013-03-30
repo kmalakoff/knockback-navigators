@@ -1,42 +1,23 @@
-$(->
-  module("knockback-page-navigators-simple-amd.js")
+try
+  require.config({
+    paths:
+      'underscore': "../../vendor/underscore-1.4.4"
+      'backbone': "../../vendor/backbone-1.0.0"
+      'knockout': "../../vendor/knockout-2.1.0"
+      'knockback': "../../vendor/knockback-core-0.17.0pre"
+      'knockback-page-navigator-simple': "../../knockback-page-navigator-simple"
+    shim:
+      underscore:
+        exports: '_'
+      backbone:
+        exports: 'Backbone'
+        deps: ['underscore']
+  })
+
+  module_name = 'knockback-defaults'
+  module_name = 'knockback' if (require.toUrl(module_name).split('./..').length is 1)
 
   # library and dependencies
-  require(['underscore', 'backbone', 'knockout', 'knockback', 'knockback-page-navigator-simple'], (_, Backbone, ko, kb) ->
-    _ or= @_
-    Backbone or= @Backbone
-
-    test("TEST DEPENDENCY MISSING", ->
-      ok(!!_, '_'); ok(!!Backbone, 'Backbone'); ok(!!ko, 'ko'); ok(!!kb, 'kb'); ok(!!kb.PageNavigatorSimple, 'kb.PageNavigatorSimple')
-    )
-
-    test("1. Basic Usage", ->
-      el = $('<div></div>')[0]
-      page_navigator = new kb.PageNavigatorSimple(el)
-      equal(el, page_navigator.el, "container element")
-    )
-
-    test("2. Click-Based navigation", ->
-      # onclick
-      el = $("""
-        <a onclick="kb.loadUrl('test1', {name: 'Slide', inverse: true})">Examples</a>
-      """)[0]
-      window.location.hash = ''
-      equal(window.location.hash, '', "onclick: no location hash")
-      $(el).click()
-      equal(window.location.hash, '#test1', "onclick: test1 location hash")
-      equal(kb.popOverrideTransition().name, 'Slide', "onclick: transition found")
-
-      # bound view model
-      el = $("""
-        <a data-bind="click: kb.loadUrlFn('test1', {name: 'Slide', inverse: true})">Examples</a>
-      """)[0]
-      ko.applyBindings({}, el)
-      window.location.hash = ''
-      equal(window.location.hash, '', "onclick: no location hash")
-      $(el).click()
-      equal(window.location.hash, '#test1', "onclick: test1 location hash")
-      equal(kb.popOverrideTransition().name, 'Slide', "onclick: transition found")
-    )
-  )
-)
+  require ['underscore', 'backbone', 'knockout', 'knockback', 'knockback-page-navigator-simple', 'qunit_test_runner'], (_, Backbone, ko, kb, kbn, runner) ->
+    window._ = window.Backbone = window.ko = window.kb = null # force each test to require dependencies synchronously
+    require ['./build/test'], -> runner.start()

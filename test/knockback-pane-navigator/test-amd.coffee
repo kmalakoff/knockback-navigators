@@ -1,23 +1,23 @@
-$(->
-  module("knockback-pane-navigators-amd.js")
+try
+  require.config({
+    paths:
+      'underscore': "../../vendor/underscore-1.4.4"
+      'backbone': "../../vendor/backbone-1.0.0"
+      'knockout': "../../vendor/knockout-2.1.0"
+      'knockback': "../../vendor/knockback-core-0.17.0pre"
+      'knockback-pane-navigator': "../../knockback-pane-navigator"
+    shim:
+      underscore:
+        exports: '_'
+      backbone:
+        exports: 'Backbone'
+        deps: ['underscore']
+  })
+
+  module_name = 'knockback-defaults'
+  module_name = 'knockback' if (require.toUrl(module_name).split('./..').length is 1)
 
   # library and dependencies
-  require(['underscore', 'backbone', 'knockout', 'knockback', 'knockback-pane-navigator'], (_, Backbone, ko, kb) ->
-    _ or= @_
-    Backbone or= @Backbone
-
-    test("TEST DEPENDENCY MISSING", ->
-      ok(!!_, '_'); ok(!!Backbone, 'Backbone'); ok(!!ko, 'ko'); ok(!!kb, 'kb'); ok(!!kb.PaneNavigator, 'kb.PaneNavigator')
-    )
-
-    test("1. Basic Usage", ->
-      # kb.statistics = new kb.Statistics() # turn on stats
-
-      el = $('<div></div>')[0]
-      page_navigator = new kb.PaneNavigator(el)
-      equal(el, page_navigator.el, "container element")
-
-      # equal(kb.statistics.registeredStatsString('all released'), 'all released', "Cleanup: stats"); kb.statistics = null
-    )
-  )
-)
+  require ['underscore', 'backbone', 'knockout', 'knockback', 'knockback-page-navigator', 'qunit_test_runner'], (_, Backbone, ko, kb, kbn, runner) ->
+    window._ = window.Backbone = window.ko = window.kb = null # force each test to require dependencies synchronously
+    require ['./build/test'], -> runner.start()
