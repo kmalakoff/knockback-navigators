@@ -1,10 +1,10 @@
 try
   require.config({
     paths:
-      'underscore': "../../vendor/underscore-1.4.4"
-      'backbone': "../../vendor/backbone-1.0.0"
-      'knockout': "../../vendor/knockout-2.1.0"
-      'knockback': "../../vendor/knockback-core-0.17.0pre"
+      'underscore': "../../vendor/test/underscore-1.4.4"
+      'backbone': "../../vendor/test/backbone-1.0.0"
+      'knockout': "../../vendor/test/knockout-2.2.1"
+      'knockback': "../../vendor/test/knockback-core-0.17.0pre"
       'knockback-page-navigator-simple': "../../knockback-page-navigator-simple"
     shim:
       underscore:
@@ -12,6 +12,8 @@ try
       backbone:
         exports: 'Backbone'
         deps: ['underscore']
+      'knockback-page-navigator-simple':
+        deps: ['knockback']
   })
 
   module_name = 'knockback-defaults'
@@ -19,5 +21,6 @@ try
 
   # library and dependencies
   require ['underscore', 'backbone', 'knockout', 'knockback', 'knockback-page-navigator-simple', 'qunit_test_runner'], (_, Backbone, ko, kb, kbn, runner) ->
-    window._ = window.Backbone = window.ko = window.kb = null # force each test to require dependencies synchronously
+    window._ = window.Backbone = window.ko = null # force each test to require dependencies synchronously
+    # window.kb = null # force each test to require dependencies synchronously
     require ['./build/test'], -> runner.start()

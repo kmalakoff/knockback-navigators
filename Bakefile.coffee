@@ -120,7 +120,7 @@ module.exports =
   _postinstall:
     commands: [
       # tests
-      'cp -v knockback/knockback-core-stack.js vendor/optional/knockback-core-stack.js'
+      'cp -v knockback/knockback-core-stack.js vendor/knockback-core-stack.js'
 
       # examples
       'cp -v knockback/knockback-core-stack.js examples/vendor/knockback-core-stack.js'

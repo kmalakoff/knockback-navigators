@@ -9,6 +9,9 @@ try (@kb = kb = if not @kb and (typeof(require) isnt 'undefined') then require('
 @kb or= kb or= {} # empty namesapce
 @Backbone or= @kb.Backbone
 
+# export Knockback so it is accessible by the views
+@kb = kb
+
 # import Knockout or provide a replacement for ko.observable and ko.observableArray
 try (ko = if not @ko and (typeof(require) != 'undefined') then require('knockout') else @ko) catch e then {}
 ko or= {} # empty namesapce

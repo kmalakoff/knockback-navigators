@@ -6,3 +6,6 @@ isElement = (obj) -> return obj and (obj.nodeType is 1)
 
 kb.transitions or= {}
 kb.fallback_transitions or= {}
+
+# export Knockback so it is accessible by the views
+@kb = kb
