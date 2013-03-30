@@ -23,4 +23,4 @@ try
   require ['underscore', 'backbone', 'knockout', 'knockback', 'knockback-pane-navigator', 'qunit_test_runner'], (_, Backbone, ko, kb, kbn, runner) ->
     window._ = window.Backbone = window.ko = null # force each test to require dependencies synchronously
     # window.kb = null # force each test to require dependencies synchronously
-    require ['./build/test'], -> runner.start()
+    runner.start(); require ['./build/test'], ->
