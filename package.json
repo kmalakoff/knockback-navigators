@@ -27,7 +27,7 @@
     "nib": ">=0.8.2"
   },
   "dependencies": {
-    "knockback": ">=0.17.0pre",
+    "knockback": ">=0.17.0",
     "knockout": "2.2.1",
     "backbone": ">=1.0.0",
     "underscore": ">=1.4.4"
