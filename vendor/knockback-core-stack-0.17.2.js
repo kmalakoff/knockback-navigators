@@ -7351,7 +7351,7 @@ kb.EventWatcher = (function() {
   EventWatcher.prototype.releaseCallbacks = function(obj) {
     var callbacks, event_name, index, info, _ref, _ref1;
 
-    if (!this.__kb.callbacks) {
+    if (!this.__kb.callbacks || !this.ee) {
       return;
     }
     _ref = this.__kb.callbacks;
@@ -8328,7 +8328,7 @@ kb.collectionObservable = function(collection, options) {
 */
 
 
-kb.RECUSIVE_AUTO_INJECT = true;
+kb.RECUSIVE_AUTO_INJECT = false;
 
 ko.bindingHandlers['inject'] = {
   'init': function(element, value_accessor, all_bindings_accessor, view_model) {

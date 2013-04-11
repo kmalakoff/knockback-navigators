@@ -4,7 +4,7 @@ try
       'underscore': "../../vendor/test/underscore-1.4.4"
       'backbone': "../../vendor/test/backbone-1.0.0"
       'knockout': "../../vendor/test/knockout-2.2.1"
-      'knockback': "../../vendor/test/knockback-core-0.17.1"
+      'knockback': "../../vendor/test/knockback-core-0.17.2"
       'knockback-page-navigator-simple': "../../knockback-page-navigator-simple"
     shim:
       underscore:
