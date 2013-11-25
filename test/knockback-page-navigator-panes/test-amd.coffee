@@ -1,10 +1,10 @@
 try
   require.config({
     paths:
-      'underscore': "../../vendor/test/underscore-1.4.4"
-      'backbone': "../../vendor/test/backbone-1.0.0"
-      'knockout': "../../vendor/test/knockout-2.2.1"
-      'knockback': "../../vendor/test/knockback-core-0.17.2"
+      'underscore': "../../vendor/test/underscore-1.5.2"
+      'backbone': "../../vendor/test/backbone-1.1.0"
+      'knockout': "../../vendor/test/knockout-3.0.0"
+      'knockback': "../../vendor/test/knockback-core-0.18.0"
       'knockback-page-navigator-panes': "../../knockback-page-navigator-panes"
     shim:
       underscore:
