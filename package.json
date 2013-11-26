@@ -27,7 +27,7 @@
     "nib": ">=0.8.2"
   },
   "dependencies": {
-    "knockback": "git+https://github.com/kmalakoff/knockback",
+    "knockback": "0.18.x",
     "knockout": "3.0.x",
     "backbone": "1.1.x",
     "underscore": "1.5.x"
